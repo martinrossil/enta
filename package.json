@@ -1,0 +1,40 @@
+{
+  "name": "enta",
+  "version": "0.0.1",
+  "description": "Enta is a Typescript library for building very fast web applications.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/**/*",
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinrossil/enta.git"
+  },
+  "keywords": [
+    "Typescript",
+    "PWA",
+    "Custom-Elements"
+  ],
+  "author": "Martin Rossil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martinrossil/enta/issues"
+  },
+  "homepage": "https://github.com/martinrossil/enta#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "rollup": "^2.41.0",
+    "rollup-plugin-filesize": "^9.1.1",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.2.3"
+  }
+}
