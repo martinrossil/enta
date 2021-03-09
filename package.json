@@ -2,7 +2,13 @@
   "name": "enta",
   "version": "0.0.1",
   "description": "Enta is a Typescript library for building very fast web applications.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "lint": "eslint src/**/*",
     "build": "rollup -c",
