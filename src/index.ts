@@ -30,8 +30,15 @@ export { default as IAnchorLayout } from './interfaces/layout/IAnchorLayout';
 export { default as IAnchorLayoutData } from './interfaces/layout/IAnchorLayoutData';
 export { default as ILayout } from './interfaces/layout/ILayout';
 export { default as ILayoutData } from './interfaces/layout/ILayoutData';
+export { default as IVerticalLayout } from './interfaces/layout/IVerticalLayout';
+export { default as IVerticalLayoutData } from './interfaces/layout/IVerticalLayoutData';
 
 export { default as AnchorLayout } from './layout/AnchorLayout';
 export { default as AnchorLayoutData } from './layout/AnchorLayoutData';
+export { default as VerticalLayout } from './layout/VerticalLayout';
+export { default as VerticalLayoutData } from './layout/VerticalLayoutData';
+
+export { HorizontalAlign } from './types/HorizontalAlign';
+export { VerticalAlign } from './types/VerticalAlign';
 
 export { default as EntaDev } from './EntaDev';
