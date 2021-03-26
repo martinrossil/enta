@@ -43,12 +43,16 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
                 this.resizeElementLeftRightPercentHeight(container, element, layoutData);
                 return;
             }
+            this.resizeElementLeftRight(container, element, layoutData);
+            return;
         }
         if (!isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
             if (!isNaN(layoutData.percentWidth)) {
                 this.resizeElementTopBottomPercentWidth(container, element, layoutData);
                 return;
             }
+            this.resizeElementTopBottom(container, element, layoutData);
+            return;
         }
         if (!isNaN(layoutData.percentWidth) && !isNaN(layoutData.percentHeight)) {
             this.resizeElementPercentBoth(container, element, layoutData);
@@ -99,6 +103,16 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
         const elementWidth = insideWidth - layoutData.left - layoutData.right;
         const elementHeight = insideHeight / 100 * layoutData.percentHeight;
         element.externalSize(elementWidth, elementHeight);
+    }
+
+    private resizeElementLeftRight(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
+        const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        element.externalWidth = insideWidth - layoutData.left - layoutData.right;
+    }
+
+    private resizeElementTopBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
+        const insideHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        element.externalHeight = insideHeight - layoutData.top - layoutData.bottom;
     }
 
     private resizeElementTopBottomPercentWidth(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
