@@ -99,7 +99,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         let height = 0;
         for (const element of elements) {
             if (width < element.measuredWidth) {
-                width = element.measuredHeight;
+                width = element.measuredWidth;
             }
             height += element.measuredHeight + this.verticalGap;
         }
@@ -113,7 +113,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         let width = 0;
         for (const element of elements) {
             if (width < element.measuredWidth) {
-                width = element.measuredHeight;
+                width = element.measuredWidth;
             }
         }
         return container.paddingLeft + width + container.paddingRight;
