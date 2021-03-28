@@ -10,18 +10,20 @@ export default class SquareContainer extends DisplayContainer {
         super();
         this.name = 'SquareContainer';
         this.padding = 20;
-        this.backgroundColor = '#EAB308';
+        this.backgroundColor = 'white'; // '#EAB308';
+        this.cornerSize = 24;
         // this.layout = new AnchorLayout();
         const v: IVerticalLayout = new VerticalLayout();
         v.horizontalAlign = 'fill';
+        v.verticalGap = 16;
         this.layout = v;
         // this.size(400, 400);
-        this.width = 400;
-        this.layoutData = new AnchorLayoutData(0, NaN, 0, NaN, NaN, NaN, 0);
+        // this.width = 400;
+        this.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, NaN, NaN, 0, 0);
         this.addElements([this.blue, this.red, this.black]);
         window.addEventListener('click', () => {
             // this.blue.width += 5;
-            v.verticalGap += 20;
+            v.verticalGap += 16;
         });
     }
 
@@ -31,10 +33,11 @@ export default class SquareContainer extends DisplayContainer {
         if (!this._blue) {
             this._blue = new DisplayElement();
             this._blue.name = 'blue';
-            // this._blue.size(300, 100);
-            this._blue.height = 100;
+            this._blue.size(300, 100);
+            // this._blue.height = 100;
             // this._blue.layoutData = new AnchorLayoutData(0, 0, NaN, 0, NaN, 50, NaN, 0);
             this._blue.backgroundColor = '#3B82F6';
+            this._blue.cornerSize = 16;
         }
         return this._blue;
     }
@@ -47,6 +50,7 @@ export default class SquareContainer extends DisplayContainer {
             this._red.name = 'red';
             // this._red.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, NaN, 100, 0);
             this._red.size(200, 100);
+            this._red.cornerSize = 16;
             this._red.backgroundColor = '#EF4444';
         }
         return this._red;
@@ -61,6 +65,7 @@ export default class SquareContainer extends DisplayContainer {
             this._black.size(100, 100);
             // this._black.layoutData = new AnchorLayoutData(NaN, 0, 0, NaN);
             this._black.backgroundColor = 'black';
+            this._black.cornerSize = 16;
         }
         return this._black;
     }
