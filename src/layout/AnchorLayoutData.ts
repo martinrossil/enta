@@ -2,6 +2,10 @@ import EventDispatcher from '../event/EventDispatcher';
 import IAnchorLayoutData from '../interfaces/layout/IAnchorLayoutData';
 
 export default class AnchorLayoutData extends EventDispatcher implements IAnchorLayoutData {
+    public static centerMiddle(): IAnchorLayoutData {
+        return new AnchorLayoutData(NaN, NaN, NaN, NaN, NaN, NaN, 0, 0);
+    }
+
     public constructor(top = NaN, right = NaN, bottom = NaN, left = NaN, percentWidth = NaN, percentHeight = NaN, horizontalCenter = NaN, verticalMiddle = NaN) {
         super();
         this.name = 'AnchorLayoutData';
