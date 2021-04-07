@@ -11,26 +11,32 @@ export default class SizeElement extends PositionElement implements ISizeElement
         let widthChanged = false;
         if (isNaN(this._width) && !isNaN(width)) {
             this._width = width;
+            this._externalWidth = NaN;
             this.actualWidth = width;
             widthChanged = true;
         } else if (!isNaN(this._width) && isNaN(width)) {
             this._width = NaN;
+            this._externalWidth = NaN;
             widthChanged = true;
         } else if (this._width !== width) {
             this._width = width;
+            this._externalWidth = NaN;
             this.actualWidth = width;
             widthChanged = true;
         }
         let heightChanged = false;
         if (isNaN(this._height) && !isNaN(height)) {
             this._height = height
+            this._externalHeight = NaN;
             this.actualHeight = height;
             heightChanged = true;
         } else if (!isNaN(this._height) && isNaN(height)) {
             this._height = NaN;
+            this._externalHeight = NaN;
             heightChanged = true;
         } else if (this._height !== height) {
             this._height = height;
+            this._externalHeight = NaN;
             this.actualHeight = height;
             heightChanged = true;
         }
@@ -42,13 +48,13 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public externalSize(width: number, height: number): void {
         let widthChanged = false;
-        if (this._externalWidth !== width) {
+        if (isNaN(this.width) && this._externalWidth !== width) {
             this._externalWidth = width;
             this.actualWidth = width;
             widthChanged = true;
         }
         let heightChanged = false;
-        if (this._externalHeight !== height) {
+        if (isNaN(this.height) && this._externalHeight !== height) {
             this._externalHeight = height;
             this.actualHeight = height;
             heightChanged = true;
@@ -64,13 +70,13 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected internalSize(width: number, height: number): void {
         let widthChanged = false;
-        if (this._internalWidth !== width) {
+        if (isNaN(this.width) && this._internalWidth !== width) {
             this._internalWidth = width;
             this.actualWidth = width;
             widthChanged = true;
         }
         let heightChanged = false;
-        if (this._internalHeight !== height) {
+        if (isNaN(this.height) && this._internalHeight !== height) {
             this._internalHeight = height;
             this.actualHeight = height;
             heightChanged = true;
@@ -91,10 +97,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
         }
         if (isNaN(value)) {
             this._width = NaN;
+            this._externalWidth = NaN;
             this.invalidate();
             return;
         }
         this._width = value;
+        this._externalWidth = NaN;
         this.actualWidth = value;
         this.invalidate();
         this.notify();
@@ -114,6 +122,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._internalWidth = value;
+        this._externalWidth = NaN;
         this.actualWidth = value;
         this.notify();
     }
@@ -125,6 +134,9 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _externalWidth = NaN;
 
     public set externalWidth(value: number) {
+        if (!isNaN(this.width)) {
+            return;
+        }
         if (isNaN(this._externalWidth) && isNaN(value)) {
             return;
         }
@@ -165,10 +177,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
         }
         if (isNaN(value)) {
             this._height = NaN;
+            this._externalHeight = NaN;
             this.invalidate();
             return;
         }
         this._height = value;
+        this._externalHeight = NaN;
         this.actualHeight = value;
         this.invalidate();
         this.notify();
@@ -188,6 +202,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._internalHeight = value;
+        this._externalHeight = NaN;
         this.actualHeight = value;
         this.notify();
     }
@@ -199,6 +214,9 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _externalHeight = NaN;
 
     public set externalHeight(value: number) {
+        if (!isNaN(this.height)) {
+            return;
+        }
         if (isNaN(this._externalHeight) && isNaN(value)) {
             return;
         }
