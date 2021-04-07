@@ -14,6 +14,36 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
 
     protected invalidateInternalSize(): void {
         console.log(this.name, 'invalidateInternalSize()', this.parent.name);
+        if (!isNaN(this.width) && !isNaN(this.height)) {
+            return;
+        }
+        if (!isNaN(this.externalWidth) && !isNaN(this.externalHeight)) {
+            return;
+        }
+        let updateInternalWidth = false;
+        let updateInternalHeight = false;
+        if (isNaN(this.width)) {
+            if (isNaN(this.externalWidth)) {
+                updateInternalWidth = true;
+            }
+        }
+        if (isNaN(this.height)) {
+            if (isNaN(this.externalHeight)) {
+                updateInternalHeight = true;
+            }
+        }
+        if (updateInternalWidth && updateInternalHeight) {
+            this.updateInternalSize();
+            return;
+        }
+        if (updateInternalWidth && !updateInternalHeight) {
+            this.updateInternalWidth();
+            return;
+        }
+        if (!updateInternalWidth && updateInternalHeight) {
+            this.updateInternalHeight();
+        }
+        /*
         if (isNaN(this.width) && isNaN(this.height)) {
             this.testIfInternalSizeShouldBeCalculated();
             return;
@@ -24,7 +54,7 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
         }
         if (!isNaN(this.width) && isNaN(this.height)) {
             this.testIfInternalHeightShouldBeCalculated();
-        }
+        } */
     }
 
     private testIfInternalSizeShouldBeCalculated(): void {
