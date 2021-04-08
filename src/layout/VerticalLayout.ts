@@ -18,11 +18,66 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
 
     public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
         console.log(container.name, this.name, 'resizeChildren()');
-        if (this.horizontalAlign === 'fill') {
-            this.resizeElementsFill(container, elements);
-            return;
+        if (container.hasSize) {
+            if (this.horizontalAlign === 'fill' && this.verticalAlign === 'fill') {
+                this.resizeElementsHorizontalVerticalFill(container, elements);
+            }
         }
-        this.resizeElements(container, elements);
+    }
+
+    private resizeElementsHorizontalVerticalFill(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+        console.log(this.name, 'resizeElementsHorizontalVerticalFill()');
+        const [heightSum, percentHeightSum, fillCount] = this.getElementsPercentHeightValues(elements);
+        const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const verticalGapSumHeight = this.verticalGap * (elements.length - 1);
+        const heightLeftForPercentHeight = innerHeight - heightSum - verticalGapSumHeight;
+        let pixelPercentRatio;
+        let heightLeftForFillHeight;
+        let fillHeight = 0;
+        if (percentHeightSum > 100) {
+            pixelPercentRatio = heightLeftForPercentHeight / percentHeightSum;
+            heightLeftForFillHeight = 0;
+        } else {
+            pixelPercentRatio = heightLeftForPercentHeight / 100;
+            heightLeftForFillHeight = heightLeftForPercentHeight - (heightLeftForPercentHeight / 100 * percentHeightSum);
+            fillHeight = heightLeftForFillHeight / fillCount;
+        }
+        for (const element of elements) {
+            if (element.layoutData instanceof VerticalLayoutData) {
+                if (!isNaN(element.layoutData.percentWidth) && !isNaN(element.layoutData.percentHeight)) {
+                    element.externalSize(innerWidth * element.layoutData.percentWidth / 100, pixelPercentRatio * element.layoutData.percentHeight);
+                } else if (!isNaN(element.layoutData.percentWidth) && isNaN(element.layoutData.percentHeight)) {
+                    element.externalSize(innerWidth * element.layoutData.percentWidth / 100, fillHeight);
+                } else if (isNaN(element.layoutData.percentWidth) && !isNaN(element.layoutData.percentHeight)) {
+                    element.externalSize(innerWidth, element.layoutData.percentHeight * pixelPercentRatio);
+                } else {
+                    element.externalSize(innerWidth, fillHeight);
+                }
+            } else {
+                element.externalSize(innerWidth, fillHeight);
+            }
+        }
+    }
+
+    private getElementsPercentHeightValues(elements: Array<ILayoutElement>): [number, number, number] {
+        let heightSum = 0;
+        let percentHeightSum = 0;
+        let fillCount = 0;
+        for (const element of elements) {
+            if (!isNaN(element.height)) {
+                heightSum += element.height;
+            } else if (element.layoutData instanceof VerticalLayoutData) {
+                if (!isNaN(element.layoutData.percentHeight)) {
+                    percentHeightSum += element.layoutData.percentHeight;
+                } else {
+                    fillCount++;
+                }
+            } else {
+                fillCount++;
+            }
+        }
+        return [heightSum, percentHeightSum, fillCount];
     }
 
     private resizeElementsFill(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
@@ -42,6 +97,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
 
     private resizeElementFill(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
         console.log(container.name, this.name, 'resizeElementFill()', element.name);
+        element.externalWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
     }
 
     private resizeElements(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
@@ -110,16 +166,16 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     private getVerticalYStartValue(container: IDisplayContainer & ILayoutElement, elements: ILayoutElement[]): number {
         let y = container.paddingTop;
         if (this.verticalAlign === 'middle' || this.verticalAlign === 'bottom') {
-            const actualHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+            const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
             let elementsHeightSum = 0;
             for (const element of elements) {
                 elementsHeightSum += element.measuredHeight;
             }
             const verticalGapSumHeight = this.verticalGap * (elements.length - 1);
             if (this.verticalAlign === 'middle') {
-                y += (actualHeight - elementsHeightSum - verticalGapSumHeight) * 0.5;
+                y += (innerHeight - elementsHeightSum - verticalGapSumHeight) * 0.5;
             } else {
-                y += (actualHeight - elementsHeightSum - verticalGapSumHeight);
+                y += (innerHeight - elementsHeightSum - verticalGapSumHeight);
             }
         }
         return y;
