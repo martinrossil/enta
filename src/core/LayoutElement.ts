@@ -1,8 +1,5 @@
-import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
 import ILayoutData from '../interfaces/layout/ILayoutData';
-import AnchorLayout from '../layout/AnchorLayout';
-import AnchorLayoutData from '../layout/AnchorLayoutData';
 import SizeElement from './SizeElement';
 
 export default class LayoutElement extends SizeElement implements ILayoutElement {
@@ -12,113 +9,32 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
         this.layoutDataChanged = this.layoutDataChanged.bind(this);
     }
 
+    public get hasWidth(): boolean {
+        return !isNaN(this.width) || !isNaN(this.externalWidth);
+    }
+
+    public get hasHeight(): boolean {
+        return !isNaN(this.height) || !isNaN(this.externalHeight);
+    }
+
+    public get hasSize(): boolean {
+        return this.hasWidth && this.hasHeight;
+    }
+
     protected invalidateInternalSize(): void {
-        console.log(this.name, 'invalidateInternalSize()', this.parent.name);
-        if (!isNaN(this.width) && !isNaN(this.height)) {
+        console.log(this.name, 'invalidateInternalSize()', this.name);
+        if (this.hasSize) {
             return;
         }
-        if (!isNaN(this.externalWidth) && !isNaN(this.externalHeight)) {
-            return;
-        }
-        let updateInternalWidth = false;
-        let updateInternalHeight = false;
-        if (isNaN(this.width)) {
-            if (isNaN(this.externalWidth)) {
-                updateInternalWidth = true;
-            }
-        }
-        if (isNaN(this.height)) {
-            if (isNaN(this.externalHeight)) {
-                updateInternalHeight = true;
-            }
-        }
-        if (updateInternalWidth && updateInternalHeight) {
+        if (!this.hasWidth && !this.hasHeight) {
             this.updateInternalSize();
             return;
         }
-        if (updateInternalWidth && !updateInternalHeight) {
+        if (!this.hasWidth && this.hasHeight) {
             this.updateInternalWidth();
             return;
         }
-        if (!updateInternalWidth && updateInternalHeight) {
-            this.updateInternalHeight();
-        }
-        /*
-        if (isNaN(this.width) && isNaN(this.height)) {
-            this.testIfInternalSizeShouldBeCalculated();
-            return;
-        }
-        if (isNaN(this.width) && !isNaN(this.height)) {
-            this.testIfInternalWidthShouldBeCalculated();
-            return;
-        }
-        if (!isNaN(this.width) && isNaN(this.height)) {
-            this.testIfInternalHeightShouldBeCalculated();
-        } */
-    }
-
-    private testIfInternalSizeShouldBeCalculated(): void {
-        let updateInternalWidth = true;
-        let updateInternalHeight = true;
-        if (this.layoutData instanceof AnchorLayoutData) {
-            if (this.parent.layout instanceof AnchorLayout) {
-                if (!isNaN(this.layoutData.left) && !isNaN(this.layoutData.right)) {
-                    updateInternalWidth = false;
-                }
-                if (!isNaN(this.layoutData.top) && !isNaN(this.layoutData.bottom)) {
-                    updateInternalHeight = false;
-                }
-                if (!isNaN(this.layoutData.percentWidth)) {
-                    updateInternalWidth = false;
-                }
-                if (!isNaN(this.layoutData.percentHeight)) {
-                    updateInternalHeight = false;
-                }
-            }
-        }
-        if (updateInternalWidth && updateInternalHeight) {
-            this.updateInternalSize();
-            return;
-        }
-        if (updateInternalWidth && !updateInternalHeight) {
-            this.updateInternalWidth();
-            return;
-        }
-        if (!updateInternalWidth && updateInternalHeight) {
-            this.updateInternalHeight();
-        }
-    }
-
-    private testIfInternalWidthShouldBeCalculated(): void {
-        let updateInternalWidth = true;
-        if (this.layoutData instanceof AnchorLayoutData) {
-            if (this.parent.layout instanceof AnchorLayout) {
-                if (!isNaN(this.layoutData.left) && !isNaN(this.layoutData.right)) {
-                    updateInternalWidth = false;
-                }
-                if (!isNaN(this.layoutData.percentWidth)) {
-                    updateInternalWidth = false;
-                }
-            }
-        }
-        if (updateInternalWidth) {
-            this.updateInternalWidth();
-        }
-    }
-
-    private testIfInternalHeightShouldBeCalculated(): void {
-        let updateInternalHeight = true;
-        if (this.layoutData instanceof AnchorLayoutData) {
-            if (this.parent.layout instanceof AnchorLayout) {
-                if (!isNaN(this.layoutData.top) && !isNaN(this.layoutData.bottom)) {
-                    updateInternalHeight = false;
-                }
-                if (!isNaN(this.layoutData.percentHeight)) {
-                    updateInternalHeight = false;
-                }
-            }
-        }
-        if (updateInternalHeight) {
+        if (this.hasWidth && !this.hasHeight) {
             this.updateInternalHeight();
         }
     }
@@ -145,10 +61,6 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
 
     public get layoutData(): ILayoutData | null {
         return this._layoutData;
-    }
-
-    public get parent(): IDisplayContainer {
-        return this.parentNode as unknown as IDisplayContainer;
     }
 }
 customElements.define('layout-element', LayoutElement);
