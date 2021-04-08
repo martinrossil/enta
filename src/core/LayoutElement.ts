@@ -40,7 +40,7 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
     }
 
     protected layoutDataChanged(): void {
-        this.dispatchEvent(new Event('invalidate', { bubbles: true }));
+        this.dispatchEvent(new CustomEvent('invalidate', { bubbles: true }));
     }
 
     private _layoutData: ILayoutData | null = null;

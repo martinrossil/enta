@@ -258,7 +258,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (!this.connected) {
             return;
         }
-        this.dispatchEvent(new Event('invalidate', { bubbles: true }));
+        this.dispatchEvent(new CustomEvent('invalidate', { bubbles: true }));
     }
 
     protected updateInternalSize(): void {
