@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="Description" content="Enta Public">
+    <meta name="msapplication-TileColor" content="#0091ff">
+    <meta name="theme-color" content="#0091ff">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0091ff">
+    <link rel="preload" href="inter-thin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-extra-light.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-light.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-semi-bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-extra-bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="inter-black.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="manifest" href="entadev.webmanifest">
+    <title>Enta Dev Production</title>
+    <style>
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 100;
+      font-display: block;
+      src: url('inter-thin.woff2') format('woff2'), url('inter-thin.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 200;
+      font-display: block;
+      src: url('inter-extra-light.woff2') format('woff2'), url('inter-extra-light.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 300;
+      font-display: block;
+      src: url('inter-light.woff2') format('woff2'), url('inter-light.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 400;
+      font-display: block;
+      src: url('inter-normal.woff2') format('woff2'), url('inter-normal.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 500;
+      font-display: block;
+      src: url('inter-medium.woff2') format('woff2'), url('inter-medium.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 600;
+      font-display: block;
+      src: url('inter-semi-bold.woff2') format('woff2'), url('inter-semi-bold.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 700;
+      font-display: block;
+      src: url('inter-bold.woff2') format('woff2'), url('inter-bold.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 800;
+      font-display: block;
+      src: url('inter-extra-bold.woff2') format('woff2'), url('inter-extra-bold.woff') format('woff');
+      }
+      @font-face {
+      font-family: 'Inter';
+      font-weight: 900;
+      font-display: block;
+      src: url('inter-black.woff2') format('woff2'), url('inter-black.woff') format('woff');
+      }
+    </style>
+    <script>var VERSION = "{{version}}";</script>
+  </head>
+  <body>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 100; position: absolute;">Inter Thin Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 200; position: absolute;">Inter Extra Light Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 300; position: absolute;">Inter Light Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 400; position: absolute;">Inter Normal Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 500; position: absolute;">Inter Medium Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 600; position: absolute;">Inter Semi Bold Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 700; position: absolute;">Inter Bold Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 800; position: absolute;">Inter Extra Bold Preload</p>
+    <p style="font-family: 'Inter', sans-serif;top: -100px; font-weight: 900; position: absolute;">Inter Black Preload</p>
+    <enta-dev></enta-dev>
+    <script>(function(){function g(){var b=document.createElement("script");b.src="./customElements.js";b.onload=e;document.body.appendChild(b)}function e(){var b=VERSION,a=!0,c=document.createElement("script");if("function"===typeof Object.fromEntries)var d=2019;else void 0!==window.Promise&&"function"===typeof window.Promise.prototype.finally?d=2018:"function"===typeof String.prototype.padStart?d=2017:"function"===typeof Array.prototype.includes?d=2016:void 0!==window.Promise?d=2015:(d=5,a=!1);a&&(c.type="module");c.src="EntaDev."+b+".es"+d+".js";c.defer=!0;document.body.appendChild(c)}if("function"!==typeof window.CustomEvent){var f=function(b,a){a=a||{bubbles:!1,cancelable:!1,detail:void 0};var c=document.createEvent("CustomEvent");c.initCustomEvent(b,a.bubbles,a.cancelable,a.detail);return c};f.prototype=window.Event.prototype;window.CustomEvent=f}window.customElements?e():g()})()</script>
+  </body>
+</html>
