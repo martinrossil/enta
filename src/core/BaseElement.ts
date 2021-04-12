@@ -15,6 +15,7 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
     }
 
     private connectedCallback(): void {
+        console.log(this.name, 'connected');
         this.connected = true;
         this.validate();
     }

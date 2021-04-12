@@ -9,9 +9,9 @@ export default class EntaDev extends ApplicationElement {
         this.backgroundColor = '#F1F5F9';
         this.padding = 20;
         this.layout = new AnchorLayout();
-        this.addElement(new SquareContainer());
         window.addEventListener('load', () => {
-            //
+            console.log('page loaded');
+            this.addElement(new SquareContainer());
         });
     }
 }
