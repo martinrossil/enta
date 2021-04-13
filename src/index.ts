@@ -1,3 +1,4 @@
+export { Icons } from './components/Icons';
 export { default as Square } from './components/Square';
 export { default as SquareContainer } from './components/SquareContainer';
 
@@ -16,6 +17,9 @@ export { default as EventDispatcher } from './event/EventDispatcher';
 export { default as BlurFilter } from './filters/BlurFilter';
 export { default as BoxShadowFilter } from './filters/BoxShadowFilter';
 export { default as ShadowFilter } from './filters/ShadowFilter';
+
+export { default as BottomBar } from './fjedre/BottomBar';
+export { default as TopBar } from './fjedre/TopBar';
 
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
