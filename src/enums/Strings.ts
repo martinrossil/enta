@@ -1,6 +1,8 @@
 export const enum Strings {
+    AUTO = 'auto',
     BORDER_BOX = 'border-box',
     D = 'd',
+    EMPTY = '',
     FILL = 'fill',
     GRADIENT_TRANSFORM = 'gradientTransform',
     GRADIENT_UNITS = 'gradientUnits',
