@@ -1,9 +1,10 @@
 import ILayout from '../layout/ILayout';
 import IDisplayElement from './IDisplayElement';
+import ILayoutElement from './ILayoutElement';
 
 export default interface IDisplayContainer extends IDisplayElement {
-    addElement(element: IDisplayElement): void;
-    addElements(elements: Array<IDisplayElement>): void;
+    addElement(element: ILayoutElement): void;
+    addElements(elements: Array<ILayoutElement>): void;
     padding: number;
     paddingLeft: number;
     paddingTop: number;

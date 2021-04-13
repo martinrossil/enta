@@ -115,16 +115,16 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     protected elements: Array<ILayoutElement> = [];
 
-    public addElement(element: IDisplayElement): void {
-        this.elements.push(element as unknown as ILayoutElement);
+    public addElement(element: ILayoutElement): void {
+        this.elements.push(element);
         this.appendChild(element as unknown as Node);
         this.invalidate();
     }
 
-    public addElements(elements: Array<IDisplayElement>): void {
+    public addElements(elements: Array<ILayoutElement>): void {
         const frag: DocumentFragment = document.createDocumentFragment();
         for (const element of elements) {
-            this.elements.push(element as unknown as ILayoutElement);
+            this.elements.push(element);
             frag.appendChild(element as unknown as Node);
         }
         this.appendChild(frag);
