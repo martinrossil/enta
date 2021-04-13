@@ -9,6 +9,8 @@ export { default as LayoutElement } from './core/LayoutElement';
 export { default as PositionElement } from './core/PositionElement';
 export { default as SizeElement } from './core/SizeElement';
 
+export { Strings } from './enums/Strings';
+
 export { default as EventDispatcher } from './event/EventDispatcher';
 
 export { default as Machine } from './fsm/Machine';
@@ -33,6 +35,9 @@ export { default as ILayoutData } from './interfaces/layout/ILayoutData';
 export { default as IVerticalLayout } from './interfaces/layout/IVerticalLayout';
 export { default as IVerticalLayoutData } from './interfaces/layout/IVerticalLayoutData';
 
+export { default as IColor } from './interfaces/vo/IColor';
+export { default as ILinearGradient } from './interfaces/vo/ILinearGradient';
+
 export { default as AnchorLayout } from './layout/AnchorLayout';
 export { default as AnchorLayoutData } from './layout/AnchorLayoutData';
 export { default as VerticalLayout } from './layout/VerticalLayout';
@@ -40,5 +45,8 @@ export { default as VerticalLayoutData } from './layout/VerticalLayoutData';
 
 export { HorizontalAlign } from './types/HorizontalAlign';
 export { VerticalAlign } from './types/VerticalAlign';
+
+export { default as Color } from './vo/Color';
+export { default as LinearGradient } from './vo/LinearGradient';
 
 export { default as EntaDev } from './EntaDev';
