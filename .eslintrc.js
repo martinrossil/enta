@@ -20,6 +20,7 @@ module.exports = {
         '@typescript-eslint/no-empty-interface': 'off',
         'prefer-spread': 'off',
         'no-useless-call': 'off',
-        'no-unused-vars': 'off'
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'off'
     }
 }
