@@ -19,6 +19,7 @@ module.exports = {
         'space-before-function-paren': 'off',
         '@typescript-eslint/no-empty-interface': 'off',
         'prefer-spread': 'off',
-        'no-useless-call': 'off'
+        'no-useless-call': 'off',
+        'no-unused-vars': 'off'
     }
 }
