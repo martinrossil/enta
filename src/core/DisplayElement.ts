@@ -116,7 +116,7 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
             return;
         }
         this._cornerSize = value;
-        this.style.borderRadius = this._cornerSize + 'px';
+        this.style.borderRadius = this._cornerSize + Strings.PX;
     }
 
     public get cornerSize(): number {
@@ -163,26 +163,6 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
 
     public get clipY(): ClipType {
         return this._clipY;
-    }
-
-    private _enabled = true;
-
-    public set enabled(value: boolean) {
-        if (this._enabled === value) {
-            return;
-        }
-        this._enabled = value;
-        if (value) {
-            this.style.pointerEvents = '';
-            this.style.userSelect = 'auto';
-        } else {
-            this.style.pointerEvents = 'none';
-            this.style.userSelect = 'none';
-        }
-    }
-
-    public get enabled(): boolean {
-        return this._enabled;
     }
 }
 customElements.define('display-element', DisplayElement);
