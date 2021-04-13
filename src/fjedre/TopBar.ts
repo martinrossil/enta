@@ -1,7 +1,7 @@
-import { Color } from '..';
 import DisplayContainer from '../core/DisplayContainer';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import AnchorLayoutData from '../layout/AnchorLayoutData';
+import Color from '../vo/Color';
 
 export default class TopBar extends DisplayContainer {
     public constructor() {
