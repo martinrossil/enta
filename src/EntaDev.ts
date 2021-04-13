@@ -42,9 +42,9 @@ export default class EntaDev extends ApplicationElement {
             this._pathElement = new PathElement();
             this._pathElement.viewBox = new Rectangle(-1, -1, 26, 26);
             this._pathElement.size(200, 200);
+            // this._pathElement.layoutData = new AnchorLayoutData(0, 0, 0, 0, NaN, NaN, 0, 0);
             this._pathElement.pathData = Icons.LOGO;
-            this._pathElement.fillColor = new Color(0, 100, 45);
-            this._pathElement.layoutData = AnchorLayoutData.centerMiddle();
+            this._pathElement.fillColor = new Color(173, 80, 40); // hsla(173, 80%, 40%, 1)
         }
         return this._pathElement;
     }
