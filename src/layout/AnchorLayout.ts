@@ -166,6 +166,18 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
             this.layoutElementRight(container, element, layoutData);
             return;
         }
+        if (!isNaN(layoutData.top) && isNaN(layoutData.bottom)) {
+            this.layoutElementTop(container, element, layoutData);
+            return;
+        }
+        if (!isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
+            this.layoutElementTopBottom(container, element, layoutData);
+            return;
+        }
+        if (isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
+            this.layoutElementBottom(container, element, layoutData);
+            return;
+        }
         if (!isNaN(layoutData.horizontalCenter) && !isNaN(layoutData.verticalMiddle)) {
             this.layoutElementHorizontalVertical(container, element, layoutData);
             return;
@@ -179,6 +191,21 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
             return;
         }
         element.position(container.paddingLeft, container.paddingTop);
+    }
+
+    private layoutElementTop(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
+        // TODO
+    }
+
+    private layoutElementTopBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
+        // TODO
+    }
+
+    private layoutElementBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
+        // TODO
+        const insideHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const y = container.paddingTop + insideHeight - element.measuredHeight - layoutData.bottom;
+        element.position(container.paddingLeft, y);
     }
 
     private layoutElementLeft(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
