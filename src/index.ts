@@ -13,6 +13,10 @@ export { Strings } from './enums/Strings';
 
 export { default as EventDispatcher } from './event/EventDispatcher';
 
+export { default as BlurFilter } from './filters/BlurFilter';
+export { default as BoxShadowFilter } from './filters/BoxShadowFilter';
+export { default as ShadowFilter } from './filters/ShadowFilter';
+
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
 
@@ -25,6 +29,11 @@ export { default as ISizeElement } from './interfaces/core/ISizeElement';
 
 export { default as IEventDispatcher } from './interfaces/event/IEventDispatcher';
 export { default as IEventListener } from './interfaces/event/IEventListener';
+
+export { default as IBlurFilter } from './interfaces/filters/IBlurFilter';
+export { default as IBoxShadowFilter } from './interfaces/filters/IBoxShadowFilter';
+export { default as IFilter } from './interfaces/filters/IFilter';
+export { default as IShadowFilter } from './interfaces/filters/IShadowFilter';
 
 export { default as IState } from './interfaces/fsm/IState';
 

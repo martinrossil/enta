@@ -1,5 +1,7 @@
 import { Strings } from '../enums/Strings';
+import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
+import IFilter from '../interfaces/filters/IFilter';
 import IColor from '../interfaces/vo/IColor';
 import ILinearGradient from '../interfaces/vo/ILinearGradient';
 import { ClipType } from '../types/ClipType';
@@ -12,9 +14,37 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         super();
         this.name = 'DisplayElement';
         this.backgroundColorChanged = this.backgroundColorChanged.bind(this);
+        this.filtersChanged = this.filtersChanged.bind(this);
         this.style.border = Strings.NONE;
         this.style.outline = Strings.NONE;
         this.style.boxSizing = Strings.BORDER_BOX;
+    }
+
+    private filters: Array<IFilter> = [];
+
+    public addFilter(value: IFilter): void {
+        this.filters.push(value);
+        value.addEventListener('invalidate', this.filtersChanged);
+        this.filtersChanged();
+    }
+
+    private filtersChanged(): void {
+        let filterString = '';
+        let boxShadowString = '';
+        if (this.filters.length === 0) {
+            this.style.filter = filterString;
+            this.style.boxShadow = boxShadowString;
+            return;
+        }
+        for (const filter of this.filters) {
+            if (filter instanceof BoxShadowFilter) {
+                boxShadowString += filter.toString() + ', ';
+            } else {
+                filterString += filter.toString() + ' ';
+            }
+        }
+        this.style.filter = filterString.substr(0, filterString.length - 2);
+        this.style.boxShadow = boxShadowString.substr(0, boxShadowString.length - 2);
     }
 
     private backgroundColorChanged(): void {
