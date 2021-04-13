@@ -6,6 +6,7 @@ import IVerticalLayout from '../interfaces/layout/IVerticalLayout';
 import AnchorLayoutData from '../layout/AnchorLayoutData';
 import VerticalLayout from '../layout/VerticalLayout';
 import VerticalLayoutData from '../layout/VerticalLayoutData';
+import Color from '../vo/Color';
 
 export default class SquareContainer extends DisplayContainer {
     public constructor() {
@@ -13,7 +14,7 @@ export default class SquareContainer extends DisplayContainer {
         this.name = 'SquareContainer';
         console.log(this.name, 'constructor()');
         this.padding = 20;
-        this.backgroundColor = 'white'; // '#EAB308';
+        this.backgroundColor = new Color(0, 0, 100); // 'white'; // '#EAB308';
         this.cornerSize = 24;
         // this.layout = new AnchorLayout();
         const v: IVerticalLayout = new VerticalLayout();
@@ -41,7 +42,7 @@ export default class SquareContainer extends DisplayContainer {
             this._blue.size(300, 50);
             // this._blue.height = 100;
             // this._blue.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 100);
-            this._blue.backgroundColor = '#3B82F6';
+            this._blue.backgroundColor = new Color(217, 91, 60);
             this._blue.cornerSize = 16;
         }
         return this._blue;
@@ -59,7 +60,7 @@ export default class SquareContainer extends DisplayContainer {
             // this._red.height = 200;
             // this._red.width = 300;
             this._red.cornerSize = 16;
-            this._red.backgroundColor = '#EF4444';
+            this._red.backgroundColor = new Color(0, 84, 60); // '#EF4444';
         }
         return this._red;
     }
@@ -73,7 +74,7 @@ export default class SquareContainer extends DisplayContainer {
             // this._black.size(400, 150);
             // this._black.width = 400;
             // this._black.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, NaN, 100);
-            this._black.backgroundColor = 'black';
+            this._black.backgroundColor = new Color(0, 0, 0);
             this._black.cornerSize = 16;
         }
         return this._black;

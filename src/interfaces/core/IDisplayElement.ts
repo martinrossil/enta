@@ -1,9 +1,11 @@
 import { ClipType } from '../../types/ClipType';
 import ILayoutData from '../layout/ILayoutData';
+import IColor from '../vo/IColor';
+import ILinearGradient from '../vo/ILinearGradient';
 import ISizeElement from './ISizeElement';
 
 export default interface IDisplayElement extends ISizeElement {
-    backgroundColor: string;
+    backgroundColor: IColor | ILinearGradient | null;
     layoutData: ILayoutData | null;
     cornerSize: number;
     clip: ClipType;

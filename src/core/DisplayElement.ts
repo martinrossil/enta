@@ -1,23 +1,74 @@
+import { Strings } from '../enums/Strings';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
+import IColor from '../interfaces/vo/IColor';
+import ILinearGradient from '../interfaces/vo/ILinearGradient';
 import { ClipType } from '../types/ClipType';
+import Color from '../vo/Color';
+import LinearGradient from '../vo/LinearGradient';
 import LayoutElement from './LayoutElement';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
         super();
         this.name = 'DisplayElement';
+        this.backgroundColorChanged = this.backgroundColorChanged.bind(this);
+        this.style.border = Strings.NONE;
+        this.style.outline = Strings.NONE;
+        this.style.boxSizing = Strings.BORDER_BOX;
     }
 
-    private _backgroundColor = '';
+    private backgroundColorChanged(): void {
+        if (this.backgroundColor) {
+            if (this.backgroundColor instanceof Color) {
+                this.style.background = '';
+                this.style.backgroundColor = this.backgroundColor.toString();
+                return;
+            }
+            if (this.backgroundColor instanceof LinearGradient) {
+                this.style.backgroundColor = '';
+                this.style.background = this.backgroundColor.toString();
+                return;
+            }
+        }
+        this.style.backgroundColor = '';
+        this.style.background = '';
+    }
 
-    public set backgroundColor(value: string) {
+    private _backgroundColor: IColor | ILinearGradient | null = null;
+
+    public set backgroundColor(value: IColor | ILinearGradient | null) {
         if (this._backgroundColor === value) {
             return;
         }
-        this.style.backgroundColor = value;
+        if (this._backgroundColor instanceof Color) {
+            this._backgroundColor.removeEventListener(Color.CHANGED, this.backgroundColorChanged);
+        } else if (this._backgroundColor instanceof LinearGradient) {
+            this._backgroundColor.removeEventListener(LinearGradient.COLOR_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(LinearGradient.COLOR_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(LinearGradient.DEGREES_CHANGED, this.backgroundColorChanged);
+        }
+        this._backgroundColor = value;
+        if (this._backgroundColor instanceof Color) {
+            this._backgroundColor.addEventListener(Color.CHANGED, this.backgroundColorChanged);
+            this.style.background = '';
+            this.style.backgroundColor = this._backgroundColor.toString();
+            return;
+        }
+        if (this._backgroundColor instanceof LinearGradient) {
+            this._backgroundColor.addEventListener(LinearGradient.COLOR_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(LinearGradient.COLOR_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(LinearGradient.DEGREES_CHANGED, this.backgroundColorChanged);
+            this.style.backgroundColor = '';
+            this.style.background = this._backgroundColor.toString();
+            return;
+        }
+        this.style.backgroundColor = '';
+        this.style.background = '';
     }
 
-    public get backgroundColor(): string {
+    public get backgroundColor(): IColor | ILinearGradient | null {
         return this._backgroundColor;
     }
 
