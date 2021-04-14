@@ -14,12 +14,14 @@ export const enum Strings {
     PATH = 'path',
     PX = 'px',
     ROTATE = 'rotate',
+    SCROLL = 'scroll',
     STOP = 'stop',
     STOP_COLOR = 'stop-color',
     STROKE = 'stroke',
     STROKE_COLOR = 'stroke-color',
     STROKE_WIDTH = 'stroke-width',
     SVG_NS = 'http://www.w3.org/2000/svg',
+    TRANSFORM = 'transform',
     URL = 'url',
     USER_SPACE_ON_USE = 'userSpaceOnUse'
 }
