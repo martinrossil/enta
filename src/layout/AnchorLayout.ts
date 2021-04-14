@@ -198,7 +198,9 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     private layoutElementTopBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
-        // TODO
+        const insideHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const y = container.paddingTop + layoutData.top;
+        element.position(container.paddingLeft, y);
     }
 
     private layoutElementBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
