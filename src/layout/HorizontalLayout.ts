@@ -78,7 +78,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
                     fillCount++;
                 }
             } else {
-                fillCount++;
+                widthSum += element.measuredWidth;
             }
         }
         return [widthSum, percentWidthSum, fillCount];
@@ -122,7 +122,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
             if (this.horizontalAlign === 'center') {
                 x += (innerWidth - elementsWidthSum - horizontalGapSumWidth) * 0.5;
             } else {
-                x += (innerHeight - elementsWidthSum - horizontalGapSumWidth);
+                x += (innerWidth - elementsWidthSum - horizontalGapSumWidth);
             }
         }
         return x;
@@ -130,7 +130,17 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
 
     public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
         console.log(container.name, this.name, 'getInternalSize()');
-        return [0, 0];
+        let width = 0;
+        let height = 0;
+        for (const element of elements) {
+            if (height < element.measuredHeight) {
+                height = element.measuredHeight;
+            }
+            width += element.measuredWidth + this.horizontalGap;
+        }
+        width = container.paddingLeft + width - this.horizontalGap + container.paddingRight;
+        height = container.paddingTop + height + container.paddingBottom;
+        return [width, height];
     }
 
     public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
