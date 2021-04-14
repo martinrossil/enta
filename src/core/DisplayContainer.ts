@@ -13,7 +13,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     protected validate(): void {
         super.validate();
-        console.log(this.name, 'validate()');
+        // console.log(this.name, 'validate()');
         this.invalidateInternalSize();
         this.resizeChildren();
         this.layoutChildren();
@@ -129,6 +129,25 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         }
         this.appendChild(frag);
         this.invalidate();
+    }
+
+    public removeElement(element: ILayoutElement): void {
+        const start: number = this.elements.indexOf(element);
+        if (start !== -1) {
+            this.elements.splice(start, 1);
+            this.removeChild(element as unknown as Node);
+            this.invalidate();
+        }
+    }
+
+    public removeElements(): void {
+        if (this.elements.length > 0) {
+            while (this.elements.length > 0) {
+                const element: ILayoutElement = this.elements.splice(0, 1)[0];
+                this.removeChild(element as unknown as Node);
+            }
+            this.invalidate();
+        }
     }
 
     private _layout: ILayout | null = null;
