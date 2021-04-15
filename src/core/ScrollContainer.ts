@@ -74,7 +74,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     protected updateInternalHeight(): void {
-        console.log(this.name, 'updateInternalHeight');
+        // console.log(this.name, 'updateInternalHeight');
         this.internalHeight = this.elementsContainer.measuredHeight;
     }
 

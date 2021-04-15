@@ -16,9 +16,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'resizeChildren()');
+        // console.log(container.name, this.name, 'resizeChildren()');
         if (container.hasWidth) {
-            console.log(this.name, 'resizeChildren hasWidth');
+            // console.log(this.name, 'resizeChildren hasWidth');
             if (this.horizontalAlign === 'fill') {
                 if (this.verticalAlign === 'fill') {
                     this.resizeElementsHorizontalVerticalFill(container, elements);
@@ -36,9 +36,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     private resizeElementsHorizontalFillVerticalMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(this.name, 'resizeElementsHorizontalFillVerticalMiddle()');
+        // console.log(this.name, 'resizeElementsHorizontalFillVerticalMiddle()');
         const [widthSum, percentWidthSum, fillCount] = this.getElementsPercentWidthValues(elements);
-        console.log(widthSum, percentWidthSum, fillCount);
+        // console.log(widthSum, percentWidthSum, fillCount);
         const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
         const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
         const widthLeftForPercentWidth = innerWidth - widthSum - horizontalGapSumWidth;
@@ -85,7 +85,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'layoutChildren()');
+        // console.log(container.name, this.name, 'layoutChildren()');
         if (this.verticalAlign === 'top') {
             console.log(this.name, 'layoutElementsTop()');
             // this.layoutElementsTop(container, elements);
@@ -100,7 +100,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     private layoutElementsMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(this.name, 'layoutElementsMiddle()');
+        // console.log(this.name, 'layoutElementsMiddle()');
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
@@ -129,7 +129,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
-        console.log(container.name, this.name, 'getInternalSize()');
+        // console.log(container.name, this.name, 'getInternalSize()');
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -144,7 +144,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        console.log(container.name, this.name, 'getInternalWidth()');
+        // console.log(container.name, this.name, 'getInternalWidth()');
         return 0;
     }
 

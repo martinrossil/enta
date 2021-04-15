@@ -40,7 +40,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     }
 
     protected updateInternalSize(): void {
-        console.log(this.name, 'updateInternalSize()');
+        // console.log(this.name, 'updateInternalSize()');
         if (this.layout) {
             this.setInternalSizeFromLayout(this.layout);
             return;

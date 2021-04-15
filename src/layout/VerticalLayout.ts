@@ -17,7 +17,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'resizeChildren()');
+        // console.log(container.name, this.name, 'resizeChildren()');
         if (container.hasSize) {
             if (this.horizontalAlign === 'fill' && this.verticalAlign === 'fill') {
                 this.resizeElementsHorizontalVerticalFill(container, elements);
@@ -120,7 +120,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'layoutChildren()');
+        // console.log(container.name, this.name, 'layoutChildren()');
         if (this.horizontalAlign === 'left') {
             this.layoutElementsLeft(container, elements);
             return;
@@ -133,7 +133,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     private layoutElementsLeft(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'layoutElementsLeft()');
+        // console.log(container.name, this.name, 'layoutElementsLeft()');
         let y = this.getVerticalYStartValue(container, elements);
         for (const element of elements) {
             element.position(container.paddingLeft, y);
@@ -208,7 +208,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        console.log(container.name, this.name, 'getInternalHeight()');
+        // console.log(container.name, this.name, 'getInternalHeight()');
         let height = 0;
         for (const element of elements) {
             height += element.measuredHeight + this.verticalGap;

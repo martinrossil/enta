@@ -22,7 +22,7 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
     }
 
     protected invalidateInternalSize(): void {
-        console.log(this.name, 'invalidateInternalSize()', this.name);
+        // console.log(this.name, 'invalidateInternalSize()', this.name);
         if (this.hasSize) {
             return;
         }
