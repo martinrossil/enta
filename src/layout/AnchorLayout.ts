@@ -299,11 +299,15 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     private layoutElementLeftRightMiddle(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IAnchorLayoutData): void {
-        const insideWidthCenter = (container.measuredWidth - container.paddingLeft - container.paddingRight) * 0.5;
+        /* const insideWidthCenter = (container.measuredWidth - container.paddingLeft - container.paddingRight) * 0.5;
         const insideHeightMiddle = (container.measuredHeight - container.paddingTop - container.paddingBottom) * 0.5;
         const elementCenter = element.measuredWidth * 0.5;
         const elementMiddle = element.measuredHeight * 0.5;
         const x = insideWidthCenter - elementCenter + layoutData.left + container.paddingLeft;
+        const y = insideHeightMiddle - elementMiddle + layoutData.verticalMiddle + container.paddingTop; */
+        const insideHeightMiddle = (container.measuredHeight - container.paddingTop - container.paddingBottom) * 0.5;
+        const elementMiddle = element.measuredHeight * 0.5;
+        const x = container.paddingLeft + layoutData.left;
         const y = insideHeightMiddle - elementMiddle + layoutData.verticalMiddle + container.paddingTop;
         element.position(x, y);
     }
