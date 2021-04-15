@@ -1,6 +1,7 @@
 import { Icons } from '../components/Icons';
 import DisplayContainer from '../core/DisplayContainer';
 import IPathElement from '../interfaces/svg/IPathElement';
+import AnchorLayoutData from '../layout/AnchorLayoutData';
 import HorizontalLayout from '../layout/HorizontalLayout';
 import PathElement from '../svg/PathElement';
 import Color from '../vo/Color';
@@ -10,9 +11,11 @@ export default class LanguageSelector extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'LanguageSelector';
+        this.size(52, 40);
         this.layout = new HorizontalLayout(8, 'left', 'middle');
         this.addElement(this.flag);
         this.addElement(this.expand);
+        this.layoutData = new AnchorLayoutData(10, 0, NaN, NaN, NaN, NaN, NaN, 0);
     }
 
     private _flag!: IPathElement;
@@ -20,7 +23,7 @@ export default class LanguageSelector extends DisplayContainer {
     private get flag(): IPathElement {
         if (!this._flag) {
             this._flag = new PathElement();
-            this._flag.size(20, 14);
+            this._flag.size(24, 16);
             this._flag.viewBox = new Rectangle(0, 0, 20, 14);
             this._flag.pathData = Icons.FLAG;
             this._flag.fillColor = new Color(0, 100, 50);

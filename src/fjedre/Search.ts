@@ -12,17 +12,18 @@ import ILabelElement from '../interfaces/text/ILabelElement';
 import LabelElement from '../text/LabelElement';
 import TypeFace from '../vo/TypeFace';
 import AnchorLayout from '../layout/AnchorLayout';
+import Theme from './Theme';
 
 export default class Search extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'Search';
-        this.height = 36;
+        this.height = 40;
         this.layout = new AnchorLayout();
-        this.layoutData = new HorizontalLayoutData(50);
         this.addElement(this.surfaceElement);
         this.addElement(this.search);
         this.addElement(this.labelElement);
+        this.layoutData = new AnchorLayoutData(NaN, 368 + 32, NaN, 192 + 32, NaN, NaN, NaN, 0);
     }
 
     private _surfaceElement!: ISurfaceElement;
@@ -30,7 +31,7 @@ export default class Search extends DisplayContainer {
     private get surfaceElement(): ISurfaceElement {
         if (!this._surfaceElement) {
             this._surfaceElement = new SurfaceElement();
-            this._surfaceElement.layoutData = new AnchorLayoutData(0.0, 0.0, 0.0, 0.0);
+            this._surfaceElement.layoutData = new AnchorLayoutData(0, 0, 0, 0);
             this._surfaceElement.fillColor = new Color(0, 0, 0, 0.0);
             this._surfaceElement.strokeColor = new Color(213, 27, 84); // blue gray 300
             this._surfaceElement.strokeWidth = 1;
@@ -47,8 +48,8 @@ export default class Search extends DisplayContainer {
             this._search.size(24, 24);
             this._search.viewBox = new Rectangle(0, 0, 24, 24);
             this._search.pathData = Icons.SEARCH;
-            this._search.fillColor = new Color(215, 16, 47); // blue gray 500
-            this._search.layoutData = new AnchorLayoutData(6, NaN, NaN, 8);
+            this._search.fillColor = Theme.blueGray400;
+            this._search.layoutData = new AnchorLayoutData(8, NaN, NaN, 8);
         }
         return this._search;
     }
@@ -58,11 +59,12 @@ export default class Search extends DisplayContainer {
     private get labelElement(): ILabelElement {
         if (!this._labelElement) {
             this._labelElement = new LabelElement();
+            this._labelElement.fontSize = 14;
             this._labelElement.text = 'Søg efter varer her...';
-            this._labelElement.layoutData = new AnchorLayoutData(12, NaN, NaN, 40);
-            this._labelElement.textColor = new Color(215, 16, 47); // blue gray 500
-            this._labelElement.typeFace = new TypeFace('Inter', 0.727, 0.09, 0.0);
-            // this._labelElement.fontWeight = 400;
+            this._labelElement.layoutData = new AnchorLayoutData(14, NaN, NaN, 40);
+            this._labelElement.textColor = Theme.blueGray400;
+            this._labelElement.typeFace = Theme.inter;
+            this._labelElement.fontWeight = 500;
         }
         return this._labelElement;
     }
