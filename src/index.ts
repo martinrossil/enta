@@ -9,7 +9,6 @@ export { default as ApplicationElement } from './core/ApplicationElement';
 export { default as BaseElement } from './core/BaseElement';
 export { default as DisplayContainer } from './core/DisplayContainer';
 export { default as DisplayElement } from './core/DisplayElement';
-export { default as LayoutElement } from './core/LayoutElement';
 export { default as PositionElement } from './core/PositionElement';
 export { default as ScrollContainer } from './core/ScrollContainer';
 export { default as SizeElement } from './core/SizeElement';
@@ -26,6 +25,7 @@ export { default as ShadowFilter } from './filters/ShadowFilter';
 
 export { default as INavigationItem } from './fjedre/interfaces/vo/INavigationItem';
 export { default as ISellingPoint } from './fjedre/interfaces/vo/ISellingPoint';
+
 export { default as ISellingPointRenderer } from './fjedre/interfaces/ISellingPointRenderer';
 
 export { default as NavigationItem } from './fjedre/vo/NavigationItem';
@@ -52,10 +52,13 @@ export { default as IList } from './interfaces/components/IList';
 export { default as IBaseElement } from './interfaces/core/IBaseElement';
 export { default as IDisplayContainer } from './interfaces/core/IDisplayContainer';
 export { default as IDisplayElement } from './interfaces/core/IDisplayElement';
+export { default as IElement } from './interfaces/core/IElement';
 export { default as ILayoutElement } from './interfaces/core/ILayoutElement';
 export { default as IPositionElement } from './interfaces/core/IPositionElement';
+export { default as IPositionLayoutElement } from './interfaces/core/IPositionLayoutElement';
 export { default as IScrollContainer } from './interfaces/core/IScrollContainer';
 export { default as ISizeElement } from './interfaces/core/ISizeElement';
+export { default as ISizeLayoutElement } from './interfaces/core/ISizeLayoutElement';
 
 export { default as IArrayCollection } from './interfaces/data/IArrayCollection';
 
@@ -71,13 +74,9 @@ export { default as IInteractive } from './interfaces/fsm/IInteractive';
 export { default as IState } from './interfaces/fsm/IState';
 
 export { default as IAnchorLayout } from './interfaces/layout/IAnchorLayout';
-export { default as IAnchorLayoutData } from './interfaces/layout/IAnchorLayoutData';
 export { default as IHorizontalLayout } from './interfaces/layout/IHorizontalLayout';
-export { default as IHorizontalLayoutData } from './interfaces/layout/IHorizontalLayoutData';
 export { default as ILayout } from './interfaces/layout/ILayout';
-export { default as ILayoutData } from './interfaces/layout/ILayoutData';
 export { default as IVerticalLayout } from './interfaces/layout/IVerticalLayout';
-export { default as IVerticalLayoutData } from './interfaces/layout/IVerticalLayoutData';
 
 export { default as IPathElement } from './interfaces/svg/IPathElement';
 export { default as ISurfaceElement } from './interfaces/svg/ISurfaceElement';
@@ -94,11 +93,8 @@ export { default as IRectangle } from './interfaces/vo/IRectangle';
 export { default as ITypeFace } from './interfaces/vo/ITypeFace';
 
 export { default as AnchorLayout } from './layout/AnchorLayout';
-export { default as AnchorLayoutData } from './layout/AnchorLayoutData';
 export { default as HorizontalLayout } from './layout/HorizontalLayout';
-export { default as HorizontalLayoutData } from './layout/HorizontalLayoutData';
 export { default as VerticalLayout } from './layout/VerticalLayout';
-export { default as VerticalLayoutData } from './layout/VerticalLayoutData';
 
 export { default as PathElement } from './svg/PathElement';
 export { default as SurfaceElement } from './svg/SurfaceElement';
