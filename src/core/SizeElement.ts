@@ -1,7 +1,8 @@
 import ISizeElement from '../interfaces/core/ISizeElement';
+import ISizeLayoutElement from '../interfaces/core/ISizeLayoutElement';
 import PositionElement from './PositionElement';
 
-export default class SizeElement extends PositionElement implements ISizeElement {
+export default class SizeElement extends PositionElement implements ISizeElement, ISizeLayoutElement {
     public constructor() {
         super();
         this.name = 'SizeElement';
@@ -42,7 +43,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         }
         if (widthChanged || heightChanged) {
             this.invalidate();
-            this.notify();
+            this.notifyInvalid();
         }
     }
 
@@ -82,7 +83,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             heightChanged = true;
         }
         if (widthChanged || heightChanged) {
-            this.notify();
+            this.notifyInvalid();
         }
     }
 
@@ -105,7 +106,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this._externalWidth = NaN;
         this.actualWidth = value;
         this.invalidate();
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get width(): number {
@@ -124,7 +125,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this._internalWidth = value;
         this._externalWidth = NaN;
         this.actualWidth = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     protected get internalWidth(): number {
@@ -185,7 +186,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this._externalHeight = NaN;
         this.actualHeight = value;
         this.invalidate();
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get height(): number {
@@ -204,7 +205,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this._internalHeight = value;
         this._externalHeight = NaN;
         this.actualHeight = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     protected get internalHeight(): number {
@@ -246,6 +247,78 @@ export default class SizeElement extends PositionElement implements ISizeElement
         return this._actualHeight;
     }
 
+    private _percentWidth = NaN;
+
+    public set percentWidth(value: number) {
+        if (isNaN(this._percentWidth) && isNaN(value)) {
+            return;
+        }
+        if (this._percentWidth === value) {
+            return;
+        }
+        if (isNaN(value)) {
+            this._percentWidth = NaN;
+            this.notifyInvalid();
+            return;
+        }
+        if (value < 0) {
+            if (this._percentWidth !== 0) {
+                this._percentWidth = 0;
+                this.notifyInvalid();
+            }
+            return;
+        }
+        if (value > 100) {
+            if (this._percentWidth !== 100) {
+                this._percentWidth = 100;
+                this.notifyInvalid();
+            }
+            return;
+        }
+        this._percentWidth = value;
+        this.notifyInvalid();
+    }
+
+    public get percentWidth(): number {
+        return this._percentWidth;
+    }
+
+    private _percentHeight = NaN;
+
+    public set percentHeight(value: number) {
+        if (isNaN(this._percentHeight) && isNaN(value)) {
+            return;
+        }
+        if (this._percentHeight === value) {
+            return;
+        }
+        if (isNaN(value)) {
+            this._percentHeight = NaN;
+            this.notifyInvalid();
+            return;
+        }
+        if (value < 0) {
+            if (this._percentHeight !== 0) {
+                this._percentHeight = 0;
+                this.notifyInvalid();
+            }
+            return;
+        }
+        if (value > 100) {
+            if (this._percentHeight !== 100) {
+                this._percentHeight = 100;
+                this.notifyInvalid();
+            }
+            return;
+        }
+        this._percentHeight = value;
+        this.notifyInvalid();
+    }
+
+    public get percentHeight(): number {
+        return this._percentHeight;
+    }
+
     public get measuredWidth(): number {
         return this.actualWidth;
     }
@@ -254,11 +327,34 @@ export default class SizeElement extends PositionElement implements ISizeElement
         return this.actualHeight;
     }
 
-    private notify(): void {
-        if (!this.connected) {
+    public get hasWidth(): boolean {
+        return !isNaN(this.width) || !isNaN(this.externalWidth);
+    }
+
+    public get hasHeight(): boolean {
+        return !isNaN(this.height) || !isNaN(this.externalHeight);
+    }
+
+    public get hasSize(): boolean {
+        return this.hasWidth && this.hasHeight;
+    }
+
+    protected invalidateInternalSize(): void {
+        // console.log(this.name, 'invalidateInternalSize()', this.name);
+        if (this.hasSize) {
             return;
         }
-        this.dispatchEvent(new CustomEvent('invalidate', { bubbles: true }));
+        if (!this.hasWidth && !this.hasHeight) {
+            this.updateInternalSize();
+            return;
+        }
+        if (!this.hasWidth && this.hasHeight) {
+            this.updateInternalWidth();
+            return;
+        }
+        if (this.hasWidth && !this.hasHeight) {
+            this.updateInternalHeight();
+        }
     }
 
     protected updateInternalSize(): void {

@@ -3,7 +3,6 @@ import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import IPathElement from '../interfaces/svg/IPathElement';
 import ILabelElement from '../interfaces/text/ILabelElement';
 import AnchorLayout from '../layout/AnchorLayout';
-import AnchorLayoutData from '../layout/AnchorLayoutData';
 import PathElement from '../svg/PathElement';
 import LabelElement from '../text/LabelElement';
 import ISellingPointRenderer from './interfaces/ISellingPointRenderer';
@@ -57,7 +56,9 @@ export default class SellingPointRenderer extends DisplayContainer implements IS
             this._labelElement.fontSize = 14;
             this._labelElement.fontWeight = 600;
             this._labelElement.textColor = Theme.blueGray500;
-            this._labelElement.layoutData = new AnchorLayoutData(6, 16, NaN, 64);
+            this._labelElement.top = 6;
+            this._labelElement.right = 16;
+            this._labelElement.left = 64;
             this._labelElement.letterSpacing = 0.4;
         }
         return this._labelElement;
@@ -73,7 +74,9 @@ export default class SellingPointRenderer extends DisplayContainer implements IS
             this._description.fontSize = 14;
             this._description.fontWeight = 400;
             this._description.textColor = Theme.blueGray400;
-            this._description.layoutData = new AnchorLayoutData(24, 16, NaN, 64);
+            this._description.top = 24;
+            this._description.right = 16;
+            this._description.left = 64;
         }
         return this._description;
     }

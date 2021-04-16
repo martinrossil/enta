@@ -1,13 +1,9 @@
 import ItemRenderer from '../components/ItemRenderer';
 import IPathElement from '../interfaces/svg/IPathElement';
 import ILabelElement from '../interfaces/text/ILabelElement';
-import IColor from '../interfaces/vo/IColor';
 import HorizontalLayout from '../layout/HorizontalLayout';
-import VerticalLayoutData from '../layout/VerticalLayoutData';
 import PathElement from '../svg/PathElement';
 import LabelElement from '../text/LabelElement';
-import Color from '../vo/Color';
-import TypeFace from '../vo/TypeFace';
 import INavigationItem from './interfaces/vo/INavigationItem';
 import Theme from './Theme';
 
@@ -22,11 +18,6 @@ export default class NavigationItemRenderer extends ItemRenderer<INavigationItem
         this.layout = new HorizontalLayout(16, 'left', 'middle');
         this.addElements([this.pathElement, this.labelElement]);
     }
-
-    private teal700: IColor = new Color(175, 77, 26);
-    private teal500: IColor = new Color(173, 80, 40);
-    private teal200: IColor = new Color(168, 84, 78);
-    private teal100: IColor = new Color(167, 85, 89);
 
     private _pathElement!: IPathElement;
 

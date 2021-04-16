@@ -1,11 +1,8 @@
 import DisplayContainer from '../core/DisplayContainer';
 import DisplayElement from '../core/DisplayElement';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
-// import AnchorLayout from '../layout/AnchorLayout';
 import IVerticalLayout from '../interfaces/layout/IVerticalLayout';
-import AnchorLayoutData from '../layout/AnchorLayoutData';
 import VerticalLayout from '../layout/VerticalLayout';
-import VerticalLayoutData from '../layout/VerticalLayoutData';
 import Color from '../vo/Color';
 
 export default class SquareContainer extends DisplayContainer {
@@ -24,7 +21,11 @@ export default class SquareContainer extends DisplayContainer {
         this.layout = v;
         // this.size(400, 400);
         // this.width = 400;
-        this.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0, NaN, 75, 0, 0);
+        this.right = 0;
+        this.left = 0;
+        this.percentHeight = 75;
+        this.horizontalCenter = 0;
+        this.verticalMiddle = 0;
         this.addElements([this.blue, this.red, this.black]);
         window.addEventListener('click', () => {
             // this.blue.width += 5;
@@ -54,7 +55,8 @@ export default class SquareContainer extends DisplayContainer {
         if (!this._red) {
             this._red = new DisplayElement();
             this._red.name = 'red';
-            this._red.layoutData = new VerticalLayoutData(75, 50);
+            this.percentWidth = 75;
+            this.percentHeight = 50;
             // this._red.layoutData = new AnchorLayoutData(NaN, 0, 0);
             // this._red.size(350, 100);
             // this._red.height = 200;

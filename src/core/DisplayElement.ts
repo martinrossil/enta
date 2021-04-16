@@ -7,9 +7,9 @@ import ILinearGradient from '../interfaces/vo/ILinearGradient';
 import { ClipType } from '../types/ClipType';
 import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
-import LayoutElement from './LayoutElement';
+import SizeElement from './SizeElement';
 
-export default class DisplayElement extends LayoutElement implements IDisplayElement {
+export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {
         super();
         this.name = 'DisplayElement';

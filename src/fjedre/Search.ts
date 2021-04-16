@@ -1,8 +1,6 @@
 import DisplayContainer from '../core/DisplayContainer';
 import IPathElement from '../interfaces/svg/IPathElement';
 import ISurfaceElement from '../interfaces/svg/ISurfaceElement';
-import AnchorLayoutData from '../layout/AnchorLayoutData';
-import HorizontalLayoutData from '../layout/HorizontalLayoutData';
 import PathElement from '../svg/PathElement';
 import SurfaceElement from '../svg/SurfaceElement';
 import Color from '../vo/Color';
@@ -10,7 +8,6 @@ import { Icons } from '../components/Icons';
 import Rectangle from '../vo/Rectangle';
 import ILabelElement from '../interfaces/text/ILabelElement';
 import LabelElement from '../text/LabelElement';
-import TypeFace from '../vo/TypeFace';
 import AnchorLayout from '../layout/AnchorLayout';
 import Theme from './Theme';
 
@@ -23,7 +20,9 @@ export default class Search extends DisplayContainer {
         this.addElement(this.surfaceElement);
         this.addElement(this.search);
         this.addElement(this.labelElement);
-        this.layoutData = new AnchorLayoutData(NaN, 368 + 32, NaN, 192 + 32, NaN, NaN, NaN, 0);
+        this.right = 400;
+        this.left = 224;
+        this.verticalMiddle = 0;
     }
 
     private _surfaceElement!: ISurfaceElement;
@@ -31,7 +30,8 @@ export default class Search extends DisplayContainer {
     private get surfaceElement(): ISurfaceElement {
         if (!this._surfaceElement) {
             this._surfaceElement = new SurfaceElement();
-            this._surfaceElement.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+            this._surfaceElement.percentWidth = 100;
+            this._surfaceElement.percentHeight = 100;
             this._surfaceElement.fillColor = new Color(0, 0, 0, 0.0);
             this._surfaceElement.strokeColor = new Color(213, 27, 84); // blue gray 300
             this._surfaceElement.strokeWidth = 1;
@@ -49,7 +49,8 @@ export default class Search extends DisplayContainer {
             this._search.viewBox = new Rectangle(0, 0, 24, 24);
             this._search.pathData = Icons.SEARCH;
             this._search.fillColor = Theme.blueGray400;
-            this._search.layoutData = new AnchorLayoutData(8, NaN, NaN, 8);
+            this._search.top = 8;
+            this._search.left = 8;
         }
         return this._search;
     }
@@ -61,7 +62,8 @@ export default class Search extends DisplayContainer {
             this._labelElement = new LabelElement();
             this._labelElement.fontSize = 14;
             this._labelElement.text = 'Søg efter varer her...';
-            this._labelElement.layoutData = new AnchorLayoutData(14, NaN, NaN, 40);
+            this._labelElement.top = 14;
+            this._labelElement.left = 40;
             this._labelElement.textColor = Theme.blueGray400;
             this._labelElement.typeFace = Theme.inter;
             this._labelElement.fontWeight = 500;

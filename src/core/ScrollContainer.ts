@@ -165,11 +165,11 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this._verticalScrollEnabled;
     }
 
-    public set layout(value: ILayout | null) {
+    public set layout(value: ILayout) {
         this.elementsContainer.layout = value;
     }
 
-    public get layout(): ILayout | null {
+    public get layout(): ILayout {
         return this.elementsContainer.layout;
     }
 

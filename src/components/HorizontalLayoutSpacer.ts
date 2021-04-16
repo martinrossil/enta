@@ -1,12 +1,11 @@
-import DisplayElement from '../core/DisplayElement';
-import HorizontalLayoutData from '../layout/HorizontalLayoutData';
-import Color from '../vo/Color';
+import SizeElement from '../core/SizeElement';
 
-export default class HorizontalLayoutSpacer extends DisplayElement {
+export default class HorizontalLayoutSpacer extends SizeElement {
     public constructor(percentWidth = NaN, percentHeight = NaN) {
         super();
         this.name = 'HorizontalSpacer';
-        this.layoutData = new HorizontalLayoutData(percentWidth, percentHeight);
+        this.percentWidth = percentWidth;
+        this.percentHeight = percentHeight
     }
 }
 customElements.define('horizontal-layout-spacer', HorizontalLayoutSpacer);

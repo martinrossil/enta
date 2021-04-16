@@ -2,10 +2,8 @@ import EventDispatcher from '../event/EventDispatcher';
 import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
 import IVerticalLayout from '../interfaces/layout/IVerticalLayout';
-import IVerticalLayoutData from '../interfaces/layout/IVerticalLayoutData';
 import { HorizontalAlign } from '../types/HorizontalAlign';
 import { VerticalAlign } from '../types/VerticalAlign';
-import VerticalLayoutData from './VerticalLayoutData';
 
 export default class VerticalLayout extends EventDispatcher implements IVerticalLayout {
     public constructor(verticalGap = 0, horizontalAlign: HorizontalAlign = 'left', verticalAlign: VerticalAlign = 'top') {
@@ -44,16 +42,12 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
             fillHeight = heightLeftForFillHeight / fillCount;
         }
         for (const element of elements) {
-            if (element.layoutData instanceof VerticalLayoutData) {
-                if (!isNaN(element.layoutData.percentWidth) && !isNaN(element.layoutData.percentHeight)) {
-                    element.externalSize(innerWidth * element.layoutData.percentWidth / 100, pixelPercentRatio * element.layoutData.percentHeight);
-                } else if (!isNaN(element.layoutData.percentWidth) && isNaN(element.layoutData.percentHeight)) {
-                    element.externalSize(innerWidth * element.layoutData.percentWidth / 100, fillHeight);
-                } else if (isNaN(element.layoutData.percentWidth) && !isNaN(element.layoutData.percentHeight)) {
-                    element.externalSize(innerWidth, element.layoutData.percentHeight * pixelPercentRatio);
-                } else {
-                    element.externalSize(innerWidth, fillHeight);
-                }
+            if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
+                element.externalSize(innerWidth * element.percentWidth / 100, pixelPercentRatio * element.percentHeight);
+            } else if (!isNaN(element.percentWidth) && isNaN(element.percentHeight)) {
+                element.externalSize(innerWidth * element.percentWidth / 100, fillHeight);
+            } else if (isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
+                element.externalSize(innerWidth, element.percentHeight * pixelPercentRatio);
             } else {
                 element.externalSize(innerWidth, fillHeight);
             }
@@ -67,56 +61,13 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         for (const element of elements) {
             if (!isNaN(element.height)) {
                 heightSum += element.height;
-            } else if (element.layoutData instanceof VerticalLayoutData) {
-                if (!isNaN(element.layoutData.percentHeight)) {
-                    percentHeightSum += element.layoutData.percentHeight;
-                } else {
-                    fillCount++;
-                }
+            } else if (!isNaN(element.percentHeight)) {
+                percentHeightSum += element.percentHeight;
             } else {
                 fillCount++;
             }
         }
         return [heightSum, percentHeightSum, fillCount];
-    }
-
-    private resizeElementsFill(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'resizeElementsFill()');
-        for (const element of elements) {
-            if (element.layoutData instanceof VerticalLayoutData) {
-                this.resizeElementFillWithLayoutData(container, element, element.layoutData);
-            } else {
-                this.resizeElementFill(container, element);
-            }
-        }
-    }
-
-    private resizeElementFillWithLayoutData(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IVerticalLayoutData): void {
-        console.log(container.name, this.name, 'resizeElementFillWithLayoutData()', element.name, layoutData.name);
-    }
-
-    private resizeElementFill(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
-        console.log(container.name, this.name, 'resizeElementFill()', element.name);
-        element.externalWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
-    }
-
-    private resizeElements(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'resizeElements()');
-        for (const element of elements) {
-            if (element.layoutData instanceof VerticalLayoutData) {
-                this.resizeElementWithLayoutData(container, element, element.layoutData);
-            } else {
-                this.resizeElement(container, element);
-            }
-        }
-    }
-
-    private resizeElementWithLayoutData(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, layoutData: IVerticalLayoutData): void {
-        console.log(container.name, this.name, 'resizeElementWithLayoutData()', element.name, layoutData.name);
-    }
-
-    private resizeElement(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
-        console.log(container.name, this.name, 'resizeElement()', element.name);
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {

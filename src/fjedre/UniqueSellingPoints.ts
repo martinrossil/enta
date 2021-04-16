@@ -1,8 +1,6 @@
 import { Icons } from '../components/Icons';
 import DisplayContainer from '../core/DisplayContainer';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
-import AnchorLayoutData from '../layout/AnchorLayoutData';
 import VerticalLayout from '../layout/VerticalLayout';
 import Color from '../vo/Color';
 import ISellingPointRenderer from './interfaces/ISellingPointRenderer';
@@ -21,7 +19,8 @@ export default class UniqueSellingPoints extends DisplayContainer {
         this.padding = 24;
         this.addFilter(new BoxShadowFilter(0, 1, 3, 0, new Color(0, 0, 0, 0.1)));
         this.addFilter(new BoxShadowFilter(0, 1, 2, 0, new Color(0, 0, 0, 0.06)));
-        this.layoutData = new AnchorLayoutData(104, 32);
+        this.top = 104;
+        this.right = 32;
         this.layout = new VerticalLayout(16);
         this.addSellingPoints();
     }

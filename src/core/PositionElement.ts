@@ -1,7 +1,8 @@
 import IPositionElement from '../interfaces/core/IPositionElement';
+import IPositionLayoutElement from '../interfaces/core/IPositionLayoutElement';
 import BaseElement from './BaseElement';
 
-export default class PositionElement extends BaseElement implements IPositionElement {
+export default class PositionElement extends BaseElement implements IPositionElement, IPositionLayoutElement {
     public constructor() {
         super();
         this.name = 'PositionElement';
@@ -53,6 +54,108 @@ export default class PositionElement extends BaseElement implements IPositionEle
 
     public get y(): number {
         return this._y;
+    }
+
+    private _top = NaN;
+
+    public set top(value: number) {
+        if (isNaN(this._top) && isNaN(value)) {
+            return;
+        }
+        if (this._top === value) {
+            return;
+        }
+        this._top = value;
+        this.notifyInvalid();
+    }
+
+    public get top(): number {
+        return this._top;
+    }
+
+    private _right = NaN;
+
+    public set right(value: number) {
+        if (isNaN(this._right) && isNaN(value)) {
+            return;
+        }
+        if (this._right === value) {
+            return;
+        }
+        this._right = value;
+        this.notifyInvalid();
+    }
+
+    public get right(): number {
+        return this._right;
+    }
+
+    private _bottom = NaN;
+
+    public set bottom(value: number) {
+        if (isNaN(this._bottom) && isNaN(value)) {
+            return;
+        }
+        if (this._bottom === value) {
+            return;
+        }
+        this._bottom = value;
+        this.notifyInvalid();
+    }
+
+    public get bottom(): number {
+        return this._bottom;
+    }
+
+    private _left = NaN;
+
+    public set left(value: number) {
+        if (isNaN(this._left) && isNaN(value)) {
+            return;
+        }
+        if (this._left === value) {
+            return;
+        }
+        this._left = value;
+        this.notifyInvalid();
+    }
+
+    public get left(): number {
+        return this._left;
+    }
+
+    private _horizontalCenter = NaN;
+
+    public set horizontalCenter(value: number) {
+        if (isNaN(this._horizontalCenter) && isNaN(value)) {
+            return;
+        }
+        if (this._horizontalCenter === value) {
+            return;
+        }
+        this._horizontalCenter = value;
+        this.notifyInvalid();
+    }
+
+    public get horizontalCenter(): number {
+        return this._horizontalCenter;
+    }
+
+    private _verticalMiddle = NaN;
+
+    public set verticalMiddle(value: number) {
+        if (isNaN(this._verticalMiddle) && isNaN(value)) {
+            return;
+        }
+        if (this._verticalMiddle === value) {
+            return;
+        }
+        this._verticalMiddle = value;
+        this.notifyInvalid();
+    }
+
+    public get verticalMiddle(): number {
+        return this._verticalMiddle;
     }
 
     private updateTransform(): void {

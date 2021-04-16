@@ -4,7 +4,6 @@ import ILayoutElement from '../interfaces/core/ILayoutElement';
 import IHorizontalLayout from '../interfaces/layout/IHorizontalLayout';
 import { HorizontalAlign } from '../types/HorizontalAlign';
 import { VerticalAlign } from '../types/VerticalAlign';
-import HorizontalLayoutData from './HorizontalLayoutData';
 
 export default class HorizontalLayout extends EventDispatcher implements IHorizontalLayout {
     public constructor(horizontalGap = 0, horizontalAlign: HorizontalAlign = 'left', verticalAlign: VerticalAlign = 'top') {
@@ -54,12 +53,10 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
             fillWidth = widthLeftForFillWidth / fillCount;
         }
         for (const element of elements) {
-            if (element.layoutData instanceof HorizontalLayoutData) {
-                if (!isNaN(element.layoutData.percentWidth)) {
-                    element.externalWidth = pixelPercentRatio * element.layoutData.percentWidth;
-                } else {
-                    element.externalWidth = fillWidth;
-                }
+            if (!isNaN(element.percentWidth)) {
+                element.externalWidth = pixelPercentRatio * element.percentWidth;
+            } else {
+                element.externalWidth = fillWidth;
             }
         }
     }
@@ -71,14 +68,10 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         for (const element of elements) {
             if (!isNaN(element.width)) {
                 widthSum += element.width;
-            } else if (element.layoutData instanceof HorizontalLayoutData) {
-                if (!isNaN(element.layoutData.percentWidth)) {
-                    percentWidthSum += element.layoutData.percentWidth;
-                } else {
-                    fillCount++;
-                }
+            } else if (!isNaN(element.percentWidth)) {
+                percentWidthSum += element.percentWidth;
             } else {
-                widthSum += element.measuredWidth;
+                fillCount++;
             }
         }
         return [widthSum, percentWidthSum, fillCount];

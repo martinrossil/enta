@@ -1,11 +1,11 @@
 import { ILayoutElement } from '..';
-import LayoutElement from '../core/LayoutElement';
+import SizeElement from '../core/SizeElement';
 import BlurFilter from '../filters/BlurFilter';
 import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 import IRectangle from '../interfaces/vo/IRectangle';
 
-export default class SvgElement extends LayoutElement implements ISvgElement, ILayoutElement {
+export default class SvgElement extends SizeElement implements ISvgElement, ILayoutElement {
     public constructor() {
         super();
         this.name = 'SvgElement';
