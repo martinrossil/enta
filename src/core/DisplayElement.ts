@@ -1,6 +1,7 @@
 import { Strings } from '../enums/Strings';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
+import IElement from '../interfaces/core/IElement';
 import IFilter from '../interfaces/filters/IFilter';
 import IColor from '../interfaces/vo/IColor';
 import ILinearGradient from '../interfaces/vo/ILinearGradient';
@@ -9,7 +10,7 @@ import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
 import SizeElement from './SizeElement';
 
-export default class DisplayElement extends SizeElement implements IDisplayElement {
+export default class DisplayElement extends SizeElement implements IDisplayElement, IElement {
     public constructor() {
         super();
         this.name = 'DisplayElement';
