@@ -24,7 +24,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     private resizeElementsHorizontalVerticalFill(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(this.name, 'resizeElementsHorizontalVerticalFill()');
+        // console.log(this.name, 'resizeElementsHorizontalVerticalFill()');
         const [heightSum, percentHeightSum, fillCount] = this.getElementsPercentHeightValues(elements);
         const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
         const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
@@ -93,7 +93,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     private layoutElementsCenter(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'layoutElementsCenter()');
+        // console.log(container.name, this.name, 'layoutElementsCenter()');
         let x = 0;
         let y = this.getVerticalYStartValue(container, elements);
         for (const element of elements) {
@@ -104,7 +104,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     private layoutElementsRight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, this.name, 'layoutElementsRight()');
+        // console.log(container.name, this.name, 'layoutElementsRight()');
         let x = 0;
         let y = this.getVerticalYStartValue(container, elements);
         for (const element of elements) {
@@ -133,7 +133,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
-        console.log(container.name, this.name, 'getInternalSize()');
+        // console.log(container.name, this.name, 'getInternalSize()');
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -148,7 +148,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        console.log(container.name, this.name, 'getInternalWidth()');
+        // console.log(container.name, this.name, 'getInternalWidth()');
         let width = 0;
         for (const element of elements) {
             if (width < element.measuredWidth) {
@@ -176,19 +176,19 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         if (isNaN(value) || value < 0) {
             if (this._verticalGap !== 0) {
                 this._verticalGap = 0;
-                this.notify();
+                this.notifyInvalid();
             }
             return;
         }
         this._verticalGap = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get verticalGap(): number {
         return this._verticalGap;
     }
 
-    private notify(): void {
+    private notifyInvalid(): void {
         this.dispatch('invalidate');
     }
 
@@ -199,7 +199,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
             return;
         }
         this._horizontalAlign = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get horizontalAlign(): HorizontalAlign {
@@ -213,7 +213,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
             return;
         }
         this._verticalAlign = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get verticalAlign(): VerticalAlign {
