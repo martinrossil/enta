@@ -5,4 +5,5 @@ export default interface IBaseElement extends IEventDispatcher {
     name: string;
     visible: boolean;
     enabled: boolean;
+    cursor: string;
 }

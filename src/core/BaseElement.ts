@@ -1,3 +1,4 @@
+import { Cursor } from '../enums/Cursor';
 import { Strings } from '../enums/Strings';
 import IBaseElement from '../interfaces/core/IBaseElement';
 
@@ -77,6 +78,20 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
 
     public get enabled(): boolean {
         return this._enabled;
+    }
+
+    private _cursor: Cursor = Cursor.NONE;
+
+    public set cursor(value: Cursor) {
+        if (this._cursor === value) {
+            return;
+        }
+        this._cursor = value;
+        this.style.cursor = value;
+    }
+
+    public get cursor(): Cursor {
+        return this._cursor;
     }
 }
 customElements.define('base-element', BaseElement);
