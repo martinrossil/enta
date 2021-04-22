@@ -38,5 +38,19 @@ export default class ImageElement extends DisplayElement implements IImageElemen
     public get source(): string {
         return this._source;
     }
+
+    private _alt = '';
+
+    public set alt(value: string) {
+        if (this._alt === value) {
+            return;
+        }
+        this._alt = value;
+        this.img.alt = value;
+    }
+
+    public get alt(): string {
+        return this._alt;
+    }
 }
 customElements.define('image-element', ImageElement);
