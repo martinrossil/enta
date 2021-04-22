@@ -26,12 +26,48 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
                 if (this.verticalAlign === 'middle') {
                     this.resizeElementsHorizontalFillVerticalMiddle(container, elements);
                 }
+                return;
+            }
+            if (this.horizontalAlign === 'left') {
+                if (this.verticalAlign === 'middle') {
+                    this.resizeElementsHorizontalLeftVerticalMiddle(container, elements);
+                }
             }
         }
     }
 
     private resizeElementsHorizontalVerticalFill(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(this.name, 'resizeElementsHorizontalVerticalFill()');
+        // console.log(this.name, 'resizeElementsHorizontalFillVerticalMiddle()');
+        const [widthSum, percentWidthSum, fillCount] = this.getElementsPercentWidthValues(elements);
+        // console.log(widthSum, percentWidthSum, fillCount);
+        const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
+        const widthLeftForPercentWidth = innerWidth - widthSum - horizontalGapSumWidth;
+        let pixelPercentRatio;
+        let widthLeftForFillWidth;
+        let fillWidth = 0;
+        if (percentWidthSum > 100) {
+            pixelPercentRatio = widthLeftForPercentWidth / percentWidthSum;
+            widthLeftForFillWidth = 0;
+        } else {
+            pixelPercentRatio = widthLeftForPercentWidth / 100;
+            widthLeftForFillWidth = widthLeftForPercentWidth - (widthLeftForPercentWidth / 100 * percentWidthSum);
+            fillWidth = widthLeftForFillWidth / fillCount;
+        }
+        for (const element of elements) {
+            if (!isNaN(element.percentWidth)) {
+                element.externalSize(pixelPercentRatio * element.percentWidth, innerHeight);
+                // element.externalWidth = pixelPercentRatio * element.percentWidth;
+            } else {
+                element.externalSize(fillWidth, innerHeight);
+                // element.externalWidth = fillWidth;
+            }
+        }
+    }
+
+    private resizeElementsHorizontalLeftVerticalMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+        // console.log(this.name, 'resizeElementsHorizontalLeftVerticalMiddle()');
     }
 
     private resizeElementsHorizontalFillVerticalMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
@@ -80,12 +116,12 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
         // console.log(container.name, this.name, 'layoutChildren()');
         if (this.verticalAlign === 'top') {
-            console.log(this.name, 'layoutElementsTop()');
+            // console.log(this.name, 'layoutElementsTop()');
             // this.layoutElementsTop(container, elements);
             return;
         }
         if (this.verticalAlign === 'bottom') {
-            console.log(this.name, 'layoutElementsBottom()');
+            // console.log(this.name, 'layoutElementsBottom()');
             // this.layoutElementsBottom(container, elements);
             return;
         }
@@ -142,8 +178,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        console.log(container.name, this.name, 'getInternalHeight()');
-        return 0;
+        // console.log(container.name, this.name, 'getInternalHeight()');
+        return 56;
+        // return 0;
     }
 
     private _horizontalGap = 0;
@@ -155,12 +192,12 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         if (isNaN(value) || value < 0) {
             if (this._horizontalGap !== 0) {
                 this._horizontalGap = 0;
-                this.notify();
+                this.notifyInvalid();
             }
             return;
         }
         this._horizontalGap = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get horizontalGap(): number {
@@ -174,7 +211,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
             return;
         }
         this._horizontalAlign = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get horizontalAlign(): HorizontalAlign {
@@ -188,14 +225,14 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
             return;
         }
         this._verticalAlign = value;
-        this.notify();
+        this.notifyInvalid();
     }
 
     public get verticalAlign(): VerticalAlign {
         return this._verticalAlign;
     }
 
-    private notify(): void {
+    private notifyInvalid(): void {
         this.dispatch('invalidate');
     }
 }
