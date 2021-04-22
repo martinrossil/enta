@@ -1,6 +1,7 @@
 export const enum Strings {
     AUTO = 'auto',
     BORDER_BOX = 'border-box',
+    COVER = 'cover',
     D = 'd',
     EMPTY = '',
     FILL = 'fill',
