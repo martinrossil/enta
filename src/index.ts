@@ -1,9 +1,6 @@
-export { default as HorizontalLayoutSpacer } from './components/HorizontalLayoutSpacer';
-export { Icons } from './components/Icons';
+export { default as ImageElement } from './components/ImageElement';
 export { default as ItemRenderer } from './components/ItemRenderer';
 export { default as List } from './components/List';
-export { default as Square } from './components/Square';
-export { default as SquareContainer } from './components/SquareContainer';
 
 export { default as ApplicationElement } from './core/ApplicationElement';
 export { default as BaseElement } from './core/BaseElement';
@@ -23,29 +20,11 @@ export { default as BlurFilter } from './filters/BlurFilter';
 export { default as BoxShadowFilter } from './filters/BoxShadowFilter';
 export { default as ShadowFilter } from './filters/ShadowFilter';
 
-export { default as INavigationItem } from './fjedre/interfaces/vo/INavigationItem';
-export { default as ISellingPoint } from './fjedre/interfaces/vo/ISellingPoint';
-
-export { default as ISellingPointRenderer } from './fjedre/interfaces/ISellingPointRenderer';
-
-export { default as NavigationItem } from './fjedre/vo/NavigationItem';
-export { default as SellingPoint } from './fjedre/vo/SellingPoint';
-
-export { default as BottomBar } from './fjedre/BottomBar';
-export { default as LanguageSelector } from './fjedre/LanguageSelector';
-export { default as LeftNavigationList } from './fjedre/LeftNavigationList';
-export { default as Logo } from './fjedre/Logo';
-export { default as NavigationItemRenderer } from './fjedre/NavigationItemRenderer';
-export { default as Search } from './fjedre/Search';
-export { default as SellingPointRenderer } from './fjedre/SellingPointRenderer';
-export { default as Theme } from './fjedre/Theme';
-export { default as TopBar } from './fjedre/TopBar';
-export { default as UniqueSellingPoints } from './fjedre/UniqueSellingPoints';
-
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
 export { default as TouchMachine } from './fsm/TouchMachine';
 
+export { default as IImageElement } from './interfaces/components/IImageElement';
 export { default as IItemRenderer } from './interfaces/components/IItemRenderer';
 export { default as IList } from './interfaces/components/IList';
 
@@ -74,6 +53,7 @@ export { default as IInteractive } from './interfaces/fsm/IInteractive';
 export { default as IState } from './interfaces/fsm/IState';
 
 export { default as IAnchorLayout } from './interfaces/layout/IAnchorLayout';
+export { default as IColumnLayout } from './interfaces/layout/IColumnLayout';
 export { default as IHorizontalLayout } from './interfaces/layout/IHorizontalLayout';
 export { default as ILayout } from './interfaces/layout/ILayout';
 export { default as IVerticalLayout } from './interfaces/layout/IVerticalLayout';
@@ -93,6 +73,7 @@ export { default as IRectangle } from './interfaces/vo/IRectangle';
 export { default as ITypeFace } from './interfaces/vo/ITypeFace';
 
 export { default as AnchorLayout } from './layout/AnchorLayout';
+export { default as ColumnLayout } from './layout/ColumnLayout';
 export { default as HorizontalLayout } from './layout/HorizontalLayout';
 export { default as VerticalLayout } from './layout/VerticalLayout';
 
@@ -102,6 +83,7 @@ export { default as SvgElement } from './svg/SvgElement';
 
 export { default as BaseText } from './text/BaseText';
 export { default as LabelElement } from './text/LabelElement';
+export { default as TextElement } from './text/TextElement';
 export { default as TextRenderer } from './text/TextRenderer';
 
 export { ClipType } from './types/ClipType';
