@@ -1,8 +1,7 @@
 import { Strings } from '../enums/Strings';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
+import IElement from '../interfaces/core/IElement';
 import IScrollContainer from '../interfaces/core/IScrollContainer';
 import ILayout from '../interfaces/layout/ILayout';
-import Color from '../vo/Color';
 import DisplayContainer from './DisplayContainer';
 import DisplayElement from './DisplayElement';
 
@@ -64,12 +63,12 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     protected updateInternalSize(): void {
-        console.log(this.name, 'updateInternalSize');
+        // console.log(this.name, 'updateInternalSize');
         this.internalSize(this.elementsContainer.measuredWidth, this.elementsContainer.measuredHeight);
     }
 
     protected updateInternalWidth(): void {
-        console.log(this.name, 'updateInternalWidth');
+        // console.log(this.name, 'updateInternalWidth');
         this.internalWidth = this.elementsContainer.measuredWidth;
     }
 
@@ -100,20 +99,28 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this._elementsContainer;
     }
 
-    public addElement(element: IDisplayElement): void {
+    public addElement(element: IElement): void {
         this.elementsContainer.addElement(element);
     }
 
-    public addElements(elements: IDisplayElement[]): void {
+    public addElementAt(element: IElement, index: number): void {
+        this.elementsContainer.addElementAt(element, index);
+    }
+
+    public addElements(elements: IElement[]): void {
         this.elementsContainer.addElements(elements);
     }
 
-    public removeElement(element: IDisplayElement): void {
+    public removeElement(element: IElement): void {
         this.elementsContainer.removeElement(element);
     }
 
     public removeElements(): void {
         this.elementsContainer.removeElements();
+    }
+
+    public containsElement(element: IElement): boolean {
+        return this.elementsContainer.contains(element as unknown as Node);
     }
 
     private _scrollEnabled = false;
