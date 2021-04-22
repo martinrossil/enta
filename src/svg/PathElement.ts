@@ -156,7 +156,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             return;
         }
         if (this._strokeColor instanceof Color) {
-            this._strokeColor.removeEventListener(Color.CHANGED, this.strokeColorChanged as IEventListener);
+            this._strokeColor.removeEventListener('invalidate', this.strokeColorChanged as IEventListener);
         } else if (this._strokeColor instanceof LinearGradient) {
             this.defs.removeChild(this.strokeLinearGradient);
             this.resetLinearGradient(this.strokeLinearGradient);
@@ -165,7 +165,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         }
         this._strokeColor = value;
         if (this._strokeColor instanceof Color) {
-            this._strokeColor.addEventListener(Color.CHANGED, this.strokeColorChanged as IEventListener);
+            this._strokeColor.addEventListener('invalidate', this.strokeColorChanged as IEventListener);
             this.path.setAttribute(Strings.STROKE, this._strokeColor.toString());
             return;
         }
@@ -194,7 +194,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             return;
         }
         if (this._fillColor instanceof Color) {
-            this._fillColor.removeEventListener(Color.CHANGED, this.fillColorChanged as IEventListener);
+            this._fillColor.removeEventListener('invalidate', this.fillColorChanged as IEventListener);
         } else if (this._fillColor instanceof LinearGradient) {
             this.defs.removeChild(this.fillLinearGradient);
             this.resetLinearGradient(this.fillLinearGradient);
@@ -203,7 +203,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         }
         this._fillColor = value;
         if (this._fillColor instanceof Color) {
-            this._fillColor.addEventListener(Color.CHANGED, this.fillColorChanged as IEventListener);
+            this._fillColor.addEventListener('invalidate', this.fillColorChanged as IEventListener);
             this.path.setAttribute(Strings.FILL, this._fillColor.toString());
             return;
         }

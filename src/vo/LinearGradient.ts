@@ -2,7 +2,6 @@ import EventDispatcher from '../event/EventDispatcher';
 import IEventListener from '../interfaces/event/IEventListener';
 import IColor from '../interfaces/vo/IColor';
 import ILinearGradient from '../interfaces/vo/ILinearGradient';
-import Color from './Color';
 
 export default class LinearGradient extends EventDispatcher implements ILinearGradient {
     public static COLOR_CHANGED = 'LinearGradient.COLOR_CHANGED';
@@ -24,7 +23,7 @@ export default class LinearGradient extends EventDispatcher implements ILinearGr
         }
         for (const color of colors) {
             this.colors.push(color);
-            color.addEventListener(Color.CHANGED, this.colorChanged as IEventListener);
+            color.addEventListener('invalidate', this.colorChanged as IEventListener);
         }
     }
 
@@ -36,14 +35,14 @@ export default class LinearGradient extends EventDispatcher implements ILinearGr
 
     public addColor(value: IColor): void {
         this.colors.push(value);
-        value.addEventListener(Color.CHANGED, this.colorChanged as IEventListener);
+        value.addEventListener('invalidate', this.colorChanged as IEventListener);
         this.dispatch(LinearGradient.COLOR_ADDED, value);
     }
 
     public addColors(value: Array<IColor>): void {
         for (const color of value) {
             this.colors.push(color);
-            color.addEventListener(Color.CHANGED, this.colorChanged as IEventListener);
+            color.addEventListener('invalidate', this.colorChanged as IEventListener);
         }
         if (value.length > 0) {
             this.dispatch(LinearGradient.COLORS_ADDED, value);

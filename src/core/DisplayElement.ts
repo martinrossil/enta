@@ -72,7 +72,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             return;
         }
         if (this._backgroundColor instanceof Color) {
-            this._backgroundColor.removeEventListener(Color.CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener('invalidate', this.backgroundColorChanged);
         } else if (this._backgroundColor instanceof LinearGradient) {
             this._backgroundColor.removeEventListener(LinearGradient.COLOR_ADDED, this.backgroundColorChanged);
             this._backgroundColor.removeEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
@@ -81,7 +81,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         }
         this._backgroundColor = value;
         if (this._backgroundColor instanceof Color) {
-            this._backgroundColor.addEventListener(Color.CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener('invalidate', this.backgroundColorChanged);
             this.style.background = '';
             this.style.backgroundColor = this._backgroundColor.toString();
             return;
