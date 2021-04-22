@@ -1,6 +1,6 @@
 {
   "name": "enta",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Enta is a Typescript library for building very fast web applications.",
   "main": "dist/index.js",
   "module": "dist/index.js",
