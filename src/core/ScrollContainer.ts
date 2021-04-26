@@ -30,7 +30,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     private updateChildrenSizes(): void {
-        this.outerElement.size(this.measuredWidth + this.scrollBarWidth, this.measuredHeight + this.scrollBarHeight);
+        this.outerElement.externalSize(this.measuredWidth + this.scrollBarWidth, this.measuredHeight + this.scrollBarHeight);
         if (!this.horizontalScrollEnabled && !this.verticalScrollEnabled) {
             this.elementsContainer.externalSize(this.measuredWidth, this.measuredHeight);
             return;
