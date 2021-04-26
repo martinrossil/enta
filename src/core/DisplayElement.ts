@@ -112,16 +112,108 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSize !== 0) {
                 this._cornerSize = 0;
+                this._cornerSizeTopLeft = 0;
+                this._cornerSizeTopRight = 0;
+                this._cornerSizeBottomLeft = 0;
+                this._cornerSizeBottomRight = 0;
                 this.style.borderRadius = '0';
             }
             return;
         }
         this._cornerSize = value;
+        this._cornerSizeTopLeft = value;
+        this._cornerSizeTopRight = value;
+        this._cornerSizeBottomLeft = value;
+        this._cornerSizeBottomRight = value;
         this.style.borderRadius = this._cornerSize + Strings.PX;
     }
 
     public get cornerSize(): number {
         return this._cornerSize;
+    }
+
+    private _cornerSizeTopLeft = 0;
+
+    public set cornerSizeTopLeft(value: number) {
+        if (this._cornerSizeTopLeft === value) {
+            return;
+        }
+        if (isNaN(value) || value < 0) {
+            if (this._cornerSizeTopLeft !== 0) {
+                this._cornerSizeTopLeft = 0;
+                this.style.borderTopLeftRadius = '0';
+            }
+            return;
+        }
+        this._cornerSizeTopLeft = value;
+        this.style.borderTopLeftRadius = this._cornerSizeTopLeft + Strings.PX;
+    }
+
+    public get cornerSizeTopLeft(): number {
+        return this._cornerSizeTopLeft;
+    }
+
+    private _cornerSizeTopRight = 0;
+
+    public set cornerSizeTopRight(value: number) {
+        if (this._cornerSizeTopRight === value) {
+            return;
+        }
+        if (isNaN(value) || value < 0) {
+            if (this._cornerSizeTopRight !== 0) {
+                this._cornerSizeTopRight = 0;
+                this.style.borderTopRightRadius = '0';
+            }
+            return;
+        }
+        this._cornerSizeTopRight = value;
+        this.style.borderTopRightRadius = this._cornerSizeTopRight + Strings.PX;
+    }
+
+    public get cornerSizeTopRight(): number {
+        return this._cornerSizeTopRight;
+    }
+
+    private _cornerSizeBottomLeft = 0;
+
+    public set cornerSizeBottomLeft(value: number) {
+        if (this._cornerSizeBottomLeft === value) {
+            return;
+        }
+        if (isNaN(value) || value < 0) {
+            if (this._cornerSizeBottomLeft !== 0) {
+                this._cornerSizeBottomLeft = 0;
+                this.style.borderBottomLeftRadius = '0';
+            }
+            return;
+        }
+        this._cornerSizeBottomLeft = value;
+        this.style.borderBottomLeftRadius = this._cornerSizeBottomLeft + Strings.PX;
+    }
+
+    public get cornerSizeBottomLeft(): number {
+        return this._cornerSizeBottomLeft;
+    }
+
+    private _cornerSizeBottomRight = 0;
+
+    public set cornerSizeBottomRight(value: number) {
+        if (this._cornerSizeBottomRight === value) {
+            return;
+        }
+        if (isNaN(value) || value < 0) {
+            if (this._cornerSizeBottomRight !== 0) {
+                this._cornerSizeBottomRight = 0;
+                this.style.borderBottomRightRadius = '0';
+            }
+            return;
+        }
+        this._cornerSizeBottomRight = value;
+        this.style.borderBottomRightRadius = this._cornerSizeBottomRight + Strings.PX;
+    }
+
+    public get cornerSizeBottomRight(): number {
+        return this._cornerSizeBottomRight;
     }
 
     private _clip: ClipType = 'visible';
