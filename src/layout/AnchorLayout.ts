@@ -196,10 +196,15 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     private layoutElementBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
-        // TODO
+        let x = container.paddingLeft;
+        if (!isNaN(element.horizontalCenter)) {
+            const insideWidthCenter = (container.measuredWidth - container.paddingLeft - container.paddingRight) * 0.5;
+            const elementCenter = element.measuredWidth * 0.5;
+            x = insideWidthCenter - elementCenter + element.horizontalCenter + container.paddingLeft;
+        }
         const insideHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
         const y = container.paddingTop + insideHeight - element.measuredHeight - element.bottom;
-        element.position(container.paddingLeft, y);
+        element.position(x, y);
     }
 
     private layoutElementLeft(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
