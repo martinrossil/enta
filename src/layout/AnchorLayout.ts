@@ -175,7 +175,7 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
             return;
         }
         if (!isNaN(element.horizontalCenter) && isNaN(element.verticalMiddle)) {
-            this.layoutElementHorizontal(container, element);
+            this.layoutElementHorizontalCenter(container, element);
             return;
         }
         if (isNaN(element.horizontalCenter) && !isNaN(element.verticalMiddle)) {
@@ -357,7 +357,37 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
         element.position(x, y);
     }
 
-    private layoutElementHorizontal(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
+    private layoutElementHorizontalCenter(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
+        if (isNaN(element.top) && isNaN(element.bottom)) {
+            this.layoutElementHorizontalCenterPaddingTop(container, element);
+        } else if (!isNaN(element.top) && isNaN(element.bottom)) {
+            this.layoutElementHorizontalCenterTop(container, element);
+        } else if (isNaN(element.top) && !isNaN(element.bottom)) {
+            this.layoutElementHorizontalCenterBottom(container, element);
+        } else {
+            this.layoutElementHorizontalCenterTopBottom(container, element);
+        }
+    }
+
+    private layoutElementHorizontalCenterTop(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
+        // TODO
+    }
+
+    private layoutElementHorizontalCenterBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
+        const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const insideHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const insideWidthCenter = insideWidth * 0.5;
+        const elementCenter = element.measuredWidth * 0.5;
+        const x = insideWidthCenter - elementCenter + element.horizontalCenter + container.paddingLeft;
+        const y = container.paddingTop + insideHeight - element.bottom - element.measuredHeight;
+        element.position(x, y);
+    }
+
+    private layoutElementHorizontalCenterTopBottom(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
+        // TODO
+    }
+
+    private layoutElementHorizontalCenterPaddingTop(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
         const insideWidthCenter = (container.measuredWidth - container.paddingLeft - container.paddingRight) * 0.5;
         const elementCenter = element.measuredWidth * 0.5;
         const x = insideWidthCenter - elementCenter + element.horizontalCenter + container.paddingLeft;
