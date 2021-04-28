@@ -6,6 +6,8 @@ import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
 import SvgElement from './SvgElement';
 import { Strings } from '../enums/Strings';
+import { StrokeLineCap } from '../types/StrokeLineCap';
+import { StrokeLineJoin } from '../types/StrokeLineJoin';
 
 export default class PathElement extends SvgElement implements IPathElement {
     public constructor() {
@@ -338,6 +340,34 @@ export default class PathElement extends SvgElement implements IPathElement {
 
     public get strokeWidth(): number {
         return this._strokeWidth;
+    }
+
+    private _strokeLineCap: StrokeLineCap = '';
+
+    public set strokeLineCap(value: StrokeLineCap) {
+        if (this._strokeLineCap === value) {
+            return;
+        }
+        this._strokeLineCap = value;
+        this.path.setAttribute('stroke-linecap', this._strokeLineCap);
+    }
+
+    public get strokeLineCap(): StrokeLineCap {
+        return this._strokeLineCap;
+    }
+
+    private _strokeLineJoin: StrokeLineJoin = '';
+
+    public set strokeLineJoin(value: StrokeLineJoin) {
+        if (this._strokeLineJoin === value) {
+            return;
+        }
+        this._strokeLineJoin = value;
+        this.path.setAttribute('stroke-linejoin', this._strokeLineJoin);
+    }
+
+    public get strokeLineJoin(): StrokeLineJoin {
+        return this._strokeLineJoin;
     }
 }
 customElements.define('path-element', PathElement);
