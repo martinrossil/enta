@@ -1,6 +1,7 @@
 export { default as ImageElement } from './components/ImageElement';
 export { default as ItemRenderer } from './components/ItemRenderer';
 export { default as List } from './components/List';
+export { default as ScreenNavigator } from './components/ScreenNavigator';
 
 export { default as ApplicationElement } from './core/ApplicationElement';
 export { default as BaseElement } from './core/BaseElement';
@@ -27,6 +28,7 @@ export { default as TouchMachine } from './fsm/TouchMachine';
 export { default as IImageElement } from './interfaces/components/IImageElement';
 export { default as IItemRenderer } from './interfaces/components/IItemRenderer';
 export { default as IList } from './interfaces/components/IList';
+export { default as IScreenNavigator } from './interfaces/components/IScreenNavigator';
 
 export { default as IBaseElement } from './interfaces/core/IBaseElement';
 export { default as IDisplayContainer } from './interfaces/core/IDisplayContainer';
