@@ -13,6 +13,7 @@ export { default as SizeElement } from './core/SizeElement';
 
 export { default as ArrayCollection } from './data/ArrayCollection';
 
+export { Cursor } from './enums/Cursor';
 export { Strings } from './enums/Strings';
 
 export { default as EventDispatcher } from './event/EventDispatcher';
