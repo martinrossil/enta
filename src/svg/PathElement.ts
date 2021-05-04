@@ -5,7 +5,7 @@ import ILinearGradient from '../interfaces/vo/ILinearGradient';
 import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
 import SvgElement from './SvgElement';
-import { Strings } from '../enums/Strings';
+import Strings from '../consts/Strings';
 import { StrokeLineCap } from '../types/StrokeLineCap';
 import { StrokeLineJoin } from '../types/StrokeLineJoin';
 
@@ -54,7 +54,7 @@ export default class PathElement extends SvgElement implements IPathElement {
 
     protected get path(): SVGPathElement {
         if (!this._path) {
-            this._path = document.createElementNS(Strings.SVG_NS, Strings.PATH);
+            this._path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         }
         return this._path;
     }
@@ -82,7 +82,7 @@ export default class PathElement extends SvgElement implements IPathElement {
     }
 
     private getLinearGradient(id: string): SVGLinearGradientElement {
-        const linearGradient: SVGLinearGradientElement = document.createElementNS(Strings.SVG_NS, Strings.LINEAR_GRADIENT);
+        const linearGradient: SVGLinearGradientElement = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
         linearGradient.setAttribute(Strings.ID, id);
         linearGradient.setAttribute(Strings.GRADIENT_UNITS, Strings.USER_SPACE_ON_USE);
         return linearGradient;
@@ -300,7 +300,7 @@ export default class PathElement extends SvgElement implements IPathElement {
     }
 
     private getStopFromColor(color: IColor): SVGStopElement {
-        const stop: SVGStopElement = document.createElementNS(Strings.SVG_NS, Strings.STOP);
+        const stop: SVGStopElement = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
         stop.setAttribute(Strings.STOP_COLOR, color.toString());
         return stop;
     }

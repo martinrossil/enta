@@ -1,4 +1,4 @@
-import { Strings } from '../enums/Strings';
+import Strings from '../consts/Strings';
 import IElement from '../interfaces/core/IElement';
 import IScrollContainer from '../interfaces/core/IScrollContainer';
 import ILayout from '../interfaces/layout/ILayout';
@@ -10,7 +10,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         super();
         this.name = 'ScrollContainer';
         this.verticalScrollEnabled = true;
-        this.clip = Strings.HIDDEN;
+        this.clip = 'hidden';
         this.addEventListener('invalidate', this.childInvalid);
         this.appendChild(this.outerElement);
     }
@@ -82,7 +82,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     private get outerElement(): DisplayElement {
         if (!this._outerElement) {
             this._outerElement = new DisplayElement();
-            this._outerElement.clip = Strings.SCROLL;
+            this._outerElement.clip = 'scroll';
             this._outerElement.appendChild(this.elementsContainer);
         }
         return this._outerElement;
@@ -132,7 +132,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._scrollEnabled = value;
         this._horizontalScrollEnabled = value;
         this._verticalScrollEnabled = value;
-        this.outerElement.clip = this.scrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
+        this.outerElement.clip = this.scrollEnabled ? 'scroll' : 'hidden';
         this.invalidate();
     }
 
@@ -148,7 +148,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._horizontalScrollEnabled = value;
         this._scrollEnabled = value && this.verticalScrollEnabled;
-        this.outerElement.clipX = this.horizontalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
+        this.outerElement.clipX = this.horizontalScrollEnabled ? 'scroll' : 'hidden';
         this.invalidate();
     }
 
@@ -164,7 +164,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._verticalScrollEnabled = value;
         this._scrollEnabled = value && this._horizontalScrollEnabled;
-        this.outerElement.clipY = this.verticalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
+        this.outerElement.clipY = this.verticalScrollEnabled ? 'scroll' : 'hidden';
         this.invalidate();
     }
 

@@ -1,5 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
-import { Strings } from '../enums/Strings';
+import Strings from '../consts/Strings';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import IColor from '../interfaces/vo/IColor';
 import { FontWeight } from '../types/FontWeight';

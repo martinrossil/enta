@@ -3,6 +3,9 @@ export { default as ItemRenderer } from './components/ItemRenderer';
 export { default as List } from './components/List';
 export { default as ScreenNavigator } from './components/ScreenNavigator';
 
+export { default as Cursor } from './consts/Cursor';
+export { default as Strings } from './consts/Strings';
+
 export { default as ApplicationElement } from './core/ApplicationElement';
 export { default as BaseElement } from './core/BaseElement';
 export { default as DisplayContainer } from './core/DisplayContainer';
@@ -12,9 +15,6 @@ export { default as ScrollContainer } from './core/ScrollContainer';
 export { default as SizeElement } from './core/SizeElement';
 
 export { default as ArrayCollection } from './data/ArrayCollection';
-
-export { Cursor } from './enums/Cursor';
-export { Strings } from './enums/Strings';
 
 export { default as EventDispatcher } from './event/EventDispatcher';
 

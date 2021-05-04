@@ -1,5 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
-import { Strings } from '../enums/Strings';
+import Strings from '../consts/Strings';
 import IImageElement from '../interfaces/components/IImageElement';
 
 export default class ImageElement extends DisplayElement implements IImageElement {

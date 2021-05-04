@@ -1,4 +1,4 @@
-import { Strings } from '../enums/Strings';
+import Strings from '../consts/Strings';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
 import IElement from '../interfaces/core/IElement';

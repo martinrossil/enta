@@ -1,5 +1,5 @@
-import { Cursor } from '../enums/Cursor';
-import { Strings } from '../enums/Strings';
+import Cursor from '../consts/Cursor';
+import Strings from '../consts/Strings';
 import IBaseElement from '../interfaces/core/IBaseElement';
 
 export default class BaseElement extends HTMLElement implements IBaseElement {
@@ -80,9 +80,9 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         return this._enabled;
     }
 
-    private _cursor: Cursor = Cursor.NONE;
+    private _cursor: string = Cursor.NONE;
 
-    public set cursor(value: Cursor) {
+    public set cursor(value: string) {
         if (this._cursor === value) {
             return;
         }
@@ -90,7 +90,7 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         this.style.cursor = value;
     }
 
-    public get cursor(): Cursor {
+    public get cursor(): string {
         return this._cursor;
     }
 }
