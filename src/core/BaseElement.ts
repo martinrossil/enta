@@ -50,10 +50,10 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         }
         this._visible = value;
         if (this._visible) {
-            this.style.display = Strings.EMPTY;
+            this.style.visibility = Strings.EMPTY;
             return;
         }
-        this.style.display = Strings.NONE;
+        this.style.visibility = Strings.HIDDEN;
     }
 
     public get visible(): boolean {
