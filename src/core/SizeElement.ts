@@ -328,11 +328,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     public get hasWidth(): boolean {
-        return !isNaN(this.width) || !isNaN(this.externalWidth);
+        return !isNaN(this.width) || !isNaN(this.percentWidth);
     }
 
     public get hasHeight(): boolean {
-        return !isNaN(this.height) || !isNaN(this.externalHeight);
+        return !isNaN(this.height) || !isNaN(this.percentHeight);
     }
 
     public get hasSize(): boolean {
@@ -340,7 +340,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     protected invalidateInternalSize(): void {
-        // console.log(this.name, 'invalidateInternalSize()', this.name);
+        console.log(this.name, 'invalidateInternalSize()');
         if (this.hasSize) {
             return;
         }
