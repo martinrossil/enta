@@ -15,121 +15,81 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(container.name, this.name, 'resizeChildren()');
+        console.log(container.name, 'resizeChildren()');
+        const h = container.measuredHeight - container.paddingTop - container.paddingBottom;
         if (container.hasWidth) {
-            // console.log(this.name, 'resizeChildren hasWidth');
-            if (this.horizontalAlign === 'fill') {
-                if (this.verticalAlign === 'fill') {
-                    this.resizeElementsHorizontalVerticalFill(container, elements);
-                    return;
-                }
-                if (this.verticalAlign === 'middle') {
-                    this.resizeElementsHorizontalFillVerticalMiddle(container, elements);
-                }
-                return;
-            }
-            if (this.horizontalAlign === 'left') {
-                if (this.verticalAlign === 'middle') {
-                    this.resizeElementsHorizontalLeftVerticalMiddle(container, elements);
+            const ratio = this.getPixelPercentWidthRatio(container, elements);
+            for (const element of elements) {
+                if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
+                    element.externalSize(ratio * element.percentWidth, h * element.percentHeight / 100);
+                } else if (!isNaN(element.percentWidth) && isNaN(element.percentHeight)) {
+                    element.externalWidth = element.percentWidth * ratio;
+                } else if (isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
+                    element.externalHeight = h * element.percentHeight / 100;
                 }
             }
-        }
-    }
-
-    private resizeElementsHorizontalVerticalFill(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(this.name, 'resizeElementsHorizontalFillVerticalMiddle()');
-        const [widthSum, percentWidthSum, fillCount] = this.getElementsPercentWidthValues(elements);
-        // console.log(widthSum, percentWidthSum, fillCount);
-        const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
-        const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
-        const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
-        const widthLeftForPercentWidth = innerWidth - widthSum - horizontalGapSumWidth;
-        let pixelPercentRatio;
-        let widthLeftForFillWidth;
-        let fillWidth = 0;
-        if (percentWidthSum > 100) {
-            pixelPercentRatio = widthLeftForPercentWidth / percentWidthSum;
-            widthLeftForFillWidth = 0;
         } else {
-            pixelPercentRatio = widthLeftForPercentWidth / 100;
-            widthLeftForFillWidth = widthLeftForPercentWidth - (widthLeftForPercentWidth / 100 * percentWidthSum);
-            fillWidth = widthLeftForFillWidth / fillCount;
-        }
-        for (const element of elements) {
-            if (!isNaN(element.percentWidth)) {
-                element.externalSize(pixelPercentRatio * element.percentWidth, innerHeight);
-                // element.externalWidth = pixelPercentRatio * element.percentWidth;
-            } else {
-                element.externalSize(fillWidth, innerHeight);
-                // element.externalWidth = fillWidth;
+            for (const element of elements) {
+                if (!isNaN(element.percentHeight)) {
+                    element.externalHeight = h * element.percentHeight / 100;
+                }
             }
         }
     }
 
-    private resizeElementsHorizontalLeftVerticalMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(this.name, 'resizeElementsHorizontalLeftVerticalMiddle()');
-    }
-
-    private resizeElementsHorizontalFillVerticalMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(this.name, 'resizeElementsHorizontalFillVerticalMiddle()');
-        const [widthSum, percentWidthSum, fillCount] = this.getElementsPercentWidthValues(elements);
-        // console.log(widthSum, percentWidthSum, fillCount);
-        const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
-        const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
-        const widthLeftForPercentWidth = innerWidth - widthSum - horizontalGapSumWidth;
-        let pixelPercentRatio;
-        let widthLeftForFillWidth;
-        let fillWidth = 0;
-        if (percentWidthSum > 100) {
-            pixelPercentRatio = widthLeftForPercentWidth / percentWidthSum;
-            widthLeftForFillWidth = 0;
-        } else {
-            pixelPercentRatio = widthLeftForPercentWidth / 100;
-            widthLeftForFillWidth = widthLeftForPercentWidth - (widthLeftForPercentWidth / 100 * percentWidthSum);
-            fillWidth = widthLeftForFillWidth / fillCount;
-        }
-        for (const element of elements) {
-            if (!isNaN(element.percentWidth)) {
-                element.externalWidth = pixelPercentRatio * element.percentWidth;
-            } else {
-                element.externalWidth = fillWidth;
-            }
-        }
-    }
-
-    private getElementsPercentWidthValues(elements: Array<ILayoutElement>): [number, number, number] {
+    private getPixelPercentWidthRatio(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
         let widthSum = 0;
         let percentWidthSum = 0;
-        let fillCount = 0;
         for (const element of elements) {
             if (!isNaN(element.width)) {
                 widthSum += element.width;
             } else if (!isNaN(element.percentWidth)) {
                 percentWidthSum += element.percentWidth;
-            } else {
-                fillCount++;
             }
         }
-        return [widthSum, percentWidthSum, fillCount];
+        const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
+        const widthLeftForPercentWidth = w - widthSum - horizontalGapSumWidth;
+        if (percentWidthSum > 100) {
+            return widthLeftForPercentWidth / horizontalGapSumWidth;
+        } else {
+            return widthLeftForPercentWidth / 100;
+        }
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(container.name, this.name, 'layoutChildren()');
+        console.log(container.name, 'layoutChildren()');
         if (this.verticalAlign === 'top') {
-            // console.log(this.name, 'layoutElementsTop()');
-            // this.layoutElementsTop(container, elements);
-            return;
+            this.layoutElementsTop(container, elements);
+        } else if (this.verticalAlign === 'bottom') {
+            this.layoutElementsBottom(container, elements);
+        } else {
+            this.layoutElementsMiddle(container, elements);
         }
-        if (this.verticalAlign === 'bottom') {
-            // console.log(this.name, 'layoutElementsBottom()');
-            // this.layoutElementsBottom(container, elements);
-            return;
+    }
+
+    private layoutElementsTop(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+        console.log(container.name, this.name, 'layoutElementsTop()');
+        let x = this.getHorizontalXStartValue(container, elements);
+        for (const element of elements) {
+            element.position(x, container.paddingTop);
+            x += element.measuredWidth + this.horizontalGap;
         }
-        this.layoutElementsMiddle(container, elements);
+    }
+
+    private layoutElementsBottom(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+        console.log(container.name, this.name, 'layoutElementsBottom()');
+        let x = this.getHorizontalXStartValue(container, elements);
+        let y = 0;
+        for (const element of elements) {
+            y = container.measuredHeight - container.paddingBottom - element.measuredHeight;
+            element.position(x, y);
+            x += element.measuredWidth + this.horizontalGap;
+        }
     }
 
     private layoutElementsMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(this.name, 'layoutElementsMiddle()');
+        console.log(container.name, this.name, 'layoutElementsMiddle()');
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
@@ -140,25 +100,28 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     private getHorizontalXStartValue(container: IDisplayContainer & ILayoutElement, elements: ILayoutElement[]): number {
-        let x = container.paddingLeft;
+        if (!container.hasWidth) {
+            return container.paddingLeft;
+        }
+        let x = container.paddingLeft
         if (this.horizontalAlign === 'center' || this.horizontalAlign === 'right') {
-            const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+            const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
             let elementsWidthSum = 0;
             for (const element of elements) {
                 elementsWidthSum += element.measuredWidth;
             }
             const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
             if (this.horizontalAlign === 'center') {
-                x += (innerWidth - elementsWidthSum - horizontalGapSumWidth) * 0.5;
+                x += (w - elementsWidthSum - horizontalGapSumWidth) * 0.5;
             } else {
-                x += (innerWidth - elementsWidthSum - horizontalGapSumWidth);
+                x += (w - elementsWidthSum - horizontalGapSumWidth);
             }
         }
         return x;
     }
 
     public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
-        // console.log(container.name, this.name, 'getInternalSize()');
+        console.log(container.name, 'getInternalSize()');
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -173,14 +136,23 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        // console.log(container.name, this.name, 'getInternalWidth()');
-        return 0;
+        console.log(container.name, 'getInternalWidth()');
+        let width = 0;
+        for (const element of elements) {
+            width += element.measuredWidth + this.horizontalGap;
+        }
+        return container.paddingLeft + width - this.horizontalGap + container.paddingRight;
     }
 
     public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        // console.log(container.name, this.name, 'getInternalHeight()');
-        return 56;
-        // return 0;
+        console.log(container.name, 'getInternalHeight()');
+        let height = 0;
+        for (const element of elements) {
+            if (height < element.measuredHeight) {
+                height = element.measuredHeight;
+            }
+        }
+        return container.paddingTop + height + container.paddingBottom;
     }
 
     private _horizontalGap = 0;
