@@ -65,10 +65,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
         }
     }
 
-    protected actualSize(width: number, height: number): void {
-        console.log('actualSize(' + width + ', ' + height);
-    }
-
     protected internalSize(width: number, height: number): void {
         let widthChanged = false;
         if (isNaN(this.width) && this._internalWidth !== width) {
@@ -340,7 +336,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     protected invalidateInternalSize(): void {
-        console.log(this.name, 'invalidateInternalSize()');
         if (this.hasSize) {
             return;
         }

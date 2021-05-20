@@ -59,7 +59,7 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
     public removeAll(): void {
         if (this.length > 0) {
             this.source.length = 0;
-            this.dispatchEvent(new Event('reset'));
+            this.dispatch('reset');
         }
     }
 

@@ -116,7 +116,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
                 this._cornerSizeTopRight = 0;
                 this._cornerSizeBottomLeft = 0;
                 this._cornerSizeBottomRight = 0;
-                this.style.borderRadius = '0';
+                this.style.borderRadius = Strings.ZERO;
             }
             return;
         }
@@ -141,7 +141,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeTopLeft !== 0) {
                 this._cornerSizeTopLeft = 0;
-                this.style.borderTopLeftRadius = '0';
+                this.style.borderTopLeftRadius = Strings.ZERO;
             }
             return;
         }
@@ -162,7 +162,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeTopRight !== 0) {
                 this._cornerSizeTopRight = 0;
-                this.style.borderTopRightRadius = '0';
+                this.style.borderTopRightRadius = Strings.ZERO;
             }
             return;
         }
@@ -183,7 +183,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeBottomLeft !== 0) {
                 this._cornerSizeBottomLeft = 0;
-                this.style.borderBottomLeftRadius = '0';
+                this.style.borderBottomLeftRadius = Strings.ZERO;
             }
             return;
         }
@@ -204,7 +204,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeBottomRight !== 0) {
                 this._cornerSizeBottomRight = 0;
-                this.style.borderBottomRightRadius = '0';
+                this.style.borderBottomRightRadius = Strings.ZERO;
             }
             return;
         }

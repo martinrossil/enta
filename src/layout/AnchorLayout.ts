@@ -10,7 +10,6 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, 'resizeChildren()');
         const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
         const h = container.measuredHeight - container.paddingTop - container.paddingBottom;
         for (const element of elements) {
@@ -25,7 +24,6 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     private resizeElement(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, w: number, h: number): void {
-        console.log(container.name, 'resizeElement()', element.name);
         let width = NaN;
         let height = NaN;
         if (!isNaN(element.percentWidth)) {
@@ -38,28 +36,24 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     private resizeElementWidth(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, w: number): void {
-        console.log(container.name, 'resizeElementwidth()', element.name);
         if (!isNaN(element.percentWidth)) {
             element.externalWidth = w * element.percentWidth / 100;
         }
     }
 
     private resizeElementHeight(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, h: number): void {
-        console.log(container.name, 'resizeElementHeight()', element.name);
         if (!isNaN(element.percentHeight)) {
             element.externalHeight = h * element.percentHeight / 100;
         }
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        console.log(container.name, 'layoutChildren()');
         for (const element of elements) {
             this.layoutElement(container, element);
         }
     }
 
     private layoutElement(container: IDisplayContainer & ILayoutElement, element: ILayoutElement): void {
-        console.log(container.name, 'layoutElement()', element.name);
         let x = container.paddingLeft;
         if (!isNaN(element.left) && isNaN(element.right)) {
             x = x + element.left;
@@ -94,7 +88,6 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
-        console.log(container.name, 'getInternalSize()');
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -123,7 +116,6 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        console.log(container.name, 'getInternalWidth()');
         let width = 0;
         for (const element of elements) {
             if (!isNaN(element.left)) {
@@ -140,7 +132,6 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
     }
 
     public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        console.log(container.name, 'getInternalHeight()');
         let height = 0;
         for (const element of elements) {
             if (!isNaN(element.top)) {

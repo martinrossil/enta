@@ -18,7 +18,6 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
         // override
     }
 
-    // eslint-disable-next-line
     public pressed(point: [number, number]): void {
         // override
     }

@@ -17,7 +17,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
     private elementWidth = 0;
 
     public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(container.name, this.name, 'resizeChildren()');
         const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
         this.columns = Math.floor(insideWidth / this.minColumnWidth);
         if (this.columns === 0) {
@@ -28,15 +27,12 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         }
         const insideMinusGaps = insideWidth - this.gap * (this.columns - 1);
         this.elementWidth = insideMinusGaps / this.columns;
-        // console.log('inside', insideWidth, 'columns', this.columns, 'elementWidth', this.elementWidth, this.elementHeight);
         for (const element of elements) {
             element.externalWidth = this.elementWidth;
-            // element.externalSize(this.elementWidth, this.minRowHeight);
         }
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        // console.log(container.name, this.name, 'layoutChildren()');
         let currentColumn = 1;
         let currentX = container.paddingLeft;
         let currentY = container.paddingTop;
@@ -54,17 +50,14 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
     }
 
     public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
-        // console.log(container.name, this.name, 'getInternalSize()');
         return [0, 0];
     }
 
     public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        // console.log(container.name, this.name, 'getInternalWidth()');
         return 0;
     }
 
     public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        // console.log(container.name, this.name, 'getInternalHeight()');
         const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
         this.columns = Math.floor(insideWidth / this.minColumnWidth);
         if (this.columns === 0) {
@@ -93,7 +86,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
                 currentColumn++;
             }
         }
-        // console.log('currentY', currentY, 'column', currentColumn, 'i', i, 'columns', this.columns);
         if (i % this.columns !== 0) {
             return currentY + currentRowHeight + container.paddingBottom;
         }

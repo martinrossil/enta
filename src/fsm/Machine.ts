@@ -20,7 +20,6 @@ export default class Machine<Host> {
             if (this.current.exit) {
                 this.current.exit.call(this.host, e);
             }
-            // console.log(e.type, this.current.name, '-->', state.name);
             this.current = state;
             if (this.current.entry) {
                 this.current.entry.call(this.host, e);

@@ -133,6 +133,8 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             this._paddingTop = 0;
             this._paddingRight = 0;
             this._paddingBottom = 0;
+            this._paddingX = 0;
+            this.paddingY = 0;
             this.invalidate();
             return;
         }
@@ -141,6 +143,8 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this._paddingRight = value;
         this._paddingBottom = value;
         this._paddingLeft = value;
+        this._paddingX = value;
+        this._paddingY = value;
         this.invalidate();
     }
 

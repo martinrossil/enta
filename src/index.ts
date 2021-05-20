@@ -84,6 +84,15 @@ export { default as PathElement } from './svg/PathElement';
 export { default as SurfaceElement } from './svg/SurfaceElement';
 export { default as SvgElement } from './svg/SvgElement';
 
+export { default as BlueContainer } from './test/BlueContainer';
+export { default as GreenBox } from './test/GreenBox';
+export { default as ITest } from './test/ITest';
+export { default as PurpleBox } from './test/PurpleBox';
+export { default as RedBox } from './test/RedBox';
+export { default as Test } from './test/Test';
+export { default as TestView } from './test/TestView';
+export { default as YellowBox } from './test/YellowBox';
+
 export { default as BaseText } from './text/BaseText';
 export { default as LabelElement } from './text/LabelElement';
 export { default as TextElement } from './text/TextElement';

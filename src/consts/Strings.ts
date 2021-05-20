@@ -25,4 +25,6 @@ export default class Strings {
     public static get TRANSFORM(): string { return 'transform'; }
     public static get URL(): string { return 'url'; }
     public static get USER_SPACE_ON_USE(): string { return 'userSpaceOnUse'; }
+    public static get VISIBLE(): string { return 'visible'; }
+    public static get ZERO(): string { return '0'; }
 }
