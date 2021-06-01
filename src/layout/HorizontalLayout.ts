@@ -46,11 +46,11 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
                 percentWidthSum += element.percentWidth;
             }
         }
-        const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
         const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
-        const widthLeftForPercentWidth = w - widthSum - horizontalGapSumWidth;
+        const widthLeftForPercentWidth = innerWidth - widthSum - horizontalGapSumWidth;
         if (percentWidthSum > 100) {
-            return widthLeftForPercentWidth / horizontalGapSumWidth;
+            return widthLeftForPercentWidth / percentWidthSum;
         } else {
             return widthLeftForPercentWidth / 100;
         }
