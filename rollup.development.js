@@ -11,7 +11,8 @@ export default [{
             serve({
                 contentBase: 'development',
                 open: true,
-                historyApiFallback: true
+                historyApiFallback: true,
+                port: 10003
             }),
             livereload()
         ],
