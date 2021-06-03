@@ -5,6 +5,7 @@ export default class ApplicationElement extends DisplayContainer {
         super();
         this.name = 'ApplicationElement';
         this.style.overflow = 'hidden';
+        document.body.style.setProperty('height', '100vh');
         document.body.style.setProperty('position', 'absolute');
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
         document.body.style.setProperty('-webkit-tap-highlight-color', 'transparent');
@@ -15,7 +16,9 @@ export default class ApplicationElement extends DisplayContainer {
     }
 
     private resize(): void {
-        this.size(window.innerWidth, window.innerHeight);
+        const w = Math.max(window.innerWidth, document.documentElement.clientWidth);
+        const h = Math.max(window.innerHeight, document.documentElement.clientHeight);
+        this.size(w, h);
     }
 }
 customElements.define('application-element', ApplicationElement);
