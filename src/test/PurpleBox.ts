@@ -5,9 +5,9 @@ export default class PurpleBox extends DisplayElement {
     public constructor() {
         super();
         this.name = 'PurpleBox';
-        // this.percentWidth = 100;
-        // this.height = 56;
-        // this.size(100, 100);
+        // this.percentWidth = 80;
+        // this.height = 70;
+        this.size(100, 28);
         this.backgroundColor = new Color(300, 100, 50, 0.5);
     }
 }
