@@ -1,30 +1,20 @@
 import DisplayContainer from '../core/DisplayContainer';
-import HorizontalLayout from '../layout/HorizontalLayout';
-import VerticalLayout from '../layout/VerticalLayout';
+import ColumnLayout from '../layout/ColumnLayout';
 import Color from '../vo/Color';
 import GreenBox from './GreenBox';
 import PurpleBox from './PurpleBox';
 import RedBox from './RedBox';
+import YellowBox from './YellowBox';
 
 export default class BlueContainer extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'BlueContainer';
-        this.layout = new HorizontalLayout(20, 'right', 'bottom');
-        this.padding = 20;
-        // this.percentWidth = 100;
-        // this.percentHeight = 100;
-        this.horizontalCenter = 0;
+        this.layout = new ColumnLayout(200, 2, 200, 20);
+        this.percentWidth = 100;
         this.verticalMiddle = 0;
         this.backgroundColor = new Color(240, 100, 50, 0.5);
-        this.addElements([new RedBox(), new GreenBox(), new PurpleBox()]);
-        window.addEventListener('click', () => {
-            if (this.layout instanceof HorizontalLayout) {
-                this.layout = new VerticalLayout(20);
-            } else {
-                this.layout = new HorizontalLayout(20);
-            }
-        });
+        this.addElements([new RedBox(), new GreenBox(), new PurpleBox(), new YellowBox()]);
     }
 }
 customElements.define('blue-container', BlueContainer);

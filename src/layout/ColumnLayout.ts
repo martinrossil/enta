@@ -28,7 +28,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         const insideMinusGaps = insideWidth - this.gap * (this.columns - 1);
         this.elementWidth = insideMinusGaps / this.columns;
         for (const element of elements) {
-            element.externalWidth = this.elementWidth;
+            element.externalSize(this.elementWidth, this.minRowHeight);
         }
     }
 
@@ -67,7 +67,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
             this.columns = this.maxColumns;
         }
         let currentColumn = 1;
-        // let currentX = container.paddingLeft;
         let currentY = container.paddingTop;
         let currentRowHeight = 0;
         const len = elements.length;
@@ -113,15 +112,15 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return this._minColumnWidth;
     }
 
-    private _minRowHeight = 128;
+    private _minRowHeight = 256;
 
     public set minRowHeight(value: number) {
         if (this._minRowHeight === value) {
             return;
         }
         if ((isNaN(value) || value <= 0)) {
-            if (value !== 128) {
-                this._minRowHeight = 128;
+            if (value !== 256) {
+                this._minRowHeight = 256;
                 this.notifyInvalid();
             }
             return;
