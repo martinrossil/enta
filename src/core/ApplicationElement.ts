@@ -5,6 +5,7 @@ export default class ApplicationElement extends DisplayContainer {
         super();
         this.name = 'ApplicationElement';
         this.style.overflow = 'hidden';
+        document.body.style.setProperty('overflow', 'hidden');
         document.body.style.setProperty('height', '100vh');
         document.body.style.setProperty('position', 'absolute');
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
