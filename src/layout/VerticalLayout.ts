@@ -44,6 +44,8 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
                 heightSum += element.height;
             } else if (!isNaN(element.percentHeight)) {
                 percentHeightSum += element.percentHeight;
+            } else {
+                heightSum += element.measuredHeight;
             }
         }
         const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;

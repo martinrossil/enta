@@ -44,6 +44,8 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
                 widthSum += element.width;
             } else if (!isNaN(element.percentWidth)) {
                 percentWidthSum += element.percentWidth;
+            } else {
+                widthSum += element.measuredWidth;
             }
         }
         const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
