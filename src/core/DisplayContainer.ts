@@ -90,9 +90,9 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     public removeElements(): void {
         if (this.elements.length > 0) {
-            while (this.elements.length > 0) {
-                const element: ILayoutElement = this.elements.splice(0, 1)[0];
-                this.removeChild(element as unknown as Node);
+            this.elements.length = 0;
+            while (this.firstChild) {
+                this.removeChild(this.firstChild);
             }
             this.invalidate();
         }
