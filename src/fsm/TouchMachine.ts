@@ -15,7 +15,7 @@ export default class TouchMachine extends Machine<IInteractive> {
         this.host.addEventListener('mouseup', this.send);
         this.host.addEventListener('mouseleave', this.send);
         this.host.addEventListener('touchstart', this.send, { passive: true });
-        this.host.addEventListener('touchend', this.send, { passive: true });
+        this.host.addEventListener('touchend', this.send);
         this.host.addEventListener('click', this.host.triggered);
     }
 
