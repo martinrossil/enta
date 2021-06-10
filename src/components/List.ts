@@ -1,12 +1,13 @@
 import ScrollContainer from '../core/ScrollContainer';
-import IList from '../interfaces/components/IList';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
+import IList from '../interfaces/components/IList';
 import IArrayCollection from '../interfaces/data/IArrayCollection';
 import IEventListener from '../interfaces/event/IEventListener';
 import { ItemRendererClass } from '../types/ItemRendererClass';
 import ItemRenderer from './ItemRenderer';
 
 export default class List<Item> extends ScrollContainer implements IList<Item> {
+    private itemRenderCache: Array<IItemRenderer<Item>> = [];
     private listItemRendererLookup: Map<Item, IItemRenderer<Item> | undefined> = new Map();
     public constructor() {
         super();
@@ -30,7 +31,12 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
     private addItemRenderers(items: Item[]): void {
         const listItemRenderers: IItemRenderer<Item>[] = [];
         for (const item of items) {
-            const listItemRenderer: IItemRenderer<Item> = new this.ItemRendererClass();
+            let listItemRenderer: IItemRenderer<Item>;
+            if (this.itemRenderCache.length) {
+                listItemRenderer = this.itemRenderCache.splice(0, 1)[0];
+            } else {
+                listItemRenderer = new this.ItemRendererClass();
+            }
             listItemRenderer.data = item;
             this.listItemRendererLookup.set(item, listItemRenderer);
             listItemRenderers.push(listItemRenderer);
@@ -54,12 +60,19 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
     private itemRemoved(e: CustomEvent<Item>): void {
         const itemRenderer: IItemRenderer<Item> | undefined = this.listItemRendererLookup.get(e.detail);
         if (itemRenderer) {
+            this.itemRenderCache.push(itemRenderer);
             this.removeElement(itemRenderer);
         }
         this.updateSelectedItemRenderer();
     }
 
     private reset(): void {
+        this._selectedIndex = NaN;
+        this.listItemRendererLookup.forEach((itemRenderer) => {
+            if (itemRenderer) {
+                this.itemRenderCache.push(itemRenderer);
+            }
+        });
         this.removeElements();
         this.listItemRendererLookup.clear();
         if (this.dataProvider) {
