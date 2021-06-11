@@ -46,7 +46,12 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
     }
 
     private itemAdded(e: CustomEvent<Item>): void {
-        const itemRenderer: IItemRenderer<Item> = new this.ItemRendererClass();
+        let itemRenderer: IItemRenderer<Item>
+        if (this.itemRenderCache.length) {
+            itemRenderer = this.itemRenderCache.splice(0, 1)[0];
+        } else {
+            itemRenderer = new this.ItemRendererClass();
+        }
         itemRenderer.data = e.detail;
         this.listItemRendererLookup.set(e.detail, itemRenderer);
         this.addElement(itemRenderer);
@@ -60,6 +65,8 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
     private itemRemoved(e: CustomEvent<Item>): void {
         const itemRenderer: IItemRenderer<Item> | undefined = this.listItemRendererLookup.get(e.detail);
         if (itemRenderer) {
+            itemRenderer.selected = false;
+            itemRenderer.data = null;
             this.itemRenderCache.push(itemRenderer);
             this.removeElement(itemRenderer);
         }
@@ -70,6 +77,8 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
         this._selectedIndex = NaN;
         this.listItemRendererLookup.forEach((itemRenderer) => {
             if (itemRenderer) {
+                itemRenderer.selected = false;
+                itemRenderer.data = null;
                 this.itemRenderCache.push(itemRenderer);
             }
         });

@@ -82,7 +82,7 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
         } else if (!isNaN(element.verticalMiddle)) {
             const insideHeightMiddle = (container.measuredHeight - container.paddingTop - container.paddingBottom) * 0.5;
             const elementMiddle = element.measuredHeight * 0.5;
-            y = insideHeightMiddle - elementMiddle + container.paddingTop;
+            y = insideHeightMiddle - elementMiddle + container.paddingTop + element.verticalMiddle;
         }
         element.position(x, y);
     }
