@@ -110,5 +110,3 @@ export { default as Color } from './vo/Color';
 export { default as LinearGradient } from './vo/LinearGradient';
 export { default as Rectangle } from './vo/Rectangle';
 export { default as TypeFace } from './vo/TypeFace';
-
-export { default as EntaDev } from './EntaDev';
