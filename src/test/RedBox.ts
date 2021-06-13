@@ -11,4 +11,4 @@ export default class RedBox extends DisplayElement {
         this.backgroundColor = new Color(0, 100, 50, 0.5);
     }
 }
-customElements.define('red-box', RedBox);
+// customElements.define('red-box', RedBox);

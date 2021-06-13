@@ -11,4 +11,4 @@ export default class PurpleBox extends DisplayElement {
         this.backgroundColor = new Color(300, 100, 50, 0.5);
     }
 }
-customElements.define('purple-box', PurpleBox);
+// customElements.define('purple-box', PurpleBox);

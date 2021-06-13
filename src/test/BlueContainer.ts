@@ -17,4 +17,4 @@ export default class BlueContainer extends DisplayContainer {
         this.addElements([new RedBox(), new GreenBox(), new YellowBox()]);
     }
 }
-customElements.define('blue-container', BlueContainer);
+// customElements.define('blue-container', BlueContainer);

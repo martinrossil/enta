@@ -16,4 +16,4 @@ export default class GreenBox extends DisplayContainer {
         this.addElements([new PurpleBox(), new RedBox()]);
     }
 }
-customElements.define('green-box', GreenBox);
+// customElements.define('green-box', GreenBox);
