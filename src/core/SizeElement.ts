@@ -61,7 +61,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             heightChanged = true;
         }
         if (widthChanged || heightChanged) {
-            this.invalidate()
+            this.invalidate();
         }
     }
 
