@@ -3,7 +3,6 @@
 ![NPM](https://img.shields.io/npm/l/enta)
 [![Coverage Status](https://coveralls.io/repos/github/martinrossil/enta/badge.svg?branch=main)](https://coveralls.io/github/martinrossil/enta?branch=main)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/enta)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/martinrossil/enta)
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/martinrossil/enta/latest/main)
 ![GitHub issues](https://img.shields.io/github/issues/martinrossil/enta)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/martinrossil/enta)
