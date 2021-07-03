@@ -6,6 +6,7 @@ import { VerticalAlign } from '../types/VerticalAlign';
 
 export default class Strings {
     public static get ABSOLUTE(): string { return 'absolute'; }
+    public static get ANTIALIASED(): string { return 'antialiased'; }
     public static get AUTO(): string { return 'auto'; }
     public static get BORDER_BOX(): string { return 'border-box'; }
     public static get BOTTOM(): VerticalAlign { return 'bottom'; }
@@ -20,6 +21,7 @@ export default class Strings {
     public static get FILL(): string { return 'fill'; }
     public static get GRADIENT_TRANSFORM(): string { return 'gradientTransform'; }
     public static get GRADIENT_UNITS(): string { return 'gradientUnits'; }
+    public static get GRAYSCALE(): string { return 'grayscale'; }
     public static get HEIGHT(): string { return 'height'; }
     public static get HIDDEN(): ClipType { return 'hidden'; }
     public static get HUNDRED_VH(): string { return '100vh'; }

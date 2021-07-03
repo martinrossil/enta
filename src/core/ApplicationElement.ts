@@ -12,6 +12,8 @@ export default class ApplicationElement extends DisplayContainer {
         document.body.style.setProperty('-webkit-overflow-scrolling', Strings.TOUCH);
         document.body.style.setProperty('-webkit-tap-highlight-color', Strings.TRANSPARENT);
         document.body.style.setProperty('-moz-tap-highlight-color', Strings.TRANSPARENT);
+        document.body.style.setProperty('-webkit-font-smoothing', Strings.ANTIALIASED);
+        document.body.style.setProperty('-moz-osx-font-smoothing', Strings.GRAYSCALE);
         document.body.style.setProperty(Strings.MARGIN, Strings.ZERO);
         window.addEventListener(Strings.RESIZE, this.resize.bind(this));
         this.resize();
