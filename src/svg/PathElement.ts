@@ -228,31 +228,31 @@ export default class PathElement extends SvgElement implements IPathElement {
     }
 
     private removeStrokeLinearGradientListeners(linearGradient: LinearGradient): void {
-        linearGradient.removeEventListener(LinearGradient.COLOR_ADDED, this.strokeLinearGradientColorAdded as IEventListener);
-        linearGradient.removeEventListener(LinearGradient.COLORS_ADDED, this.strokeLinearGradientColorsAdded as IEventListener);
-        linearGradient.removeEventListener(LinearGradient.COLOR_CHANGED, this.strokeLinearGradientColorChanged as IEventListener);
-        linearGradient.removeEventListener(LinearGradient.DEGREES_CHANGED, this.strokeLinearGradientDegreesChanged as IEventListener);
+        linearGradient.removeEventListener(Strings.COLOR_ADDED, this.strokeLinearGradientColorAdded as IEventListener);
+        linearGradient.removeEventListener(Strings.COLORS_ADDED, this.strokeLinearGradientColorsAdded as IEventListener);
+        linearGradient.removeEventListener(Strings.COLOR_CHANGED, this.strokeLinearGradientColorChanged as IEventListener);
+        linearGradient.removeEventListener(Strings.DEGREES_CHANGED, this.strokeLinearGradientDegreesChanged as IEventListener);
     }
 
     private addStrokeLinearGradientListeners(linearGradient: LinearGradient): void {
-        linearGradient.addEventListener(LinearGradient.COLOR_ADDED, this.strokeLinearGradientColorAdded as IEventListener);
-        linearGradient.addEventListener(LinearGradient.COLORS_ADDED, this.strokeLinearGradientColorsAdded as IEventListener);
-        linearGradient.addEventListener(LinearGradient.COLOR_CHANGED, this.strokeLinearGradientColorChanged as IEventListener);
-        linearGradient.addEventListener(LinearGradient.DEGREES_CHANGED, this.strokeLinearGradientDegreesChanged as IEventListener);
+        linearGradient.addEventListener(Strings.COLOR_ADDED, this.strokeLinearGradientColorAdded as IEventListener);
+        linearGradient.addEventListener(Strings.COLORS_ADDED, this.strokeLinearGradientColorsAdded as IEventListener);
+        linearGradient.addEventListener(Strings.COLOR_CHANGED, this.strokeLinearGradientColorChanged as IEventListener);
+        linearGradient.addEventListener(Strings.DEGREES_CHANGED, this.strokeLinearGradientDegreesChanged as IEventListener);
     }
 
     private removeFillLinearGradientListeners(linearGradient: LinearGradient): void {
-        linearGradient.removeEventListener(LinearGradient.COLOR_ADDED, this.fillLinearGradientColorAdded as IEventListener);
-        linearGradient.removeEventListener(LinearGradient.COLORS_ADDED, this.fillLinearGradientColorsAdded as IEventListener);
-        linearGradient.removeEventListener(LinearGradient.COLOR_CHANGED, this.fillLinearGradientColorChanged as IEventListener);
-        linearGradient.removeEventListener(LinearGradient.DEGREES_CHANGED, this.fillLinearGradientDegreesChanged as IEventListener);
+        linearGradient.removeEventListener(Strings.COLOR_ADDED, this.fillLinearGradientColorAdded as IEventListener);
+        linearGradient.removeEventListener(Strings.COLORS_ADDED, this.fillLinearGradientColorsAdded as IEventListener);
+        linearGradient.removeEventListener(Strings.COLOR_CHANGED, this.fillLinearGradientColorChanged as IEventListener);
+        linearGradient.removeEventListener(Strings.DEGREES_CHANGED, this.fillLinearGradientDegreesChanged as IEventListener);
     }
 
     private addFillLinearGradientListeners(linearGradient: LinearGradient): void {
-        linearGradient.addEventListener(LinearGradient.COLOR_ADDED, this.fillLinearGradientColorAdded as IEventListener);
-        linearGradient.addEventListener(LinearGradient.COLORS_ADDED, this.fillLinearGradientColorsAdded as IEventListener);
-        linearGradient.addEventListener(LinearGradient.COLOR_CHANGED, this.fillLinearGradientColorChanged as IEventListener);
-        linearGradient.addEventListener(LinearGradient.DEGREES_CHANGED, this.fillLinearGradientDegreesChanged as IEventListener);
+        linearGradient.addEventListener(Strings.COLOR_ADDED, this.fillLinearGradientColorAdded as IEventListener);
+        linearGradient.addEventListener(Strings.COLORS_ADDED, this.fillLinearGradientColorsAdded as IEventListener);
+        linearGradient.addEventListener(Strings.COLOR_CHANGED, this.fillLinearGradientColorChanged as IEventListener);
+        linearGradient.addEventListener(Strings.DEGREES_CHANGED, this.fillLinearGradientDegreesChanged as IEventListener);
     }
 
     private updateLinearGradientRotation(linearGradientElement: SVGLinearGradientElement, degrees: number): void {

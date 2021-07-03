@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IColor from '../interfaces/vo/IColor';
 
@@ -151,6 +152,6 @@ export default class Color extends EventDispatcher implements IColor {
     }
 
     private notify(): void {
-        this.dispatch('invalidate', this);
+        this.dispatch(Strings.INVALIDATE, this);
     }
 }

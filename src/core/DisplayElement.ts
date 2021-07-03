@@ -74,10 +74,10 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (this._backgroundColor instanceof Color) {
             this._backgroundColor.removeEventListener(Strings.INVALIDATE, this.backgroundColorChanged);
         } else if (this._backgroundColor instanceof LinearGradient) {
-            this._backgroundColor.removeEventListener(LinearGradient.COLOR_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.removeEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.removeEventListener(LinearGradient.COLOR_CHANGED, this.backgroundColorChanged);
-            this._backgroundColor.removeEventListener(LinearGradient.DEGREES_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(Strings.COLOR_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(Strings.COLORS_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(Strings.COLOR_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(Strings.DEGREES_CHANGED, this.backgroundColorChanged);
         }
         this._backgroundColor = value;
         if (this._backgroundColor instanceof Color) {
@@ -87,10 +87,10 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             return;
         }
         if (this._backgroundColor instanceof LinearGradient) {
-            this._backgroundColor.addEventListener(LinearGradient.COLOR_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.addEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.addEventListener(LinearGradient.COLOR_CHANGED, this.backgroundColorChanged);
-            this._backgroundColor.addEventListener(LinearGradient.DEGREES_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(Strings.COLOR_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(Strings.COLORS_ADDED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(Strings.COLOR_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener(Strings.DEGREES_CHANGED, this.backgroundColorChanged);
             this.style.backgroundColor = Strings.EMPTY;
             this.style.background = this._backgroundColor.toString();
             return;

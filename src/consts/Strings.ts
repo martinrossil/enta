@@ -10,8 +10,12 @@ export default class Strings {
     public static get BORDER_BOX(): string { return 'border-box'; }
     public static get BOTTOM(): VerticalAlign { return 'bottom'; }
     public static get CENTER(): HorizontalAlign { return 'center'; }
+    public static get COLOR_ADDED(): string { return 'colorAdded'; }
+    public static get COLORS_ADDED(): string { return 'colorsAdded'; }
+    public static get COLOR_CHANGED(): string { return 'colorChanged'; }
     public static get COVER(): string { return 'cover'; }
     public static get D(): string { return 'd'; }
+    public static get DEGREES_CHANGED(): string { return 'degreesChanged'; }
     public static get ELLIPSIS(): string { return 'ellipsis'; }
     public static get EMPTY(): string { return ''; }
     public static get FILL(): string { return 'fill'; }
