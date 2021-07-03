@@ -370,4 +370,3 @@ export default class PathElement extends SvgElement implements IPathElement {
         return this._strokeLineJoin;
     }
 }
-customElements.define('path-element', PathElement);

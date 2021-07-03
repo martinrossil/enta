@@ -258,4 +258,3 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._clipY;
     }
 }
-customElements.define('display-element', DisplayElement);

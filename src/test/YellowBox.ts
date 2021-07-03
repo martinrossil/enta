@@ -12,4 +12,4 @@ export default class YellowBox extends DisplayContainer {
         this.addElement(new PurpleBox());
     }
 }
-// customElements.define('yellow-box', YellowBox);
+customElements.define('yellow-box', YellowBox);

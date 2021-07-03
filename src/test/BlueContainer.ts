@@ -2,7 +2,6 @@ import DisplayContainer from '../core/DisplayContainer';
 import HorizontalLayout from '../layout/HorizontalLayout';
 import Color from '../vo/Color';
 import GreenBox from './GreenBox';
-import PurpleBox from './PurpleBox';
 import RedBox from './RedBox';
 import YellowBox from './YellowBox';
 
@@ -17,4 +16,4 @@ export default class BlueContainer extends DisplayContainer {
         this.addElements([new RedBox(), new GreenBox(), new YellowBox()]);
     }
 }
-// customElements.define('blue-container', BlueContainer);
+customElements.define('blue-container', BlueContainer);

@@ -188,4 +188,3 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
         return this._selectedIndex;
     }
 }
-customElements.define('list-element', List);

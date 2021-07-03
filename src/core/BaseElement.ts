@@ -94,4 +94,3 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         return this._cursor;
     }
 }
-customElements.define('base-element', BaseElement);

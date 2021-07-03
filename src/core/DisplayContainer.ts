@@ -280,4 +280,3 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         return this._paddingY;
     }
 }
-customElements.define('display-container', DisplayContainer);

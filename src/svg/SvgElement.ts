@@ -78,4 +78,3 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
         return this._viewBox;
     }
 }
-customElements.define('svg-element', SvgElement);

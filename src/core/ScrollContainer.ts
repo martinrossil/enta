@@ -240,4 +240,3 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this.elementsContainer.paddingY;
     }
 }
-customElements.define('scroll-container', ScrollContainer);
