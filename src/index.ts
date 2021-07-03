@@ -22,6 +22,7 @@ export { default as BlurFilter } from './filters/BlurFilter';
 export { default as BoxShadowFilter } from './filters/BoxShadowFilter';
 export { default as ShadowFilter } from './filters/ShadowFilter';
 
+export { default as InteractiveMachine } from './fsm/InteractiveMachine';
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
 export { default as TouchMachine } from './fsm/TouchMachine';
@@ -96,6 +97,7 @@ export { HorizontalAlign } from './types/HorizontalAlign';
 export { ItemRendererClass } from './types/ItemRendererClass';
 export { StrokeLineCap } from './types/StrokeLineCap';
 export { StrokeLineJoin } from './types/StrokeLineJoin';
+export { SvgNameSpace } from './types/SvgNameSpace';
 export { TextAlign } from './types/TextAlign';
 export { VerticalAlign } from './types/VerticalAlign';
 
