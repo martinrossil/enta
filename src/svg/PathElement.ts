@@ -36,7 +36,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         }
     }
 
-    private _pathData = Strings.EMPTY;
+    private _pathData = '';
 
     public set pathData(value: string) {
         if (this._pathData === value) {

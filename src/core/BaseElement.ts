@@ -50,7 +50,7 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         }
         this._visible = value;
         if (this._visible) {
-            this.style.visibility = Strings.EMPTY;
+            this.style.visibility = '';
             return;
         }
         this.style.visibility = Strings.HIDDEN;
@@ -68,7 +68,7 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         }
         this._enabled = value;
         if (value) {
-            this.style.pointerEvents = Strings.EMPTY;
+            this.style.pointerEvents = '';
             this.style.userSelect = Strings.AUTO;
         } else {
             this.style.pointerEvents = Strings.NONE;

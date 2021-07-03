@@ -104,8 +104,8 @@ export default class BaseText extends DisplayElement implements IBaseText {
     }
 
     protected resetTextRendererStyles(): void {
-        this.textRenderer.style.width = Strings.EMPTY;
-        this.textRenderer.style.height = Strings.EMPTY;
+        this.textRenderer.style.width = '';
+        this.textRenderer.style.height = '';
     }
 
     protected get actualFontSize(): number {

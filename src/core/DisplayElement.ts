@@ -51,18 +51,18 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
     private backgroundColorChanged(): void {
         if (this.backgroundColor) {
             if (this.backgroundColor instanceof Color) {
-                this.style.background = Strings.EMPTY;
+                this.style.background = '';
                 this.style.backgroundColor = this.backgroundColor.toString();
                 return;
             }
             if (this.backgroundColor instanceof LinearGradient) {
-                this.style.backgroundColor = Strings.EMPTY;
+                this.style.backgroundColor = '';
                 this.style.background = this.backgroundColor.toString();
                 return;
             }
         }
-        this.style.backgroundColor = Strings.EMPTY;
-        this.style.background = Strings.EMPTY;
+        this.style.backgroundColor = '';
+        this.style.background = '';
     }
 
     private _backgroundColor: IColor | ILinearGradient | null = null;
@@ -82,7 +82,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this._backgroundColor = value;
         if (this._backgroundColor instanceof Color) {
             this._backgroundColor.addEventListener(Strings.INVALIDATE, this.backgroundColorChanged);
-            this.style.background = Strings.EMPTY;
+            this.style.background = '';
             this.style.backgroundColor = this._backgroundColor.toString();
             return;
         }
@@ -91,12 +91,12 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             this._backgroundColor.addEventListener(Strings.COLORS_ADDED, this.backgroundColorChanged);
             this._backgroundColor.addEventListener(Strings.COLOR_CHANGED, this.backgroundColorChanged);
             this._backgroundColor.addEventListener(Strings.DEGREES_CHANGED, this.backgroundColorChanged);
-            this.style.backgroundColor = Strings.EMPTY;
+            this.style.backgroundColor = '';
             this.style.background = this._backgroundColor.toString();
             return;
         }
-        this.style.backgroundColor = Strings.EMPTY;
-        this.style.background = Strings.EMPTY;
+        this.style.backgroundColor = '';
+        this.style.background = '';
     }
 
     public get backgroundColor(): IColor | ILinearGradient | null {

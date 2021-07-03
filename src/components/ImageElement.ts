@@ -25,7 +25,7 @@ export default class ImageElement extends DisplayElement implements IImageElemen
         return this._img;
     }
 
-    private _source = Strings.EMPTY;
+    private _source = '';
 
     public set source(value: string) {
         if (this._source === value) {
@@ -39,7 +39,7 @@ export default class ImageElement extends DisplayElement implements IImageElemen
         return this._source;
     }
 
-    private _alt = Strings.EMPTY;
+    private _alt = '';
 
     public set alt(value: string) {
         if (this._alt === value) {

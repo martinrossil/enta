@@ -17,7 +17,6 @@ export default class Strings {
     public static get D(): string { return 'd'; }
     public static get DEGREES_CHANGED(): string { return 'degreesChanged'; }
     public static get ELLIPSIS(): string { return 'ellipsis'; }
-    public static get EMPTY(): string { return ''; }
     public static get FILL(): string { return 'fill'; }
     public static get GRADIENT_TRANSFORM(): string { return 'gradientTransform'; }
     public static get GRADIENT_UNITS(): string { return 'gradientUnits'; }
