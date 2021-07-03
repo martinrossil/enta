@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import DisplayElement from '../core/DisplayElement';
 import IBaseText from '../interfaces/text/IBaseText';
 import IColor from '../interfaces/vo/IColor';
@@ -103,8 +104,8 @@ export default class BaseText extends DisplayElement implements IBaseText {
     }
 
     protected resetTextRendererStyles(): void {
-        this.textRenderer.style.width = '';
-        this.textRenderer.style.height = '';
+        this.textRenderer.style.width = Strings.EMPTY;
+        this.textRenderer.style.height = Strings.EMPTY;
     }
 
     protected get actualFontSize(): number {

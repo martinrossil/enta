@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IShadowFilter from '../interfaces/filters/IShadowFilter';
 import IColor from '../interfaces/vo/IColor';
@@ -18,7 +19,7 @@ export default class ShadowFilter extends EventDispatcher implements IShadowFilt
             this._blur = blur;
         }
         this._color = color;
-        this._color.addEventListener('invalidate', this.colorChanged);
+        this._color.addEventListener(Strings.INVALIDATE, this.colorChanged);
     }
 
     private _x = 0;
@@ -90,9 +91,9 @@ export default class ShadowFilter extends EventDispatcher implements IShadowFilt
         if (this._color === value) {
             return;
         }
-        this._color.removeEventListener('invalidate', this.colorChanged);
+        this._color.removeEventListener(Strings.INVALIDATE, this.colorChanged);
         this._color = value;
-        this._color.addEventListener('invalidate', this.colorChanged);
+        this._color.addEventListener(Strings.INVALIDATE, this.colorChanged);
         this.notify();
     }
 
@@ -109,6 +110,6 @@ export default class ShadowFilter extends EventDispatcher implements IShadowFilt
     }
 
     private notify(): void {
-        this.dispatch('invalidate');
+        this.dispatch(Strings.INVALIDATE);
     }
 }

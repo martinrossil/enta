@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
@@ -6,7 +7,7 @@ import { HorizontalAlign } from '../types/HorizontalAlign';
 import { VerticalAlign } from '../types/VerticalAlign';
 
 export default class HorizontalLayout extends EventDispatcher implements IHorizontalLayout {
-    public constructor(horizontalGap = 0, horizontalAlign: HorizontalAlign = 'left', verticalAlign: VerticalAlign = 'top') {
+    public constructor(horizontalGap = 0, horizontalAlign: HorizontalAlign = Strings.LEFT, verticalAlign: VerticalAlign = Strings.TOP) {
         super();
         this.name = 'HorizontalLayout';
         this.horizontalGap = horizontalGap;
@@ -59,9 +60,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        if (this.verticalAlign === 'top') {
+        if (this.verticalAlign === Strings.TOP) {
             this.layoutElementsTop(container, elements);
-        } else if (this.verticalAlign === 'bottom') {
+        } else if (this.verticalAlign === Strings.BOTTOM) {
             this.layoutElementsBottom(container, elements);
         } else {
             this.layoutElementsMiddle(container, elements);
@@ -101,14 +102,14 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
             return container.paddingLeft;
         }
         let x = container.paddingLeft
-        if (this.horizontalAlign === 'center' || this.horizontalAlign === 'right') {
+        if (this.horizontalAlign === Strings.CENTER || this.horizontalAlign === Strings.RIGHT) {
             const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
             let elementsWidthSum = 0;
             for (const element of elements) {
                 elementsWidthSum += element.measuredWidth;
             }
             const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
-            if (this.horizontalAlign === 'center') {
+            if (this.horizontalAlign === Strings.CENTER) {
                 x += (w - elementsWidthSum - horizontalGapSumWidth) * 0.5;
             } else {
                 x += (w - elementsWidthSum - horizontalGapSumWidth);
@@ -170,7 +171,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return this._horizontalGap;
     }
 
-    private _horizontalAlign: HorizontalAlign = 'left';
+    private _horizontalAlign: HorizontalAlign = Strings.LEFT;
 
     public set horizontalAlign(value: HorizontalAlign) {
         if (this._horizontalAlign === value) {
@@ -184,7 +185,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return this._horizontalAlign;
     }
 
-    private _verticalAlign: VerticalAlign = 'top';
+    private _verticalAlign: VerticalAlign = Strings.TOP;
 
     public set verticalAlign(value: VerticalAlign) {
         if (this._verticalAlign === value) {
@@ -199,6 +200,6 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     }
 
     private notifyInvalid(): void {
-        this.dispatch('invalidate');
+        this.dispatch(Strings.INVALIDATE);
     }
 }

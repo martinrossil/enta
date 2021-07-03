@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import ILabelElement from '../interfaces/text/ILabelElement';
 import BaseText from './BaseText';
 
@@ -6,9 +7,9 @@ export default class LabelElement extends BaseText implements ILabelElement {
         super();
         this.name = 'LabelElement';
         this.lineHeight = 2;
-        this.textRenderer.style.whiteSpace = 'nowrap';
-        this.textRenderer.style.textOverflow = 'ellipsis';
-        this.textRenderer.style.overflow = 'hidden';
+        this.textRenderer.style.whiteSpace = Strings.NO_WRAP;
+        this.textRenderer.style.textOverflow = Strings.ELLIPSIS;
+        this.textRenderer.style.overflow = Strings.HIDDEN;
     }
 
     protected validate(): void {

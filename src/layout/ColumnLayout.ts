@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
@@ -222,6 +223,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
     }
 
     private notifyInvalid(): void {
-        this.dispatch('invalidate');
+        this.dispatch(Strings.INVALIDATE);
     }
 }

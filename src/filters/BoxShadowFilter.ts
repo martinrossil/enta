@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IBoxShadowFilter from '../interfaces/filters/IBoxShadowFilter';
 import IColor from '../interfaces/vo/IColor';
@@ -21,7 +22,7 @@ export default class BoxShadowFilter extends EventDispatcher implements IBoxShad
             this._spread = spread;
         }
         this._color = color;
-        this._color.addEventListener('invalidate', this.colorChanged);
+        this._color.addEventListener(Strings.INVALIDATE, this.colorChanged);
         this._inset = inset;
     }
 
@@ -119,9 +120,9 @@ export default class BoxShadowFilter extends EventDispatcher implements IBoxShad
         if (this._color === value) {
             return;
         }
-        this._color.removeEventListener('invalidate', this.colorChanged);
+        this._color.removeEventListener(Strings.INVALIDATE, this.colorChanged);
         this._color = value;
-        this._color.addEventListener('invalidate', this.colorChanged);
+        this._color.addEventListener(Strings.INVALIDATE, this.colorChanged);
         this.notify();
     }
 
@@ -152,6 +153,6 @@ export default class BoxShadowFilter extends EventDispatcher implements IBoxShad
     }
 
     private notify(): void {
-        this.dispatch('invalidate');
+        this.dispatch(Strings.INVALIDATE);
     }
 }

@@ -1,4 +1,5 @@
 import { ILayoutElement } from '..';
+import Strings from '../consts/Strings';
 import SizeElement from '../core/SizeElement';
 import BlurFilter from '../filters/BlurFilter';
 import ShadowFilter from '../filters/ShadowFilter';
@@ -19,8 +20,8 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
     }
 
     private updateSvgAttributes(): void {
-        this.svg.setAttribute('width', this.measuredWidth.toString());
-        this.svg.setAttribute('height', this.measuredHeight.toString());
+        this.svg.setAttribute(Strings.WIDTH, this.measuredWidth.toString());
+        this.svg.setAttribute(Strings.HEIGHT, this.measuredHeight.toString());
     }
 
     public addFilter(value: BlurFilter | ShadowFilter): void {
@@ -31,12 +32,12 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
 
     private get svg(): SVGSVGElement {
         if (!this._svg) {
-            this._svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            this._svg.style.position = 'absolute';
-            this._svg.style.overflow = 'visible';
+            this._svg = document.createElementNS(Strings.SVG_NS, 'svg');
+            this._svg.style.position = Strings.ABSOLUTE;
+            this._svg.style.overflow = Strings.VISIBLE;
             this._svg.appendChild(this.defs);
             this._svg.appendChild(this.group);
-            this._svg.setAttribute('preserveAspectRatio', 'none');
+            this._svg.setAttribute(Strings.PRESERVE_ASPECT_RATIO, Strings.NONE);
         }
         return this._svg;
     }
@@ -45,7 +46,7 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
 
     protected get defs(): SVGDefsElement {
         if (!this._defs) {
-            this._defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            this._defs = document.createElementNS(Strings.SVG_NS, 'defs');
         }
         return this._defs;
     }
@@ -54,7 +55,7 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
 
     protected get group(): SVGElement {
         if (!this._group) {
-            this._group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            this._group = document.createElementNS(Strings.SVG_NS, 'g');
         }
         return this._group;
     }
@@ -68,10 +69,10 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
         this._viewBox = value;
         if (this._viewBox) {
             const box = this._viewBox;
-            this.svg.setAttribute('viewBox', box.x + ' ' + box.y + ' ' + box.width + ' ' + box.height);
+            this.svg.setAttribute(Strings.VIEW_BOX, box.x + ' ' + box.y + ' ' + box.width + ' ' + box.height);
             return;
         }
-        this.svg.removeAttribute('viewBox');
+        this.svg.removeAttribute(Strings.VIEW_BOX);
     }
 
     public get viewBox(): IRectangle | null {

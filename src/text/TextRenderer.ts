@@ -135,7 +135,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._lineHeight;
     }
 
-    private _textAlign: TextAlign ='left';
+    private _textAlign: TextAlign = Strings.LEFT;
 
     public set textAlign(value: TextAlign) {
         if (this._textAlign === value) {

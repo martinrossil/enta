@@ -10,8 +10,8 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         super();
         this.name = 'ScrollContainer';
         this.verticalScrollEnabled = true;
-        this.clip = 'hidden';
-        this.addEventListener('invalidate', this.childInvalid);
+        this.clip = Strings.HIDDEN;
+        this.addEventListener(Strings.INVALIDATE, this.childInvalid);
         this.appendChild(this.outerElement);
     }
 
@@ -79,7 +79,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     private get outerElement(): DisplayElement {
         if (!this._outerElement) {
             this._outerElement = new DisplayElement();
-            this._outerElement.clip = 'scroll';
+            this._outerElement.clip = Strings.SCROLL;
             this._outerElement.appendChild(this.elementsContainer);
         }
         return this._outerElement;
@@ -134,7 +134,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._verticalScrollEnabled = value;
         this.elementsContainer.percentWidth = NaN;
         this.elementsContainer.percentHeight = NaN;
-        this.outerElement.clip = this.scrollEnabled ? 'scroll' : 'hidden';
+        this.outerElement.clip = this.scrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
 
@@ -150,7 +150,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._horizontalScrollEnabled = value;
         this._scrollEnabled = value && this.verticalScrollEnabled;
-        this.outerElement.clipX = this.horizontalScrollEnabled ? 'scroll' : 'hidden';
+        this.outerElement.clipX = this.horizontalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.elementsContainer.percentWidth = this.horizontalScrollEnabled ? NaN : 100;
         this.invalidate();
     }
@@ -167,7 +167,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._verticalScrollEnabled = value;
         this._scrollEnabled = value && this._horizontalScrollEnabled;
-        this.outerElement.clipY = this.verticalScrollEnabled ? 'scroll' : 'hidden';
+        this.outerElement.clipY = this.verticalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.elementsContainer.percentHeight = this.verticalScrollEnabled ? NaN : 100;
         this.invalidate();
     }

@@ -36,7 +36,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         }
     }
 
-    private _pathData = '';
+    private _pathData = Strings.EMPTY;
 
     public set pathData(value: string) {
         if (this._pathData === value) {
@@ -54,7 +54,7 @@ export default class PathElement extends SvgElement implements IPathElement {
 
     protected get path(): SVGPathElement {
         if (!this._path) {
-            this._path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            this._path = document.createElementNS(Strings.SVG_NS, 'path');
         }
         return this._path;
     }
@@ -82,7 +82,7 @@ export default class PathElement extends SvgElement implements IPathElement {
     }
 
     private getLinearGradient(id: string): SVGLinearGradientElement {
-        const linearGradient: SVGLinearGradientElement = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+        const linearGradient: SVGLinearGradientElement = document.createElementNS(Strings.SVG_NS, 'linearGradient');
         linearGradient.setAttribute(Strings.ID, id);
         linearGradient.setAttribute(Strings.GRADIENT_UNITS, Strings.USER_SPACE_ON_USE);
         return linearGradient;
@@ -158,7 +158,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             return;
         }
         if (this._strokeColor instanceof Color) {
-            this._strokeColor.removeEventListener('invalidate', this.strokeColorChanged as IEventListener);
+            this._strokeColor.removeEventListener(Strings.INVALIDATE, this.strokeColorChanged as IEventListener);
         } else if (this._strokeColor instanceof LinearGradient) {
             this.defs.removeChild(this.strokeLinearGradient);
             this.resetLinearGradient(this.strokeLinearGradient);
@@ -167,7 +167,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         }
         this._strokeColor = value;
         if (this._strokeColor instanceof Color) {
-            this._strokeColor.addEventListener('invalidate', this.strokeColorChanged as IEventListener);
+            this._strokeColor.addEventListener(Strings.INVALIDATE, this.strokeColorChanged as IEventListener);
             this.path.setAttribute(Strings.STROKE, this._strokeColor.toString());
             return;
         }
@@ -196,7 +196,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             return;
         }
         if (this._fillColor instanceof Color) {
-            this._fillColor.removeEventListener('invalidate', this.fillColorChanged as IEventListener);
+            this._fillColor.removeEventListener(Strings.INVALIDATE, this.fillColorChanged as IEventListener);
         } else if (this._fillColor instanceof LinearGradient) {
             this.defs.removeChild(this.fillLinearGradient);
             this.resetLinearGradient(this.fillLinearGradient);
@@ -205,7 +205,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         }
         this._fillColor = value;
         if (this._fillColor instanceof Color) {
-            this._fillColor.addEventListener('invalidate', this.fillColorChanged as IEventListener);
+            this._fillColor.addEventListener(Strings.INVALIDATE, this.fillColorChanged as IEventListener);
             this.path.setAttribute(Strings.FILL, this._fillColor.toString());
             return;
         }
@@ -300,7 +300,7 @@ export default class PathElement extends SvgElement implements IPathElement {
     }
 
     private getStopFromColor(color: IColor): SVGStopElement {
-        const stop: SVGStopElement = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        const stop: SVGStopElement = document.createElementNS(Strings.SVG_NS, 'stop');
         stop.setAttribute(Strings.STOP_COLOR, color.toString());
         return stop;
     }
@@ -311,7 +311,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             const offsetStep = 1 / (linearGradientElement.childNodes.length - 1);
             for (const child of linearGradientElement.childNodes) {
                 const stop: SVGStopElement = child as SVGStopElement;
-                stop.setAttribute(Strings.OFFSET, offset + '');
+                stop.setAttribute(Strings.OFFSET, offset.toString());
                 offset = offset + offsetStep;
             }
         }
@@ -349,7 +349,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             return;
         }
         this._strokeLineCap = value;
-        this.path.setAttribute('stroke-linecap', this._strokeLineCap);
+        this.path.setAttribute(Strings.STROKE_LINECAP, this._strokeLineCap);
     }
 
     public get strokeLineCap(): StrokeLineCap {
@@ -363,7 +363,7 @@ export default class PathElement extends SvgElement implements IPathElement {
             return;
         }
         this._strokeLineJoin = value;
-        this.path.setAttribute('stroke-linejoin', this._strokeLineJoin);
+        this.path.setAttribute(Strings.STROKE_LINEJOIN, this._strokeLineJoin);
     }
 
     public get strokeLineJoin(): StrokeLineJoin {

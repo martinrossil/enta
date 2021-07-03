@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import ISurfaceElement from '../interfaces/svg/ISurfaceElement';
 import { CornerType } from '../types/CornerType';
 import PathElement from './PathElement';
@@ -15,11 +16,11 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
     }
 
     protected updatePathData(): void {
-        if (this.cornerType === 'round') {
-            this.path.setAttribute('d', this.getRoundData());
+        if (this.cornerType === Strings.ROUND) {
+            this.path.setAttribute(Strings.D, this.getRoundData());
             return;
         }
-        this.path.setAttribute('d', this.getCutData());
+        this.path.setAttribute(Strings.D, this.getCutData());
     }
 
     private _cornerSize = 0;
@@ -41,7 +42,7 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
         return this._cornerSize;
     }
 
-    private _cornerType: CornerType = 'round';
+    private _cornerType: CornerType = Strings.ROUND;
 
     public set cornerType(value: CornerType) {
         if (this._cornerType === value) {

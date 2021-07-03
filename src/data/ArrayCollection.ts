@@ -1,10 +1,11 @@
+import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IArrayCollection from '../interfaces/data/IArrayCollection';
 
 export default class ArrayCollection<Item> extends EventDispatcher implements IArrayCollection<Item> {
     public constructor(source: Item[] | null = null) {
         super();
-        this.name = 'ArrayList';
+        this.name = 'ArrayCollection';
         if (source) {
             this._source = source;
             return;
@@ -14,12 +15,12 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
 
     public addItem(item: Item): void {
         this.source.push(item);
-        this.dispatch('itemAdded', item);
+        this.dispatch(Strings.ITEM_ADDED, item);
     }
 
     public addItems(items: Item[]): void {
         this._source = this.source.concat(items);
-        this.dispatch('itemsAdded', items);
+        this.dispatch(Strings.ITEMS_ADDED, items);
     }
 
     public getItemIndex(item: Item): number {
@@ -44,7 +45,7 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
         const index = this.source.indexOf(item);
         if (index > -1) {
             this.source.splice(index, 1);
-            this.dispatch('itemRemoved', item);
+            this.dispatch(Strings.ITEM_REMOVED, item);
         }
     }
 
@@ -52,14 +53,14 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
         const item = this.getItemAt(index);
         if (item) {
             this.source.splice(index, 1);
-            this.dispatch('itemRemoved', item);
+            this.dispatch(Strings.ITEM_REMOVED, item);
         }
     }
 
     public removeAll(): void {
         if (this.length > 0) {
             this.source.length = 0;
-            this.dispatch('reset');
+            this.dispatch(Strings.RESET);
         }
     }
 

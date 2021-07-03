@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import ISizeElement from '../interfaces/core/ISizeElement';
 import ISizeLayoutElement from '../interfaces/core/ISizeLayoutElement';
 import PositionElement from './PositionElement';
@@ -156,7 +157,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._actualWidth = value;
-        this.style.width = this._actualWidth + 'px';
+        this.style.width = this._actualWidth + Strings.PX;
     }
 
     protected get actualWidth(): number {
@@ -236,7 +237,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._actualHeight = value;
-        this.style.height = this._actualHeight + 'px';
+        this.style.height = this._actualHeight + Strings.PX;
     }
 
     protected get actualHeight(): number {

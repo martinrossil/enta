@@ -39,7 +39,7 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         if (!this.connected) {
             return;
         }
-        this.dispatchEvent(new CustomEvent('invalidate', { bubbles: true }));
+        this.dispatchEvent(new CustomEvent(Strings.INVALIDATE, { bubbles: true }));
     }
 
     private _visible = true;

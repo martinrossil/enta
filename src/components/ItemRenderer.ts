@@ -1,3 +1,4 @@
+import Strings from '../consts/Strings';
 import DisplayContainer from '../core/DisplayContainer';
 import TouchMachine from '../fsm/TouchMachine';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
@@ -23,7 +24,7 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
     }
 
     public triggered(): void {
-        this.dispatch('itemRendererTriggered', this.data, true);
+        this.dispatch(Strings.ITEM_RENDERER_TRIGGERED, this.data, true);
     }
 
     protected dataChanged(): void {

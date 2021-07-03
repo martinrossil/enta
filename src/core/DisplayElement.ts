@@ -25,7 +25,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
 
     public addFilter(value: IFilter): void {
         this.filters.push(value);
-        value.addEventListener('invalidate', this.filtersChanged);
+        value.addEventListener(Strings.INVALIDATE, this.filtersChanged);
         this.filtersChanged();
     }
 
@@ -51,18 +51,18 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
     private backgroundColorChanged(): void {
         if (this.backgroundColor) {
             if (this.backgroundColor instanceof Color) {
-                this.style.background = '';
+                this.style.background = Strings.EMPTY;
                 this.style.backgroundColor = this.backgroundColor.toString();
                 return;
             }
             if (this.backgroundColor instanceof LinearGradient) {
-                this.style.backgroundColor = '';
+                this.style.backgroundColor = Strings.EMPTY;
                 this.style.background = this.backgroundColor.toString();
                 return;
             }
         }
-        this.style.backgroundColor = '';
-        this.style.background = '';
+        this.style.backgroundColor = Strings.EMPTY;
+        this.style.background = Strings.EMPTY;
     }
 
     private _backgroundColor: IColor | ILinearGradient | null = null;
@@ -72,7 +72,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             return;
         }
         if (this._backgroundColor instanceof Color) {
-            this._backgroundColor.removeEventListener('invalidate', this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener(Strings.INVALIDATE, this.backgroundColorChanged);
         } else if (this._backgroundColor instanceof LinearGradient) {
             this._backgroundColor.removeEventListener(LinearGradient.COLOR_ADDED, this.backgroundColorChanged);
             this._backgroundColor.removeEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
@@ -81,8 +81,8 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         }
         this._backgroundColor = value;
         if (this._backgroundColor instanceof Color) {
-            this._backgroundColor.addEventListener('invalidate', this.backgroundColorChanged);
-            this.style.background = '';
+            this._backgroundColor.addEventListener(Strings.INVALIDATE, this.backgroundColorChanged);
+            this.style.background = Strings.EMPTY;
             this.style.backgroundColor = this._backgroundColor.toString();
             return;
         }
@@ -91,12 +91,12 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             this._backgroundColor.addEventListener(LinearGradient.COLORS_ADDED, this.backgroundColorChanged);
             this._backgroundColor.addEventListener(LinearGradient.COLOR_CHANGED, this.backgroundColorChanged);
             this._backgroundColor.addEventListener(LinearGradient.DEGREES_CHANGED, this.backgroundColorChanged);
-            this.style.backgroundColor = '';
+            this.style.backgroundColor = Strings.EMPTY;
             this.style.background = this._backgroundColor.toString();
             return;
         }
-        this.style.backgroundColor = '';
-        this.style.background = '';
+        this.style.backgroundColor = Strings.EMPTY;
+        this.style.background = Strings.EMPTY;
     }
 
     public get backgroundColor(): IColor | ILinearGradient | null {
@@ -216,7 +216,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._cornerSizeBottomRight;
     }
 
-    private _clip: ClipType = 'visible';
+    private _clip: ClipType = Strings.VISIBLE;
 
     public set clip(value: ClipType) {
         if (this._clip === value) {
@@ -230,7 +230,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._clip;
     }
 
-    private _clipX: ClipType = 'visible';
+    private _clipX: ClipType = Strings.VISIBLE;
 
     public set clipX(value: ClipType) {
         if (this._clipX === value) {
@@ -244,7 +244,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._clipX;
     }
 
-    private _clipY: ClipType = 'visible';
+    private _clipY: ClipType = Strings.VISIBLE;
 
     public set clipY(value: ClipType) {
         if (this._clipY === value) {
