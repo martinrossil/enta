@@ -6,18 +6,17 @@ import State from './State';
 export default class InteractiveMachine extends Machine<IInteractive> {
     public constructor(host: IInteractive) {
         super(host);
+        host.addEventListener('mouseover', this.send);
+        host.addEventListener('touchstart', this.send);
+        this.initial.on = host.initial.bind(host);
         this.initial.addTransition('mouseover', this.mouseOver);
+        /*
         this.initial.addTransition('mousedown', this.pressed);
-        // this.initial.addTransition('touchstart', this.touchStart);
-        this.initial.on = this.host.initial.bind(this.host);
-        // host.addEventListener('touchstart', this.send, { passive: true });
+        this.initial.addTransition('touchstart', this.touchStart);
         host.addEventListener('mouseover', this.send);
         host.addEventListener('mouseover', this.send);
-        host.addEventListener('mousedown', this.send);
         host.addEventListener('mouseup', this.send);
-        host.addEventListener('mouseleave', this.send);
-        // host.addEventListener('touchstart', this.send, { passive: true });
-        host.addEventListener('click', this.send);
+         */
     }
 
     private _mouseOver!: IState;
@@ -26,10 +25,16 @@ export default class InteractiveMachine extends Machine<IInteractive> {
             this._mouseOver = new State('MouseOver');
             this._mouseOver.addTransition('mouseleave', this.initial);
             this._mouseOver.addTransition('mousedown', this.pressed);
-            this._mouseOver.addTransition('click', this.clicked)
-            this._mouseOver.on = this.host.hover.bind(this.host);
+            this._mouseOver.entry = this.mouseOverEntry.bind(this);
         }
         return this._mouseOver;
+    }
+
+    private mouseOverEntry(e: Event): void {
+        this.host.removeEventListener('touchstart', this.send);
+        this.host.addEventListener('mouseleave', this.send);
+        this.host.addEventListener('mousedown', this.send);
+        this.host.hover();
     }
 
     private _pressed!: IState;
@@ -44,7 +49,8 @@ export default class InteractiveMachine extends Machine<IInteractive> {
     }
 
     private onPressed(e: Event) {
-        this.host.pressed(this.getTouchPoint(e));
+        const [x, y] = this.getTouchPoint(e);
+        this.host.pressed(x, y);
     }
 
     private _clicked!: IState;
@@ -74,7 +80,6 @@ export default class InteractiveMachine extends Machine<IInteractive> {
     } */
 
     private getTouchPoint(e: Event): [number, number] {
-        console.log(e);
         if (e instanceof MouseEvent) {
             return [e.offsetX, e.offsetY];
         }
