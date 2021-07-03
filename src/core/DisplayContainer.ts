@@ -281,3 +281,4 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         return this._paddingY;
     }
 }
+customElements.define('enta-dc', DisplayContainer);
