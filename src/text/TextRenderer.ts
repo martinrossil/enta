@@ -149,3 +149,4 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._textAlign;
     }
 }
+customElements.define('enta-tr', TextRenderer);

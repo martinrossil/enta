@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import DisplayElement from '../core/DisplayElement';
 import IBaseText from '../interfaces/text/IBaseText';
 import IColor from '../interfaces/vo/IColor';
