@@ -18,7 +18,7 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
         // override
     }
 
-    public pressed(point: [number, number]): void {
+    public pressed(x: number, y: number): void {
         // override
     }
 
