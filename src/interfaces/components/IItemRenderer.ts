@@ -5,6 +5,6 @@ export default interface IItemRenderer<Item> extends IDisplayContainer {
     selected: boolean;
     initial(): void;
     hover(): void;
-    pressed(point: [number, number]): void;
+    pressed(x: number, y: number): void;
     triggered(): void;
 }

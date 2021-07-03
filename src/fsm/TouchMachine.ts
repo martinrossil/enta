@@ -16,7 +16,7 @@ export default class TouchMachine extends Machine<IInteractive> {
         this.host.addEventListener('mouseleave', this.send);
         this.host.addEventListener('touchstart', this.send, { passive: true });
         this.host.addEventListener('touchend', this.send);
-        this.host.addEventListener('click', this.host.triggered);
+        // this.host.addEventListener('click', this.host.triggered);
     }
 
     private initialEntry(e: Event): void {
@@ -32,7 +32,7 @@ export default class TouchMachine extends Machine<IInteractive> {
                 const rect = this.host.getBoundingClientRect();
                 if (px > rect.x && px < rect.x + rect.width) {
                     if (py > rect.y && py < rect.y + rect.height) {
-                        this.host.triggered();
+                        // this.host.triggered();
                     }
                 }
             }
@@ -65,7 +65,7 @@ export default class TouchMachine extends Machine<IInteractive> {
     }
 
     private onPressed(e: Event) {
-        this.host.pressed(this.getTouchPoint(e));
+        // this.host.pressed(this.getTouchPoint(e));
     }
 
     private getTouchPoint(e: Event): [number, number] {
