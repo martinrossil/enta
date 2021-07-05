@@ -5,12 +5,13 @@ import ILayoutElement from '../interfaces/core/ILayoutElement';
 import IColomnLayout from '../interfaces/layout/IColumnLayout';
 
 export default class ColumnLayout extends EventDispatcher implements IColomnLayout {
-    public constructor(minColumnWidth = 256, maxColumns = 4, gap = NaN) {
+    public constructor(minColumnWidth = 256, maxColumns = 4, gap = NaN, aspectRatio = NaN) {
         super();
         this.name = 'ColumnLayout';
         this.minColumnWidth = minColumnWidth;
         this.maxColumns = maxColumns;
         this.gap = gap;
+        this.aspectRatio = aspectRatio;
     }
 
     private columns = 0;
@@ -45,17 +46,18 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         let elementHeight = 0;
         for (const element of elements) {
             element.position(currentX, currentY);
-            if (elementHeight > element.measuredHeight) {
-                elementHeight = element.measuredHeight;
-            }
-            if (currentColumn % this.columns === 0) {
+            if (this.columns === 1) {
+                currentY += this.verticalGap + element.measuredHeight;
+            } else if (currentColumn % this.columns === 0) {
                 currentColumn = 1;
                 currentX = container.paddingLeft;
                 currentY += this.verticalGap + elementHeight;
-                elementHeight = element.measuredHeight;
             } else {
                 currentColumn++;
                 currentX += this.horizontalGap + this.elementWidth;
+            }
+            if (elementHeight < element.measuredHeight) {
+                elementHeight = element.measuredHeight;
             }
         }
     }

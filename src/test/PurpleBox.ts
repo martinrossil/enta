@@ -11,7 +11,7 @@ export default class PurpleBox extends DisplayElement implements IInteractive {
         this.name = PurpleBox.TAG;
         this.horizontalCenter = 0;
         this.verticalMiddle = 0;
-        this.size(200, 200);
+        // this.size(200, 200);
         this.cursor = Cursor.POINTER;
         this.backgroundColor = new Color(300, 100, 50, 0.5);
     }
