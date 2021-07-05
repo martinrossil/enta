@@ -5,12 +5,11 @@ import ILayoutElement from '../interfaces/core/ILayoutElement';
 import IColomnLayout from '../interfaces/layout/IColumnLayout';
 
 export default class ColumnLayout extends EventDispatcher implements IColomnLayout {
-    public constructor(minColumnWidth = 256, maxColumns = 4, minRowHeight = 128, gap = NaN) {
+    public constructor(minColumnWidth = 256, maxColumns = 4, gap = NaN) {
         super();
         this.name = 'ColumnLayout';
         this.minColumnWidth = minColumnWidth;
         this.maxColumns = maxColumns;
-        this.minRowHeight = minRowHeight;
         this.gap = gap;
     }
 
@@ -28,8 +27,14 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         }
         const insideMinusGaps = insideWidth - this.gap * (this.columns - 1);
         this.elementWidth = insideMinusGaps / this.columns;
-        for (const element of elements) {
-            element.externalSize(this.elementWidth, this.minRowHeight);
+        if (!isNaN(this.aspectRatio)) {
+            for (const element of elements) {
+                element.externalSize(this.elementWidth, this.elementWidth / this.aspectRatio);
+            }
+        } else {
+            for (const element of elements) {
+                element.externalWidth = this.elementWidth;
+            }
         }
     }
 
@@ -37,12 +42,17 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         let currentColumn = 1;
         let currentX = container.paddingLeft;
         let currentY = container.paddingTop;
+        let elementHeight = 0;
         for (const element of elements) {
             element.position(currentX, currentY);
+            if (elementHeight > element.measuredHeight) {
+                elementHeight = element.measuredHeight;
+            }
             if (currentColumn % this.columns === 0) {
                 currentColumn = 1;
                 currentX = container.paddingLeft;
-                currentY += this.verticalGap + this.minRowHeight;
+                currentY += this.verticalGap + elementHeight;
+                elementHeight = element.measuredHeight;
             } else {
                 currentColumn++;
                 currentX += this.horizontalGap + this.elementWidth;
@@ -111,27 +121,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
 
     public get minColumnWidth(): number {
         return this._minColumnWidth;
-    }
-
-    private _minRowHeight = 256;
-
-    public set minRowHeight(value: number) {
-        if (this._minRowHeight === value) {
-            return;
-        }
-        if ((isNaN(value) || value <= 0)) {
-            if (value !== 256) {
-                this._minRowHeight = 256;
-                this.notifyInvalid();
-            }
-            return;
-        }
-        this._minRowHeight = value;
-        this.notifyInvalid();
-    }
-
-    public get minRowHeight(): number {
-        return this._minRowHeight;
     }
 
     private _maxColumns = 4;
@@ -220,6 +209,23 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
 
     public get verticalGap(): number {
         return this._verticalGap;
+    }
+
+    private _aspectRatio = NaN;
+
+    public set aspectRatio(value: number) {
+        if (isNaN(this._aspectRatio) && isNaN(value)) {
+            return;
+        }
+        if (this._aspectRatio === value) {
+            return;
+        }
+        this._aspectRatio = value;
+        this.notifyInvalid();
+    }
+
+    public get aspectRatio(): number {
+        return this._aspectRatio;
     }
 
     private notifyInvalid(): void {
