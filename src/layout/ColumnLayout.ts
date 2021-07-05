@@ -48,16 +48,23 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
             element.position(currentX, currentY);
             if (this.columns === 1) {
                 currentY += this.verticalGap + element.measuredHeight;
-            } else if (currentColumn % this.columns === 0) {
-                currentColumn = 1;
-                currentX = container.paddingLeft;
-                currentY += this.verticalGap + elementHeight;
-            } else {
+            } else if (currentColumn === 1) {
                 currentColumn++;
                 currentX += this.horizontalGap + this.elementWidth;
-            }
-            if (elementHeight < element.measuredHeight) {
                 elementHeight = element.measuredHeight;
+            } else if (currentColumn < this.columns) {
+                currentColumn++;
+                currentX += this.horizontalGap + this.elementWidth;
+                if (elementHeight < element.measuredHeight) {
+                    elementHeight = element.measuredHeight;
+                }
+            } else {
+                currentColumn = 1;
+                currentX = container.paddingLeft;
+                if (elementHeight < element.measuredHeight) {
+                    elementHeight = element.measuredHeight;
+                }
+                currentY += this.verticalGap + elementHeight;
             }
         }
     }
