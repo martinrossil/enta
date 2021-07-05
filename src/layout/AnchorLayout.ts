@@ -27,10 +27,26 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
         let width = NaN;
         let height = NaN;
         if (!isNaN(element.percentWidth)) {
-            width = w * element.percentWidth / 100;
+            if (!isNaN(element.left) && !isNaN(element.right)) {
+                width = (w - element.left - element.right) * element.percentWidth / 100;
+            } else if (!isNaN(element.left) && isNaN(element.right)) {
+                width = (w - element.left) * element.percentWidth / 100;
+            } else if (isNaN(element.left) && !isNaN(element.right)) {
+                width = (w - element.right) * element.percentWidth / 100;
+            } else {
+                width = w * element.percentWidth / 100;
+            }
         }
         if (!isNaN(element.percentHeight)) {
-            height = h * element.percentHeight / 100;
+            if (!isNaN(element.top) && !isNaN(element.bottom)) {
+                height = (h - element.top - element.bottom) * element.percentHeight / 100;
+            } else if (!isNaN(element.top) && isNaN(element.bottom)) {
+                height = (h - element.top) * element.percentHeight / 100;
+            } else if (isNaN(element.top) && !isNaN(element.bottom)) {
+                height = (h - element.bottom) * element.percentHeight / 100;
+            } else {
+                height = h * element.percentHeight / 100;
+            }
         }
         element.externalSize(width, height);
     }
