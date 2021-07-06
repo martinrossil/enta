@@ -57,6 +57,27 @@ export default class PositionElement extends BaseElement implements IPositionEle
         return this._y;
     }
 
+    private _z = NaN;
+
+    public set z(value: number) {
+        if (isNaN(this._z) && isNaN(value)) {
+            return;
+        }
+        if (this._z === value) {
+            return;
+        }
+        this._z = value;
+        if (isNaN(this._z)) {
+            this.style.zIndex = '';
+        } else {
+            this.style.zIndex = this._z + '';
+        }
+    }
+
+    public get z(): number {
+        return this._z;
+    }
+
     private _top = NaN;
 
     public set top(value: number) {
