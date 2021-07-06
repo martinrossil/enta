@@ -53,13 +53,29 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
 
     private resizeElementWidth(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, w: number): void {
         if (!isNaN(element.percentWidth)) {
-            element.externalWidth = w * element.percentWidth / 100;
+            if (!isNaN(element.left) && !isNaN(element.right)) {
+                element.externalWidth = (w - element.left - element.right) * element.percentWidth / 100;
+            } else if (!isNaN(element.left) && isNaN(element.right)) {
+                element.externalWidth = (w - element.left) * element.percentWidth / 100;
+            } else if (isNaN(element.left) && !isNaN(element.right)) {
+                element.externalWidth = (w - element.right) * element.percentWidth / 100;
+            } else {
+                element.externalWidth = w * element.percentWidth / 100;
+            }
         }
     }
 
     private resizeElementHeight(container: IDisplayContainer & ILayoutElement, element: ILayoutElement, h: number): void {
         if (!isNaN(element.percentHeight)) {
-            element.externalHeight = h * element.percentHeight / 100;
+            if (!isNaN(element.top) && !isNaN(element.bottom)) {
+                element.externalHeight = (h - element.top - element.bottom) * element.percentHeight / 100;
+            } else if (!isNaN(element.top) && isNaN(element.bottom)) {
+                element.externalHeight = (h - element.top) * element.percentHeight / 100;
+            } else if (isNaN(element.top) && !isNaN(element.bottom)) {
+                element.externalHeight = (h - element.bottom) * element.percentHeight / 100;
+            } else {
+                element.externalHeight = h * element.percentHeight / 100;
+            }
         }
     }
 
