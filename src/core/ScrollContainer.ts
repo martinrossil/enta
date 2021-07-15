@@ -132,6 +132,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._scrollEnabled = value;
         this._horizontalScrollEnabled = value;
         this._verticalScrollEnabled = value;
+        this.elementsContainer.measureInternalSize = !value;
         this.outerElement.clip = this.scrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
@@ -148,6 +149,8 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._horizontalScrollEnabled = value;
         this._scrollEnabled = value && this.verticalScrollEnabled;
+        this.elementsContainer.measureInternalHeight = !value;
+        this.elementsContainer.measureInternalWidth = !this.verticalScrollEnabled;
         this.outerElement.clipX = this.horizontalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
@@ -163,7 +166,9 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
             return;
         }
         this._verticalScrollEnabled = value;
-        this._scrollEnabled = value && this._horizontalScrollEnabled;
+        this._scrollEnabled = value && this.horizontalScrollEnabled;
+        this.elementsContainer.measureInternalWidth = !value;
+        this.elementsContainer.measureInternalHeight = !this.horizontalScrollEnabled;
         this.outerElement.clipY = this.verticalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
