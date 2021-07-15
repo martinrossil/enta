@@ -9,30 +9,32 @@ export default class PurpleBox extends DisplayElement implements IInteractive {
     public constructor() {
         super();
         this.name = PurpleBox.TAG;
-        // this.size(200, 200);
+        this.size(200, 200);
         this.cursor = Cursor.POINTER;
         this.backgroundColor = new Color(300, 100, 50);
-        this.left = 100;
-        this.top = 100;
-        this.z = 1;
+        this.centerOffset = 0;
+        this.middleOffset = 0;
     }
 
     private machine: InteractiveMachine = new InteractiveMachine(this);
 
-    public pressed(x: number, y: number): void {
-        console.log('pressed()', x, y);
-    }
-
     public initial(): void {
         console.log('initial()');
+        this.backgroundColor = new Color(300, 100, 50);
     }
 
     public hover(): void {
         console.log('hover()');
+        this.backgroundColor = new Color(180, 100, 50);
     }
 
-    public triggered(): void {
-        //
+    public pressed(x: number, y: number): void {
+        console.log('pressed()', x, y);
+        this.backgroundColor = new Color(230, 100, 50);
+    }
+
+    public clicked(): void {
+        console.log('clicked()');
     }
 }
 customElements.define(PurpleBox.TAG, PurpleBox);
