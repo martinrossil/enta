@@ -7,14 +7,16 @@ import ITest from './ITest';
 export default class TestView extends ItemRenderer<ITest> {
     public constructor() {
         super();
-        this.percentWidth = 100;
-        this.height = 64;
-        this.padding = 16;
+        // this.percentWidth = 100;
+        this.measureInternalSize = false;
+        // this.height = Math.random() * 100 + 100;
+        // this.padding = 16;
+        this.height = 100; // Math.random() * 200 + 100;
         this.backgroundColor = new Color(212, 100, 50, 0.2);
-        this.addElement(this.nameLabel);
+        // this.addElement(this.nameLabel);
     }
 
-    private _nameLabel!: ILabelElement;
+    /* private _nameLabel!: ILabelElement;
 
     private get nameLabel(): ILabelElement {
         if (!this._nameLabel) {
@@ -29,6 +31,6 @@ export default class TestView extends ItemRenderer<ITest> {
         if (this.data) {
             this.nameLabel.text = this.data.text;
         }
-    }
+    } */
 }
 customElements.define('test-view', TestView);
