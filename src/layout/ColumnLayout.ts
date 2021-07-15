@@ -1,125 +1,183 @@
 import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
-import IDisplayContainer from '../interfaces/core/IDisplayContainer';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
 import IColomnLayout from '../interfaces/layout/IColumnLayout';
+import ISvgElement from '../interfaces/svg/ISvgElement';
+import IDisplayContainer from '../interfaces/core/IDisplayContainer';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
 
 export default class ColumnLayout extends EventDispatcher implements IColomnLayout {
-    public constructor(minColumnWidth = 256, maxColumns = 4, gap = NaN, aspectRatio = NaN) {
+    public constructor(minColumnWidth = 128, maxColumns = 4, gap = 16) {
         super();
         this.name = 'ColumnLayout';
         this.minColumnWidth = minColumnWidth;
         this.maxColumns = maxColumns;
         this.gap = gap;
-        this.aspectRatio = aspectRatio;
     }
 
-    private columns = 0;
-    private elementWidth = 0;
-
-    public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
-        const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
-        this.columns = Math.floor(insideWidth / this.minColumnWidth);
-        if (this.columns === 0) {
-            this.columns = 1;
-        }
-        if (this.columns > this.maxColumns) {
-            this.columns = this.maxColumns;
-        }
-        const insideMinusGaps = insideWidth - this.gap * (this.columns - 1);
-        this.elementWidth = insideMinusGaps / this.columns;
-        if (!isNaN(this.aspectRatio)) {
-            for (const element of elements) {
-                element.externalSize(this.elementWidth, this.elementWidth / this.aspectRatio);
-            }
-        } else {
-            for (const element of elements) {
-                element.externalWidth = this.elementWidth;
-            }
+    public resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const [columnWidth] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
+        for (const element of elements) {
+            element.externalWidth = columnWidth;
         }
     }
 
-    public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+    private getColumnWidthAndCount(width: number, minColumnWidth: number, maxColumns: number, gap: number): [number, number] {
+        if (maxColumns === 1) {
+            return [width, 1];
+        }
+        const widthMinusGaps = width - (maxColumns - 1) * gap;
+        const totalColumnsWidth = minColumnWidth * maxColumns;
+        if (totalColumnsWidth <= widthMinusGaps) {
+            return [widthMinusGaps / maxColumns, maxColumns];
+        }
+        return this.getColumnWidthAndCount(width, minColumnWidth, maxColumns - 1, gap);
+    }
+
+    public layoutChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+        if (elements.length === 0) {
+            return;
+        }
+        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const [columnWidth, columnCount] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
+        if (elements.length <= columnCount) {
+            let currentX = container.paddingLeft;
+            const currentY = container.paddingTop;
+            for (const element of elements) {
+                element.position(currentX, currentY);
+                currentX += this.horizontalGap + columnWidth;
+            }
+            return;
+        }
         let currentColumn = 1;
         let currentX = container.paddingLeft;
         let currentY = container.paddingTop;
         let elementHeight = 0;
         for (const element of elements) {
-            element.position(currentX, currentY);
-            if (this.columns === 1) {
-                currentY += this.verticalGap + element.measuredHeight;
-            } else if (currentColumn === 1) {
-                currentColumn++;
-                currentX += this.horizontalGap + this.elementWidth;
+            if (elementHeight < element.measuredHeight) {
                 elementHeight = element.measuredHeight;
-            } else if (currentColumn < this.columns) {
+            }
+            element.position(currentX, currentY);
+            if (currentColumn < columnCount) {
                 currentColumn++;
-                currentX += this.horizontalGap + this.elementWidth;
-                if (elementHeight < element.measuredHeight) {
-                    elementHeight = element.measuredHeight;
-                }
+                currentX += columnWidth + this.horizontalGap;
             } else {
                 currentColumn = 1;
                 currentX = container.paddingLeft;
-                if (elementHeight < element.measuredHeight) {
-                    elementHeight = element.measuredHeight;
-                }
-                currentY += this.verticalGap + elementHeight;
+                currentY += elementHeight + this.verticalGap;
+                elementHeight = 0;
             }
         }
     }
 
-    public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
-        return [0, 0];
+    private noElementsSize(container: IDisplayContainer): [number, number] {
+        return [container.paddingLeft + container.paddingRight, container.paddingTop + container.paddingBottom];
     }
 
-    public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        return 0;
+    private oneRowSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
+        const elementCount = elements.length;
+        const totalElementsWidth = elementCount * this.minColumnWidth + (elementCount - 1) * this.horizontalGap;
+        const calculatedWidth = container.paddingLeft + totalElementsWidth + container.paddingRight;
+        const highestElementHeight = this.getHighestElementHeightValue(elements);
+        const calculatedHeight = container.paddingTop + highestElementHeight + container.paddingBottom;
+        return [calculatedWidth, calculatedHeight];
     }
 
-    public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
-        const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
-        this.columns = Math.floor(insideWidth / this.minColumnWidth);
-        if (this.columns === 0) {
-            this.columns = 1;
+    public getInternalSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
+        if (elements.length === 0) {
+            return this.noElementsSize(container);
         }
-        if (this.columns > this.maxColumns) {
-            this.columns = this.maxColumns;
+        if (elements.length <= this.maxColumns) {
+            return this.oneRowSize(container, elements);
         }
+        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const [columnWidth, columnCount] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
+        const lastElementIndex = elements.length - 1;
         let currentColumn = 1;
         let currentY = container.paddingTop;
-        let currentRowHeight = 0;
-        const len = elements.length;
-        let element: ILayoutElement;
-        let i = 0;
-        for (i; i < len; i++) {
-            element = elements[i];
-            if (currentRowHeight < element.measuredHeight) {
-                currentRowHeight = element.measuredHeight;
+        let elementHeight = 0;
+        for (const element of elements) {
+            if (elementHeight < element.measuredHeight) {
+                elementHeight = element.measuredHeight;
             }
-            if (currentColumn === this.columns) {
-                currentColumn = 1;
-                currentY = currentY + currentRowHeight + this.verticalGap;
-                currentRowHeight = 0;
-            } else {
+            if (currentColumn < columnCount) {
                 currentColumn++;
+            } else {
+                currentColumn = 1;
+                if (elements.indexOf(element) !== lastElementIndex) {
+                    currentY += elementHeight + this.verticalGap;
+                    elementHeight = 0;
+                }
             }
         }
-        if (i % this.columns !== 0) {
-            return currentY + currentRowHeight + container.paddingBottom;
-        }
-        return currentY - this.verticalGap + container.paddingBottom;
+        const totalElementsWidth = this.maxColumns * this.minColumnWidth + (this.maxColumns - 1) * this.horizontalGap;
+        const calculatedWidth = container.paddingLeft + totalElementsWidth + container.paddingRight;
+        const totalElementsHeight = currentY + elementHeight - container.paddingTop;
+        const calculatedHeight = container.paddingTop + totalElementsHeight + container.paddingBottom;
+        return [calculatedWidth, calculatedHeight];
     }
 
-    private _minColumnWidth = 256;
+    public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+        const lastElementIndex = elements.length - 1;
+        let currentColumn = 1;
+        let currentY = container.paddingTop;
+        let elementHeight = 0;
+        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const [columnWidth, columnCount] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
+        for (const element of elements) {
+            if (elementHeight < element.measuredHeight) {
+                elementHeight = element.measuredHeight;
+            }
+            if (currentColumn < columnCount) {
+                currentColumn++;
+            } else {
+                currentColumn = 1;
+                if (elements.indexOf(element) !== lastElementIndex) {
+                    currentY += elementHeight + this.verticalGap;
+                    elementHeight = 0;
+                }
+            }
+        }
+        const totalElementsHeight = currentY + elementHeight - container.paddingTop;
+        return container.paddingTop + totalElementsHeight + container.paddingBottom;
+    }
+
+    public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+        if (elements.length === 0) {
+            return container.paddingLeft + container.paddingRight;
+        }
+        if (elements.length <= this.maxColumns) {
+            return this.oneRowWidth(container, elements);
+        }
+        const totalElementsWidth = this.maxColumns * this.minColumnWidth + (this.maxColumns - 1) * this.horizontalGap;
+        return container.paddingLeft + totalElementsWidth + container.paddingRight;
+    }
+
+    private oneRowWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+        const elementCount = elements.length;
+        const totalElementsWidth = elementCount * this.minColumnWidth + (elementCount - 1) * this.horizontalGap;
+        return container.paddingLeft + totalElementsWidth + container.paddingRight;
+    }
+
+    private getHighestElementHeightValue(elements: Array<IDisplayElement | ISvgElement>): number {
+        let height = 0;
+        for (const element of elements) {
+            if (height < element.measuredHeight) {
+                height = element.measuredHeight;
+            }
+        }
+        return height;
+    }
+
+    private _minColumnWidth = 128;
 
     public set minColumnWidth(value: number) {
         if (this._minColumnWidth === value) {
             return;
         }
         if ((isNaN(value) || value <= 0)) {
-            if (value !== 256) {
-                this._minColumnWidth = 256;
+            if (value !== 128) {
+                this._minColumnWidth = 128;
                 this.notifyInvalid();
             }
             return;
@@ -153,7 +211,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return this._maxColumns;
     }
 
-    private _gap = 0;
+    private _gap = 16;
 
     public set gap(value: number) {
         if (this._gap === value) {
@@ -178,15 +236,15 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return this._gap;
     }
 
-    private _horizontalGap = 0;
+    private _horizontalGap = 16;
 
     public set horizontalGap(value: number) {
         if (this._horizontalGap === value) {
             return;
         }
         if (isNaN(value) || value < 0) {
-            if (this._horizontalGap !== 0) {
-                this._horizontalGap = 0;
+            if (this._horizontalGap !== 16) {
+                this._horizontalGap = 16;
                 this.notifyInvalid();
             }
             return;
@@ -199,15 +257,15 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return this._horizontalGap;
     }
 
-    private _verticalGap = 0;
+    private _verticalGap = 16;
 
     public set verticalGap(value: number) {
         if (this._verticalGap === value) {
             return;
         }
         if (isNaN(value) || value < 0) {
-            if (this._verticalGap !== 0) {
-                this._verticalGap = 0;
+            if (this._verticalGap !== 16) {
+                this._verticalGap = 16;
                 this.notifyInvalid();
             }
             return;
@@ -218,23 +276,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
 
     public get verticalGap(): number {
         return this._verticalGap;
-    }
-
-    private _aspectRatio = NaN;
-
-    public set aspectRatio(value: number) {
-        if (isNaN(this._aspectRatio) && isNaN(value)) {
-            return;
-        }
-        if (this._aspectRatio === value) {
-            return;
-        }
-        this._aspectRatio = value;
-        this.notifyInvalid();
-    }
-
-    public get aspectRatio(): number {
-        return this._aspectRatio;
     }
 
     private notifyInvalid(): void {
