@@ -25,7 +25,6 @@ export { default as ShadowFilter } from './filters/ShadowFilter';
 export { default as InteractiveMachine } from './fsm/InteractiveMachine';
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
-export { default as TouchMachine } from './fsm/TouchMachine';
 
 export { default as IImageElement } from './interfaces/components/IImageElement';
 export { default as IItemRenderer } from './interfaces/components/IItemRenderer';
@@ -50,6 +49,7 @@ export { default as IFilter } from './interfaces/filters/IFilter';
 export { default as IShadowFilter } from './interfaces/filters/IShadowFilter';
 
 export { default as IInteractive } from './interfaces/fsm/IInteractive';
+export { default as IMachine } from './interfaces/fsm/IMachine';
 export { default as IState } from './interfaces/fsm/IState';
 
 export { default as IColumnLayout } from './interfaces/layout/IColumnLayout';
