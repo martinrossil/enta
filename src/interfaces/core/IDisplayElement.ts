@@ -1,4 +1,3 @@
-import { ILayoutElement } from '../..';
 import { ClipType } from '../../types/ClipType';
 import IFilter from '../filters/IFilter';
 import IColor from '../vo/IColor';
@@ -15,5 +14,8 @@ export default interface IDisplayElement extends ISizeElement {
     clip: ClipType;
     clipX: ClipType;
     clipY: ClipType;
+    visible: boolean;
+    enabled: boolean;
+    cursor: string;
     addFilter(filter: IFilter): void;
 }
