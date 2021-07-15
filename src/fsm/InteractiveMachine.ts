@@ -6,78 +6,78 @@ import State from './State';
 export default class InteractiveMachine extends Machine<IInteractive> {
     public constructor(host: IInteractive) {
         super(host);
-        host.addEventListener('mouseover', this.send);
-        host.addEventListener('touchstart', this.send);
         this.initial.on = host.initial.bind(host);
-        this.initial.addTransition('mouseover', this.mouseOver);
-        /*
-        this.initial.addTransition('mousedown', this.pressed);
-        this.initial.addTransition('touchstart', this.touchStart);
+        this.initial.addTransition('mouseover', this.hoverState);
+        this.initial.addTransition('touchstart', this.pressedState);
+        host.addEventListener('DELAY_COMPLETE', this.send);
         host.addEventListener('mouseover', this.send);
-        host.addEventListener('mouseover', this.send);
+        host.addEventListener('mousedown', this.send);
+        host.addEventListener('mouseleave', this.send);
         host.addEventListener('mouseup', this.send);
-         */
+        host.addEventListener('touchstart', this.send, { passive: true });
+        host.addEventListener('touchend', this.send, { passive: true });
+        host.addEventListener('click', this.send);
     }
 
-    private _mouseOver!: IState;
-    private get mouseOver(): IState {
-        if (!this._mouseOver) {
-            this._mouseOver = new State('MouseOver');
-            this._mouseOver.addTransition('mouseleave', this.initial);
-            this._mouseOver.addTransition('mousedown', this.pressed);
-            this._mouseOver.entry = this.mouseOverEntry.bind(this);
+    private _hoverState!: IState;
+    private get hoverState(): IState {
+        if (!this._hoverState) {
+            this._hoverState = new State('Hover');
+            this._hoverState.on = this.hover.bind(this);
+            this._hoverState.addTransition('mouseleave', this.initial);
+            this._hoverState.addTransition('mousedown', this.pressedState);
+            this._hoverState.addTransition('click', this.clickedState);
+            this._hoverState.addTransition('DELAY_COMPLETE', this.initial);
         }
-        return this._mouseOver;
+        return this._hoverState;
     }
 
-    private mouseOverEntry(e: Event): void {
-        this.host.removeEventListener('touchstart', this.send);
-        this.host.addEventListener('mouseleave', this.send);
-        this.host.addEventListener('mousedown', this.send);
+    private _pressedState!: IState;
+    private get pressedState(): IState {
+        if (!this._pressedState) {
+            this._pressedState = new State('Pressed');
+            this._pressedState.on = this.pressed.bind(this);
+            this._pressedState.addTransition('mouseup', this.hoverState);
+            this._pressedState.addTransition('mouseleave', this.initial);
+            this._pressedState.addTransition('touchend', this.delayState);
+        }
+        return this._pressedState;
+    }
+
+    private _clickedState!: IState;
+    private get clickedState(): IState {
+        if (!this._clickedState) {
+            this._clickedState = new State('Clicked');
+            this._clickedState.next = this.hoverState;
+        }
+        return this._clickedState;
+    }
+
+    private _delayState!: IState;
+    private get delayState(): IState {
+        if (!this._delayState) {
+            this._delayState = new State('Delay');
+            this._delayState.on = this.delay.bind(this);
+            this._delayState.addTransition('DELAY_COMPLETE', this.initial);
+            this._delayState.addTransition('click', this.clickedState);
+        }
+        return this._delayState;
+    }
+
+    private delay(): void {
+        setTimeout(() => {
+            this.host.dispatch('DELAY_COMPLETE', null, false);
+        }, 0);
+    }
+
+    private hover(): void {
         this.host.hover();
     }
 
-    private _pressed!: IState;
-    private get pressed(): IState {
-        if (!this._pressed) {
-            this._pressed = new State('Pressed');
-            this._pressed.addTransition('mouseleave', this.initial);
-            this._pressed.addTransition('mouseup', this.mouseOver);
-            this._pressed.on = this.onPressed.bind(this);
-        }
-        return this._pressed;
-    }
-
-    private onPressed(e: Event) {
+    private pressed(e: Event) {
         const [x, y] = this.getTouchPoint(e);
         this.host.pressed(x, y);
     }
-
-    private _clicked!: IState;
-    private get clicked(): IState {
-        if (!this._clicked) {
-            this._clicked = new State('Clicked');
-            // this._clicked.on = this.host.clicked.bind(this.host);
-            this._clicked.next = this.mouseOver;
-        }
-        return this._clicked;
-    }
-
-    /* private _touchStart!: IState;
-    private get touchStart(): IState {
-        if (!this._touchStart) {
-            this._touchStart = new State('TouchStart');
-            this._touchStart.addTransition('touchend', this.initial);
-            this._touchStart.entry = this.entryTouchStart.bind(this);
-            this._touchStart.on = this.onPressed.bind(this);
-        }
-        return this._touchStart;
-    }
-
-    private entryTouchStart(): void {
-        console.log('entryTouchStart()');
-        window.addEventListener('touchend', this.send, { passive: true, once: true });
-    } */
 
     private getTouchPoint(e: Event): [number, number] {
         if (e instanceof MouseEvent) {
@@ -90,7 +90,7 @@ export default class InteractiveMachine extends Machine<IInteractive> {
             if (e.changedTouches && e.changedTouches.length > 0) {
                 const touch: Touch = e.changedTouches[0];
                 const rect: DOMRect = this.host.getBoundingClientRect();
-                return [touch.pageX - rect.x, touch.pageY - rect.y];
+                return [Math.ceil(touch.pageX - rect.x), Math.ceil(touch.pageY - rect.y)];
             }
         }
         return [0, 0];

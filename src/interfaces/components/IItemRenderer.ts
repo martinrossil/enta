@@ -6,5 +6,5 @@ export default interface IItemRenderer<Item> extends IDisplayElement {
     initial(): void;
     hover(): void;
     pressed(x: number, y: number): void;
-    triggered(): void;
+    clicked(): void;
 }

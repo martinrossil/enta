@@ -1,6 +1,6 @@
 import Strings from '../consts/Strings';
 import DisplayContainer from '../core/DisplayContainer';
-import TouchMachine from '../fsm/TouchMachine';
+import InteractiveMachine from '../fsm/InteractiveMachine';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
 
 export default class ItemRenderer<Item> extends DisplayContainer implements IItemRenderer<Item> {
@@ -9,7 +9,7 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
         this.name = 'ListItemRenderer';
     }
 
-    private machine: TouchMachine = new TouchMachine(this);
+    private machine: InteractiveMachine = new InteractiveMachine(this);
 
     public initial(): void {
         // override
@@ -23,7 +23,7 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
         // override
     }
 
-    public triggered(): void {
+    public clicked(): void {
         this.dispatch(Strings.ITEM_RENDERER_TRIGGERED, this.data, true);
     }
 
