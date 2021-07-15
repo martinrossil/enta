@@ -1,34 +1,35 @@
+import IMachine from '../interfaces/fsm/IMachine';
 import IState from '../interfaces/fsm/IState';
 import State from './State';
 
-export default class Machine<Host> {
+export default class Machine<Host> implements IMachine {
     protected host: Host;
-    protected current: IState;
+    public currentState: IState;
     protected readonly initial: IState = new State('initial');
     public constructor(host: Host) {
         this.host = host;
-        this.current = this.initial;
+        this.currentState = this.initial;
         this.send = this.send.bind(this);
     }
 
-    protected send(e: Event): void {
-        this.changeState(this.current.getState(e.type), e);
+    public send(e: Event): void {
+        this.changeState(this.currentState.getState(e.type), e);
     }
 
     private changeState(state: IState, e: Event) {
-        if (this.current !== state) {
-            if (this.current.exit) {
-                this.current.exit.call(this.host, e);
+        if (this.currentState !== state) {
+            if (this.currentState.exit) {
+                this.currentState.exit.call(this.host, e);
             }
-            this.current = state;
-            if (this.current.entry) {
-                this.current.entry.call(this.host, e);
+            this.currentState = state;
+            if (this.currentState.entry) {
+                this.currentState.entry.call(this.host, e);
             }
-            if (this.current.on) {
-                this.current.on.call(this.host, e);
+            if (this.currentState.on) {
+                this.currentState.on.call(this.host, e);
             }
-            if (this.current.next) {
-                this.changeState(this.current.next, e);
+            if (this.currentState.next) {
+                this.changeState(this.currentState.next, e);
             }
         }
     }
