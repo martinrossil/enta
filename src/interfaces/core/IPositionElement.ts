@@ -5,7 +5,8 @@ export default interface IPositionElement extends IBaseElement {
     right: number;
     bottom: number;
     left: number;
-    horizontalCenter: number;
-    verticalMiddle: number;
+    centerOffset: number;
+    middleOffset: number;
     z: number;
+    position(x: number, y: number): void;
 }

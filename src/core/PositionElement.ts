@@ -1,9 +1,8 @@
 import Strings from '../consts/Strings';
 import IPositionElement from '../interfaces/core/IPositionElement';
-import IPositionLayoutElement from '../interfaces/core/IPositionLayoutElement';
 import BaseElement from './BaseElement';
 
-export default class PositionElement extends BaseElement implements IPositionElement, IPositionLayoutElement {
+export default class PositionElement extends BaseElement implements IPositionElement {
     public constructor() {
         super();
         this.name = 'PositionElement';
@@ -146,38 +145,38 @@ export default class PositionElement extends BaseElement implements IPositionEle
         return this._left;
     }
 
-    private _horizontalCenter = NaN;
+    private _centerOffset = NaN;
 
-    public set horizontalCenter(value: number) {
-        if (isNaN(this._horizontalCenter) && isNaN(value)) {
+    public set centerOffset(value: number) {
+        if (isNaN(this._centerOffset) && isNaN(value)) {
             return;
         }
-        if (this._horizontalCenter === value) {
+        if (this._centerOffset === value) {
             return;
         }
-        this._horizontalCenter = value;
+        this._centerOffset = value;
         this.notifyInvalid();
     }
 
-    public get horizontalCenter(): number {
-        return this._horizontalCenter;
+    public get centerOffset(): number {
+        return this._centerOffset;
     }
 
-    private _verticalMiddle = NaN;
+    private _middleOffset = NaN;
 
-    public set verticalMiddle(value: number) {
-        if (isNaN(this._verticalMiddle) && isNaN(value)) {
+    public set middleOffset(value: number) {
+        if (isNaN(this._middleOffset) && isNaN(value)) {
             return;
         }
-        if (this._verticalMiddle === value) {
+        if (this._middleOffset === value) {
             return;
         }
-        this._verticalMiddle = value;
+        this._middleOffset = value;
         this.notifyInvalid();
     }
 
-    public get verticalMiddle(): number {
-        return this._verticalMiddle;
+    public get middleOffset(): number {
+        return this._middleOffset;
     }
 
     private updateTransform(): void {
