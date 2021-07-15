@@ -1,14 +1,14 @@
 import ILayout from '../layout/ILayout';
+import ISvgElement from '../svg/ISvgElement';
 import IDisplayElement from './IDisplayElement';
-import IElement from './IElement';
 
 export default interface IDisplayContainer extends IDisplayElement {
-    addElement(element: IElement): void;
-    addElementAt(element: IElement, index: number): void;
-    addElements(elements: Array<IElement>): void;
-    removeElement(element: IElement): void;
+    addElement(element: IDisplayElement | ISvgElement): void;
+    addElementAt(element: IDisplayElement | ISvgElement, index: number): void;
+    addElements(elements: Array<IDisplayElement | ISvgElement>): void;
+    removeElement(element: IDisplayElement | ISvgElement): void;
+    containsElement(element: IDisplayElement | ISvgElement): boolean;
     removeElements(): void;
-    containsElement(element: IElement): boolean;
     padding: number;
     paddingLeft: number;
     paddingTop: number;

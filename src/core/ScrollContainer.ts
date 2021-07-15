@@ -1,7 +1,9 @@
 import Strings from '../consts/Strings';
-import IElement from '../interfaces/core/IElement';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
 import IScrollContainer from '../interfaces/core/IScrollContainer';
 import ILayout from '../interfaces/layout/ILayout';
+import ISvgElement from '../interfaces/svg/ISvgElement';
+import Color from '../vo/Color';
 import DisplayContainer from './DisplayContainer';
 import DisplayElement from './DisplayElement';
 
@@ -90,28 +92,26 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     private get elementsContainer(): DisplayContainer {
         if (!this._elementsContainer) {
             this._elementsContainer = new DisplayContainer();
-            // setting percentWidth/height will prevent internalSize validation
-            this._elementsContainer.percentWidth = 100;
-            this._elementsContainer.percentHeight = 100;
+            this._elementsContainer.backgroundColor = new Color(180, 100, 50, 0.2);
             // this will boost scroll performance, no repaints
             this._elementsContainer.style.willChange = Strings.TRANSFORM;
         }
         return this._elementsContainer;
     }
 
-    public addElement(element: IElement): void {
+    public addElement(element: IDisplayElement | ISvgElement): void {
         this.elementsContainer.addElement(element);
     }
 
-    public addElementAt(element: IElement, index: number): void {
+    public addElementAt(element: IDisplayElement | ISvgElement, index: number): void {
         this.elementsContainer.addElementAt(element, index);
     }
 
-    public addElements(elements: IElement[]): void {
+    public addElements(elements: Array<IDisplayElement | ISvgElement>): void {
         this.elementsContainer.addElements(elements);
     }
 
-    public removeElement(element: IElement): void {
+    public removeElement(element: IDisplayElement | ISvgElement): void {
         this.elementsContainer.removeElement(element);
     }
 
@@ -119,7 +119,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this.elementsContainer.removeElements();
     }
 
-    public containsElement(element: IElement): boolean {
+    public containsElement(element: IDisplayElement | ISvgElement): boolean {
         return this.elementsContainer.contains(element as unknown as Node);
     }
 
@@ -132,8 +132,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._scrollEnabled = value;
         this._horizontalScrollEnabled = value;
         this._verticalScrollEnabled = value;
-        this.elementsContainer.percentWidth = NaN;
-        this.elementsContainer.percentHeight = NaN;
         this.outerElement.clip = this.scrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
@@ -151,7 +149,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._horizontalScrollEnabled = value;
         this._scrollEnabled = value && this.verticalScrollEnabled;
         this.outerElement.clipX = this.horizontalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
-        this.elementsContainer.percentWidth = this.horizontalScrollEnabled ? NaN : 100;
         this.invalidate();
     }
 
@@ -168,7 +165,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._verticalScrollEnabled = value;
         this._scrollEnabled = value && this._horizontalScrollEnabled;
         this.outerElement.clipY = this.verticalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
-        this.elementsContainer.percentHeight = this.verticalScrollEnabled ? NaN : 100;
         this.invalidate();
     }
 

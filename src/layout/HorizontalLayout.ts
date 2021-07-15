@@ -1,10 +1,11 @@
 import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
-import IDisplayContainer from '../interfaces/core/IDisplayContainer';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
 import IHorizontalLayout from '../interfaces/layout/IHorizontalLayout';
 import { HorizontalAlign } from '../types/HorizontalAlign';
 import { VerticalAlign } from '../types/VerticalAlign';
+import ISvgElement from '../interfaces/svg/ISvgElement';
+import IDisplayContainer from '../interfaces/core/IDisplayContainer';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
 
 export default class HorizontalLayout extends EventDispatcher implements IHorizontalLayout {
     public constructor(horizontalGap = 0, horizontalAlign: HorizontalAlign = Strings.LEFT, verticalAlign: VerticalAlign = Strings.TOP) {
@@ -15,9 +16,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         this.verticalAlign = verticalAlign;
     }
 
-    public resizeChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+    public resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
         const h = container.measuredHeight - container.paddingTop - container.paddingBottom;
-        if (container.hasWidth) {
+        if (!isNaN(container.width)) {
             const ratio = this.getPixelPercentWidthRatio(container, elements);
             for (const element of elements) {
                 if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
@@ -37,7 +38,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private getPixelPercentWidthRatio(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
+    private getPixelPercentWidthRatio(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let widthSum = 0;
         let percentWidthSum = 0;
         for (const element of elements) {
@@ -59,7 +60,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    public layoutChildren(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+    public layoutChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
         if (this.verticalAlign === Strings.TOP) {
             this.layoutElementsTop(container, elements);
         } else if (this.verticalAlign === Strings.BOTTOM) {
@@ -69,7 +70,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private layoutElementsTop(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+    private layoutElementsTop(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
         let x = this.getHorizontalXStartValue(container, elements);
         for (const element of elements) {
             element.position(x, container.paddingTop);
@@ -77,7 +78,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private layoutElementsBottom(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+    private layoutElementsBottom(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
@@ -87,7 +88,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private layoutElementsMiddle(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): void {
+    private layoutElementsMiddle(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
@@ -97,8 +98,8 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private getHorizontalXStartValue(container: IDisplayContainer & ILayoutElement, elements: ILayoutElement[]): number {
-        if (!container.hasWidth) {
+    private getHorizontalXStartValue(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+        if (isNaN(container.width)) {
             return container.paddingLeft;
         }
         let x = container.paddingLeft
@@ -118,7 +119,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return x;
     }
 
-    public getInternalSize(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): [number, number] {
+    public getInternalSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -132,7 +133,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return [width, height];
     }
 
-    public getInternalWidth(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
+    public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let width = 0;
         for (const element of elements) {
             width += element.measuredWidth + this.horizontalGap;
@@ -140,7 +141,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return container.paddingLeft + width - this.horizontalGap + container.paddingRight;
     }
 
-    public getInternalHeight(container: IDisplayContainer & ILayoutElement, elements: Array<ILayoutElement>): number {
+    public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let height = 0;
         for (const element of elements) {
             if (height < element.measuredHeight) {

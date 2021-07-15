@@ -1,6 +1,6 @@
+import { CornerType } from '../types/CornerType';
 import Strings from '../consts/Strings';
 import ISurfaceElement from '../interfaces/svg/ISurfaceElement';
-import { CornerType } from '../types/CornerType';
 import PathElement from './PathElement';
 
 export default class SurfaceElement extends PathElement implements ISurfaceElement {

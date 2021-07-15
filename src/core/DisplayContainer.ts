@@ -1,10 +1,10 @@
 import Strings from '../consts/Strings';
 import IDisplayContainer from '../interfaces/core/IDisplayContainer';
-import IElement from '../interfaces/core/IElement';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
 import ILayout from '../interfaces/layout/ILayout';
 import AnchorLayout from '../layout/AnchorLayout';
-import DisplayElement from './DisplayElement';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
+import DisplayElement from '../core/DisplayElement';
+import ISvgElement from '../interfaces/svg/ISvgElement';
 
 export default class DisplayContainer extends DisplayElement implements IDisplayContainer {
     public constructor() {
@@ -49,39 +49,39 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidate();
     }
 
-    protected elements: Array<ILayoutElement> = [];
+    protected elements: Array<IDisplayElement | ISvgElement> = [];
 
-    public addElement(element: IElement): void {
-        this.elements.push(element as unknown as ILayoutElement);
+    public addElement(element: IDisplayElement | ISvgElement): void {
+        this.elements.push(element);
         this.appendChild(element as unknown as Node);
         this.invalidate();
     }
 
-    public addElementAt(element: IElement, index: number): void {
+    public addElementAt(element: IDisplayElement | ISvgElement, index: number): void {
         if (this.elements[index]) {
             const beforeElement: Node = this.elements[index] as unknown as Node;
-            this.elements.splice(index, 0, element as unknown as ILayoutElement);
+            this.elements.splice(index, 0, element);
             this.insertBefore(element as unknown as Node, beforeElement);
             this.invalidate();
             return;
         }
-        this.elements.push(element as unknown as ILayoutElement);
+        this.elements.push(element);
         this.appendChild(element as unknown as Node);
         this.invalidate();
     }
 
-    public addElements(elements: Array<IElement>): void {
+    public addElements(elements: Array<IDisplayElement | ISvgElement>): void {
         const frag: DocumentFragment = document.createDocumentFragment();
         for (const element of elements) {
-            this.elements.push(element as unknown as ILayoutElement);
+            this.elements.push(element);
             frag.appendChild(element as unknown as Node);
         }
         this.appendChild(frag);
         this.invalidate();
     }
 
-    public removeElement(element: IElement): void {
-        const start: number = this.elements.indexOf(element as unknown as ILayoutElement);
+    public removeElement(element: IDisplayElement | ISvgElement): void {
+        const start: number = this.elements.indexOf(element);
         if (start !== -1) {
             this.elements.splice(start, 1);
             this.removeChild(element as unknown as Node);
@@ -99,7 +99,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         }
     }
 
-    public containsElement(element: IElement): boolean {
+    public containsElement(element: IDisplayElement | ISvgElement): boolean {
         return this.contains(element as unknown as Node);
     }
 

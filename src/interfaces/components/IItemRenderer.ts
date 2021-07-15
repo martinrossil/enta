@@ -1,6 +1,6 @@
-import IDisplayContainer from '../core/IDisplayContainer';
+import IDisplayElement from '../core/IDisplayElement';
 
-export default interface IItemRenderer<Item> extends IDisplayContainer {
+export default interface IItemRenderer<Item> extends IDisplayElement {
     data: Item | null;
     selected: boolean;
     initial(): void;

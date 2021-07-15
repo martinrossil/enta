@@ -1,3 +1,5 @@
+import { StrokeLineCap } from '../types/StrokeLineCap';
+import { StrokeLineJoin } from '../types/StrokeLineJoin';
 import IEventListener from '../interfaces/event/IEventListener';
 import IPathElement from '../interfaces/svg/IPathElement';
 import IColor from '../interfaces/vo/IColor';
@@ -6,8 +8,6 @@ import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
 import SvgElement from './SvgElement';
 import Strings from '../consts/Strings';
-import { StrokeLineCap } from '../types/StrokeLineCap';
-import { StrokeLineJoin } from '../types/StrokeLineJoin';
 
 export default class PathElement extends SvgElement implements IPathElement {
     public constructor() {
@@ -370,3 +370,4 @@ export default class PathElement extends SvgElement implements IPathElement {
         return this._strokeLineJoin;
     }
 }
+customElements.define('path-element', PathElement);

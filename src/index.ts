@@ -35,13 +35,9 @@ export { default as IScreenNavigator } from './interfaces/components/IScreenNavi
 export { default as IBaseElement } from './interfaces/core/IBaseElement';
 export { default as IDisplayContainer } from './interfaces/core/IDisplayContainer';
 export { default as IDisplayElement } from './interfaces/core/IDisplayElement';
-export { default as IElement } from './interfaces/core/IElement';
-export { default as ILayoutElement } from './interfaces/core/ILayoutElement';
 export { default as IPositionElement } from './interfaces/core/IPositionElement';
-export { default as IPositionLayoutElement } from './interfaces/core/IPositionLayoutElement';
 export { default as IScrollContainer } from './interfaces/core/IScrollContainer';
 export { default as ISizeElement } from './interfaces/core/ISizeElement';
-export { default as ISizeLayoutElement } from './interfaces/core/ISizeLayoutElement';
 
 export { default as IArrayCollection } from './interfaces/data/IArrayCollection';
 
@@ -56,7 +52,6 @@ export { default as IShadowFilter } from './interfaces/filters/IShadowFilter';
 export { default as IInteractive } from './interfaces/fsm/IInteractive';
 export { default as IState } from './interfaces/fsm/IState';
 
-export { default as IAnchorLayout } from './interfaces/layout/IAnchorLayout';
 export { default as IColumnLayout } from './interfaces/layout/IColumnLayout';
 export { default as IHorizontalLayout } from './interfaces/layout/IHorizontalLayout';
 export { default as ILayout } from './interfaces/layout/ILayout';
