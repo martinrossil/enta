@@ -92,7 +92,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     private get elementsContainer(): DisplayContainer {
         if (!this._elementsContainer) {
             this._elementsContainer = new DisplayContainer();
-            this._elementsContainer.backgroundColor = new Color(180, 100, 50, 0.2);
             // this will boost scroll performance, no repaints
             this._elementsContainer.style.willChange = Strings.TRANSFORM;
         }
