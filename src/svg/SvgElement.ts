@@ -1,12 +1,12 @@
-import { ILayoutElement } from '..';
 import Strings from '../consts/Strings';
-import SizeElement from '../core/SizeElement';
 import BlurFilter from '../filters/BlurFilter';
 import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 import IRectangle from '../interfaces/vo/IRectangle';
+import SizeElement from '../core/SizeElement';
+import Cursor from '../consts/Cursor';
 
-export default class SvgElement extends SizeElement implements ISvgElement, ILayoutElement {
+export default class SvgElement extends SizeElement implements ISvgElement {
     public constructor() {
         super();
         this.name = 'SvgElement';
@@ -77,5 +77,57 @@ export default class SvgElement extends SizeElement implements ISvgElement, ILay
 
     public get viewBox(): IRectangle | null {
         return this._viewBox;
+    }
+
+    private _visible = true;
+
+    public set visible(value: boolean) {
+        if (this._visible === value) {
+            return;
+        }
+        this._visible = value;
+        if (this._visible) {
+            this.style.visibility = '';
+            return;
+        }
+        this.style.visibility = Strings.HIDDEN;
+    }
+
+    public get visible(): boolean {
+        return this._visible;
+    }
+
+    private _enabled = true;
+
+    public set enabled(value: boolean) {
+        if (this._enabled === value) {
+            return;
+        }
+        this._enabled = value;
+        if (value) {
+            this.style.pointerEvents = '';
+            this.style.userSelect = Strings.AUTO;
+        } else {
+            this.style.pointerEvents = Strings.NONE;
+            this.style.userSelect = Strings.NONE;
+        }
+    }
+
+    public get enabled(): boolean {
+        return this._enabled;
+    }
+
+    private _cursor: string = Cursor.NONE;
+
+    public set cursor(value: string) {
+        if (this._cursor === value) {
+            return;
+        }
+        this._cursor = value;
+        this.style.cursor = value;
+    }
+
+    public get cursor(): string {
+        return this._cursor;
     }
 }

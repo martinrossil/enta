@@ -1,16 +1,16 @@
+import { ClipType } from '../types/ClipType';
 import Strings from '../consts/Strings';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
-import IElement from '../interfaces/core/IElement';
 import IFilter from '../interfaces/filters/IFilter';
 import IColor from '../interfaces/vo/IColor';
 import ILinearGradient from '../interfaces/vo/ILinearGradient';
-import { ClipType } from '../types/ClipType';
 import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
 import SizeElement from './SizeElement';
+import Cursor from '../consts/Cursor';
 
-export default class DisplayElement extends SizeElement implements IDisplayElement, IElement {
+export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {
         super();
         this.name = 'DisplayElement';
@@ -256,6 +256,58 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
 
     public get clipY(): ClipType {
         return this._clipY;
+    }
+
+    private _visible = true;
+
+    public set visible(value: boolean) {
+        if (this._visible === value) {
+            return;
+        }
+        this._visible = value;
+        if (this._visible) {
+            this.style.visibility = '';
+            return;
+        }
+        this.style.visibility = Strings.HIDDEN;
+    }
+
+    public get visible(): boolean {
+        return this._visible;
+    }
+
+    private _enabled = true;
+
+    public set enabled(value: boolean) {
+        if (this._enabled === value) {
+            return;
+        }
+        this._enabled = value;
+        if (value) {
+            this.style.pointerEvents = '';
+            this.style.userSelect = Strings.AUTO;
+        } else {
+            this.style.pointerEvents = Strings.NONE;
+            this.style.userSelect = Strings.NONE;
+        }
+    }
+
+    public get enabled(): boolean {
+        return this._enabled;
+    }
+
+    private _cursor: string = Cursor.NONE;
+
+    public set cursor(value: string) {
+        if (this._cursor === value) {
+            return;
+        }
+        this._cursor = value;
+        this.style.cursor = value;
+    }
+
+    public get cursor(): string {
+        return this._cursor;
     }
 }
 customElements.define('enta-de', DisplayElement);
