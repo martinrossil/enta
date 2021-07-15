@@ -1,6 +1,7 @@
 import DisplayContainer from '../core/DisplayContainer';
 import IScreenNavigator from '../interfaces/components/IScreenNavigator';
-import IBaseElement from '../interfaces/core/IBaseElement';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
+import ISvgElement from '../interfaces/svg/ISvgElement';
 
 export default class ScreenNavigator extends DisplayContainer implements IScreenNavigator {
     public constructor() {
@@ -10,7 +11,7 @@ export default class ScreenNavigator extends DisplayContainer implements IScreen
 
     private updateScreens(): void {
         for (let i = 0; i < this.elements.length; i++) {
-            const screen: IBaseElement = this.elements[i] as unknown as IBaseElement;
+            const screen: IDisplayElement | ISvgElement = this.elements[i];
             screen.visible = this.screenIndex === i;
         }
     }
