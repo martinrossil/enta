@@ -48,6 +48,7 @@ export default class InteractiveMachine extends Machine<IInteractive> {
     private get clickedState(): IState {
         if (!this._clickedState) {
             this._clickedState = new State('Clicked');
+            this._clickedState.on = this.clicked.bind(this);
             this._clickedState.next = this.hoverState;
         }
         return this._clickedState;
@@ -77,6 +78,10 @@ export default class InteractiveMachine extends Machine<IInteractive> {
     private pressed(e: Event) {
         const [x, y] = this.getTouchPoint(e);
         this.host.pressed(x, y);
+    }
+
+    private clicked(): void {
+        this.host.clicked();
     }
 
     private getTouchPoint(e: Event): [number, number] {
