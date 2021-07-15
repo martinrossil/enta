@@ -6,5 +6,4 @@ export default interface IColomnLayout extends ILayout {
     verticalGap: number;
     minColumnWidth: number;
     maxColumns: number;
-    aspectRatio: number;
 }
