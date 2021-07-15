@@ -1,15 +1,13 @@
 import ApplicationElement from './core/ApplicationElement';
-import ColumnLayout from './layout/ColumnLayout';
-import GreenBox from './test/GreenBox';
-import PurpleBox from './test/PurpleBox';
-import RedBox from './test/RedBox';
+import TestList from './test/TestList';
 
 export default class EntaDev extends ApplicationElement {
     public static TAG = 'enta-dev';
     public constructor() {
         super();
         this.name = EntaDev.TAG;
-        this.addElements([new PurpleBox(), new RedBox(), new GreenBox()]);
+        this.padding = 20;
+        this.addElement(new TestList());
     }
 }
 customElements.define(EntaDev.TAG, EntaDev);
