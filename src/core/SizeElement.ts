@@ -1,9 +1,8 @@
 import Strings from '../consts/Strings';
 import ISizeElement from '../interfaces/core/ISizeElement';
-import ISizeLayoutElement from '../interfaces/core/ISizeLayoutElement';
 import PositionElement from './PositionElement';
 
-export default class SizeElement extends PositionElement implements ISizeElement, ISizeLayoutElement {
+export default class SizeElement extends PositionElement implements ISizeElement {
     public constructor() {
         super();
         this.name = 'SizeElement';
@@ -50,16 +49,40 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public externalSize(width: number, height: number): void {
         let widthChanged = false;
-        if (isNaN(this.width) && this._externalWidth !== width) {
-            this._externalWidth = width;
-            this.actualWidth = width;
-            widthChanged = true;
+        if (isNaN(this.width)) {
+            if (isNaN(this.externalWidth) && !isNaN(width)) {
+                this._externalWidth = width;
+                this.actualWidth = width;
+                widthChanged = true;
+            } else if (!isNaN(this.externalWidth) && isNaN(width)) {
+                this._externalWidth = width;
+                this.actualWidth = 0;
+                widthChanged = true;
+            } else if (!isNaN(this.externalWidth) && !isNaN(width)) {
+                if (this.externalWidth !== width) {
+                    this._externalWidth = width;
+                    this.actualWidth = width;
+                    widthChanged = true;
+                }
+            }
         }
         let heightChanged = false;
-        if (isNaN(this.height) && this._externalHeight !== height) {
-            this._externalHeight = height;
-            this.actualHeight = height;
-            heightChanged = true;
+        if (isNaN(this.height)) {
+            if (isNaN(this.externalHeight) && !isNaN(height)) {
+                this._externalHeight = height;
+                this.actualHeight = height;
+                heightChanged = true;
+            } else if (!isNaN(this.externalHeight) && isNaN(height)) {
+                this._externalHeight = height;
+                this.actualHeight = 0;
+                heightChanged = true;
+            } else if (!isNaN(this.externalHeight) && !isNaN(height)) {
+                if (this.externalHeight !== height) {
+                    this._externalHeight = height;
+                    this.actualHeight = height;
+                    heightChanged = true;
+                }
+            }
         }
         if (widthChanged || heightChanged) {
             this.invalidate();
@@ -324,31 +347,75 @@ export default class SizeElement extends PositionElement implements ISizeElement
         return this.actualHeight;
     }
 
-    public get hasWidth(): boolean {
-        return !isNaN(this.width) || !isNaN(this.percentWidth);
+    public set measureInternalSize(value: boolean) {
+        let measureInternalWidthChanged = false;
+        let measureInternalHeightChanged = false;
+        if (this._measureInternalWidth !== value) {
+            this._measureInternalWidth = value;
+            measureInternalWidthChanged = true;
+        }
+        if (this._measureInternalHeight !== value) {
+            this._measureInternalHeight = value;
+            measureInternalHeightChanged = true;
+        }
+        if (measureInternalWidthChanged || measureInternalHeightChanged) {
+            this.invalidate();
+        }
     }
 
-    public get hasHeight(): boolean {
-        return !isNaN(this.height) || !isNaN(this.percentHeight);
+    public get measureInternalSize(): boolean {
+        return this.measureInternalWidth && this.measureInternalHeight;
     }
 
-    public get hasSize(): boolean {
-        return this.hasWidth && this.hasHeight;
+    private _measureInternalWidth = true;
+
+    public set measureInternalWidth(value: boolean) {
+        if (this._measureInternalWidth === value) {
+            return;
+        }
+        this._measureInternalWidth = value;
+        this.invalidate();
+    }
+
+    public get measureInternalWidth(): boolean {
+        return this._measureInternalWidth;
+    }
+
+    private _measureInternalHeight = true;
+
+    public set measureInternalHeight(value: boolean) {
+        if (this._measureInternalHeight === value) {
+            return;
+        }
+        this._measureInternalHeight = value;
+        this.invalidate();
+    }
+
+    public get measureInternalHeight(): boolean {
+        return this._measureInternalHeight;
     }
 
     protected invalidateInternalSize(): void {
-        if (this.hasSize) {
+        if (!isNaN(this.width) && !isNaN(this.height)) {
             return;
         }
-        if (!this.hasWidth && !this.hasHeight) {
+        let updateWidth = false;
+        let updateHeight = false;
+        if (isNaN(this.width) && this.measureInternalWidth) {
+            updateWidth = true;
+        }
+        if (isNaN(this.height) && this.measureInternalHeight) {
+            updateHeight = true;
+        }
+        if (updateWidth && updateHeight) {
             this.updateInternalSize();
             return;
         }
-        if (!this.hasWidth && this.hasHeight) {
+        if (updateWidth && !updateHeight) {
             this.updateInternalWidth();
             return;
         }
-        if (this.hasWidth && !this.hasHeight) {
+        if (!updateWidth && updateHeight) {
             this.updateInternalHeight();
         }
     }
