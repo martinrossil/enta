@@ -61,8 +61,8 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
         const trc = tlc;
         const brc = tlc;
         const blc = tlc;
-        const w = this.measuredWidth;
-        const h = this.measuredHeight;
+        const w = this.actualWidth;
+        const h = this.actualHeight;
         let d = '';
         d += 'M ' + tlc + ' 0 ';
         d += 'L ' + (w - trc) + ' 0 ';
@@ -82,8 +82,8 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
         const trc = tlc;
         const brc = tlc;
         const blc = tlc;
-        const w = this.measuredWidth;
-        const h = this.measuredHeight;
+        const w = this.actualWidth;
+        const h = this.actualHeight;
         let d = '';
         // mov top left arc start
         d += 'M 0 ' + tlc + ' ';

@@ -11,7 +11,7 @@ export default class TextElement extends BaseText implements ITextElement {
     protected validate(): void {
         super.validate();
         this.invalidateInternalSize();
-        this.textRenderer.width = this.measuredWidth;
+        this.textRenderer.width = this.actualWidth;
         this.updateTextRendererPosition();
     }
 
