@@ -1,6 +1,4 @@
-import ILayout from './ILayout';
-
-export default interface IColomnLayout extends ILayout {
+export default interface IColomnLayout {
     gap: number;
     horizontalGap: number;
     verticalGap: number;

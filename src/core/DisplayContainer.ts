@@ -2,11 +2,13 @@ import Strings from '../consts/Strings';
 import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import ILayout from '../interfaces/layout/ILayout';
 import AnchorLayout from '../layout/AnchorLayout';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
 import DisplayElement from '../core/DisplayElement';
-import ISvgElement from '../interfaces/svg/ISvgElement';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
+import ILayoutContainer from '../interfaces/core/ILayoutContainer';
+import { LayoutType } from '../types/LayoutType';
+import { ChildType } from '../types/ChildType';
 
-export default class DisplayContainer extends DisplayElement implements IDisplayContainer {
+export default class DisplayContainer extends DisplayElement implements IDisplayContainer, ILayoutContainer {
     public constructor() {
         super();
         this.name = 'DisplayContainer';
@@ -21,24 +23,24 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     }
 
     protected resizeChildren(): void {
-        this.layout.resizeChildren(this, this.elements);
+        this.internalLayout.resizeChildren(this, this.elements);
     }
 
     protected layoutChildren(): void {
-        this.layout.layoutChildren(this, this.elements);
+        this.internalLayout.layoutChildren(this, this.elements);
     }
 
     protected updateInternalSize(): void {
-        const [width, height] = this.layout.getInternalSize(this, this.elements);
+        const [width, height] = this.internalLayout.getInternalSize(this, this.elements);
         this.internalSize(width, height);
     }
 
     protected updateInternalWidth(): void {
-        this.internalWidth = this.layout.getInternalWidth(this, this.elements);
+        this.internalWidth = this.internalLayout.getInternalWidth(this, this.elements);
     }
 
     protected updateInternalHeight(): void {
-        this.internalHeight = this.layout.getInternalHeight(this, this.elements);
+        this.internalHeight = this.internalLayout.getInternalHeight(this, this.elements);
     }
 
     protected childInvalid(e: Event): void {
@@ -49,39 +51,39 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidate();
     }
 
-    protected elements: Array<IDisplayElement | ISvgElement> = [];
+    protected elements: Array<ILayoutElement> = [];
 
-    public addElement(element: IDisplayElement | ISvgElement): void {
-        this.elements.push(element);
+    public addElement(element: ChildType): void {
+        this.elements.push(element as unknown as ILayoutElement);
         this.appendChild(element as unknown as Node);
         this.invalidate();
     }
 
-    public addElementAt(element: IDisplayElement | ISvgElement, index: number): void {
+    public addElementAt(element: ChildType, index: number): void {
         if (this.elements[index]) {
             const beforeElement: Node = this.elements[index] as unknown as Node;
-            this.elements.splice(index, 0, element);
+            this.elements.splice(index, 0, element as unknown as ILayoutElement);
             this.insertBefore(element as unknown as Node, beforeElement);
             this.invalidate();
             return;
         }
-        this.elements.push(element);
+        this.elements.push(element as unknown as ILayoutElement);
         this.appendChild(element as unknown as Node);
         this.invalidate();
     }
 
-    public addElements(elements: Array<IDisplayElement | ISvgElement>): void {
+    public addElements(elements: Array<ChildType>): void {
         const frag: DocumentFragment = document.createDocumentFragment();
         for (const element of elements) {
-            this.elements.push(element);
+            this.elements.push(element as unknown as ILayoutElement);
             frag.appendChild(element as unknown as Node);
         }
         this.appendChild(frag);
         this.invalidate();
     }
 
-    public removeElement(element: IDisplayElement | ISvgElement): void {
-        const start: number = this.elements.indexOf(element);
+    public removeElement(element: ChildType): void {
+        const start: number = this.elements.indexOf(element as unknown as ILayoutElement);
         if (start !== -1) {
             this.elements.splice(start, 1);
             this.removeChild(element as unknown as Node);
@@ -99,30 +101,34 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         }
     }
 
-    public containsElement(element: IDisplayElement | ISvgElement): boolean {
+    public containsElement(element: ChildType): boolean {
         return this.contains(element as unknown as Node);
+    }
+
+    private get internalLayout(): ILayout {
+        return this.layout as ILayout;
     }
 
     private _layout!: ILayout;
 
-    public set layout(value: ILayout) {
+    public set layout(value: LayoutType) {
         if (this._layout === value) {
             return;
         }
         if (this._layout) {
             this._layout.removeEventListener(Strings.INVALIDATE, this.invalidate);
         }
-        this._layout = value;
+        this._layout = value as ILayout;
         this._layout.addEventListener(Strings.INVALIDATE, this.invalidate);
         this.invalidate();
     }
 
-    public get layout(): ILayout {
+    public get layout(): LayoutType {
         if (!this._layout) {
-            this._layout = new AnchorLayout();
+            this._layout = new AnchorLayout() as unknown as ILayout;
             this._layout.addEventListener(Strings.INVALIDATE, this.invalidate);
         }
-        return this._layout;
+        return this._layout as LayoutType;
     }
 
     private _padding = 0;
@@ -281,4 +287,4 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         return this._paddingY;
     }
 }
-customElements.define('enta-dc', DisplayContainer);
+customElements.define('display-container', DisplayContainer);

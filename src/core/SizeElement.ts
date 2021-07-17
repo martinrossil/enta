@@ -175,7 +175,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     private _actualWidth = 0;
 
-    protected set actualWidth(value: number) {
+    public set actualWidth(value: number) {
         if (isNaN(value)) {
             return;
         }
@@ -183,7 +183,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this.style.width = this._actualWidth + Strings.PX;
     }
 
-    protected get actualWidth(): number {
+    public get actualWidth(): number {
         return this._actualWidth;
     }
 
@@ -255,7 +255,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     private _actualHeight = 0;
 
-    protected set actualHeight(value: number) {
+    public set actualHeight(value: number) {
         if (isNaN(value)) {
             return;
         }
@@ -263,7 +263,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this.style.height = this._actualHeight + Strings.PX;
     }
 
-    protected get actualHeight(): number {
+    public get actualHeight(): number {
         return this._actualHeight;
     }
 
@@ -337,62 +337,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public get percentHeight(): number {
         return this._percentHeight;
-    }
-
-    public get measuredWidth(): number {
-        return this.actualWidth;
-    }
-
-    public get measuredHeight(): number {
-        return this.actualHeight;
-    }
-
-    public set measureInternalSize(value: boolean) {
-        let measureInternalWidthChanged = false;
-        let measureInternalHeightChanged = false;
-        if (this._measureInternalWidth !== value) {
-            this._measureInternalWidth = value;
-            measureInternalWidthChanged = true;
-        }
-        if (this._measureInternalHeight !== value) {
-            this._measureInternalHeight = value;
-            measureInternalHeightChanged = true;
-        }
-        if (measureInternalWidthChanged || measureInternalHeightChanged) {
-            this.invalidate();
-        }
-    }
-
-    public get measureInternalSize(): boolean {
-        return this.measureInternalWidth && this.measureInternalHeight;
-    }
-
-    private _measureInternalWidth = true;
-
-    public set measureInternalWidth(value: boolean) {
-        if (this._measureInternalWidth === value) {
-            return;
-        }
-        this._measureInternalWidth = value;
-        this.invalidate();
-    }
-
-    public get measureInternalWidth(): boolean {
-        return this._measureInternalWidth;
-    }
-
-    private _measureInternalHeight = true;
-
-    public set measureInternalHeight(value: boolean) {
-        if (this._measureInternalHeight === value) {
-            return;
-        }
-        this._measureInternalHeight = value;
-        this.invalidate();
-    }
-
-    public get measureInternalHeight(): boolean {
-        return this._measureInternalHeight;
     }
 
     protected invalidateInternalSize(): void {

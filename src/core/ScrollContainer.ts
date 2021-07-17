@@ -1,11 +1,10 @@
 import Strings from '../consts/Strings';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
 import IScrollContainer from '../interfaces/core/IScrollContainer';
-import ILayout from '../interfaces/layout/ILayout';
-import ISvgElement from '../interfaces/svg/ISvgElement';
-import Color from '../vo/Color';
-import DisplayContainer from './DisplayContainer';
+import IScrollOuterElement from '../interfaces/core/IScrollOuterElement';
+import { ChildType } from '../types/ChildType';
+import { LayoutType } from '../types/LayoutType';
 import DisplayElement from './DisplayElement';
+import ScrollOuterElement from './ScrollOuterElement';
 
 export default class ScrollContainer extends DisplayElement implements IScrollContainer {
     public constructor() {
@@ -14,7 +13,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this.verticalScrollEnabled = true;
         this.clip = Strings.HIDDEN;
         this.addEventListener(Strings.INVALIDATE, this.childInvalid);
-        this.appendChild(this.outerElement);
+        this.appendChild(this.outerElement as unknown as Node);
     }
 
     protected childInvalid(e: Event): void {
@@ -76,50 +75,37 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this.internalHeight = this.outerElement.elementsContainer.actualHeight;
     }
 
-    private _outerElement!: DisplayElement;
+    private _outerElement!: IScrollOuterElement;
 
-    private get outerElement(): DisplayElement {
+    private get outerElement(): IScrollOuterElement {
         if (!this._outerElement) {
-            this._outerElement = new DisplayElement();
-            this._outerElement.clip = Strings.SCROLL;
-            this._outerElement.appendChild(this.elementsContainer);
+            this._outerElement = new ScrollOuterElement();
         }
         return this._outerElement;
     }
 
-    private _elementsContainer!: DisplayContainer;
-
-    private get elementsContainer(): DisplayContainer {
-        if (!this._elementsContainer) {
-            this._elementsContainer = new DisplayContainer();
-            // this will boost scroll performance, no repaints
-            this._elementsContainer.style.willChange = Strings.TRANSFORM;
-        }
-        return this._elementsContainer;
+    public addElement(element: ChildType): void {
+        this.outerElement.elementsContainer.addElement(element);
     }
 
-    public addElement(element: IDisplayElement | ISvgElement): void {
-        this.elementsContainer.addElement(element);
+    public addElementAt(element: ChildType, index: number): void {
+        this.outerElement.elementsContainer.addElementAt(element, index);
     }
 
-    public addElementAt(element: IDisplayElement | ISvgElement, index: number): void {
-        this.elementsContainer.addElementAt(element, index);
+    public addElements(elements: Array<ChildType>): void {
+        this.outerElement.elementsContainer.addElements(elements);
     }
 
-    public addElements(elements: Array<IDisplayElement | ISvgElement>): void {
-        this.elementsContainer.addElements(elements);
-    }
-
-    public removeElement(element: IDisplayElement | ISvgElement): void {
-        this.elementsContainer.removeElement(element);
+    public removeElement(element: ChildType): void {
+        this.outerElement.elementsContainer.removeElement(element);
     }
 
     public removeElements(): void {
-        this.elementsContainer.removeElements();
+        this.outerElement.elementsContainer.removeElements();
     }
 
-    public containsElement(element: IDisplayElement | ISvgElement): boolean {
-        return this.elementsContainer.contains(element as unknown as Node);
+    public containsElement(element: ChildType): boolean {
+        return this.outerElement.elementsContainer.contains(element as unknown as Node);
     }
 
     private _scrollEnabled = false;
@@ -131,7 +117,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._scrollEnabled = value;
         this._horizontalScrollEnabled = value;
         this._verticalScrollEnabled = value;
-        this.elementsContainer.measureInternalSize = !value;
         this.outerElement.clip = this.scrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
@@ -148,8 +133,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._horizontalScrollEnabled = value;
         this._scrollEnabled = value && this.verticalScrollEnabled;
-        this.elementsContainer.measureInternalHeight = !value;
-        this.elementsContainer.measureInternalWidth = !this.verticalScrollEnabled;
         this.outerElement.clipX = this.horizontalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
@@ -166,8 +149,6 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._verticalScrollEnabled = value;
         this._scrollEnabled = value && this.horizontalScrollEnabled;
-        this.elementsContainer.measureInternalWidth = !value;
-        this.elementsContainer.measureInternalHeight = !this.horizontalScrollEnabled;
         this.outerElement.clipY = this.verticalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
         this.invalidate();
     }
@@ -176,67 +157,67 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this._verticalScrollEnabled;
     }
 
-    public set layout(value: ILayout) {
-        this.elementsContainer.layout = value;
+    public set layout(value: LayoutType) {
+        this.outerElement.elementsContainer.layout = value;
     }
 
-    public get layout(): ILayout {
-        return this.elementsContainer.layout;
+    public get layout(): LayoutType {
+        return this.outerElement.elementsContainer.layout;
     }
 
     public set padding(value: number) {
-        this.elementsContainer.padding = value;
+        this.outerElement.elementsContainer.padding = value;
     }
 
     public get padding(): number {
-        return this.elementsContainer.padding;
+        return this.outerElement.elementsContainer.padding;
     }
 
     public set paddingLeft(value: number) {
-        this.elementsContainer.paddingLeft = value;
+        this.outerElement.elementsContainer.paddingLeft = value;
     }
 
     public get paddingLeft(): number {
-        return this.elementsContainer.paddingLeft;
+        return this.outerElement.elementsContainer.paddingLeft;
     }
 
     public set paddingTop(value: number) {
-        this.elementsContainer.paddingTop = value;
+        this.outerElement.elementsContainer.paddingTop = value;
     }
 
     public get paddingTop(): number {
-        return this.elementsContainer.paddingTop;
+        return this.outerElement.elementsContainer.paddingTop;
     }
 
     public set paddingRight(value: number) {
-        this.elementsContainer.paddingRight = value;
+        this.outerElement.elementsContainer.paddingRight = value;
     }
 
     public get paddingRight(): number {
-        return this.elementsContainer.paddingRight;
+        return this.outerElement.elementsContainer.paddingRight;
     }
 
     public set paddingBottom(value: number) {
-        this.elementsContainer.paddingBottom = value;
+        this.outerElement.elementsContainer.paddingBottom = value;
     }
 
     public get paddingBottom(): number {
-        return this.elementsContainer.paddingBottom;
+        return this.outerElement.elementsContainer.paddingBottom;
     }
 
     public set paddingX(value: number) {
-        this.elementsContainer.paddingX = value;
+        this.outerElement.elementsContainer.paddingX = value;
     }
 
     public get paddingX(): number {
-        return this.elementsContainer.paddingX;
+        return this.outerElement.elementsContainer.paddingX;
     }
 
     public set paddingY(value: number) {
-        this.elementsContainer.paddingY = value;
+        this.outerElement.elementsContainer.paddingY = value;
     }
 
     public get paddingY(): number {
-        return this.elementsContainer.paddingY;
+        return this.outerElement.elementsContainer.paddingY;
     }
 }

@@ -1,12 +1,11 @@
 import IEventDispatcher from '../event/IEventDispatcher';
-import IDisplayContainer from '../../interfaces/core/IDisplayContainer';
-import IDisplayElement from '../../interfaces/core/IDisplayElement';
-import ISvgElement from '../svg/ISvgElement';
+import ILayoutContainer from '../../interfaces/core/ILayoutContainer';
+import ILayoutElement from '../core/ILayoutElement';
 
 export default interface ILayout extends IEventDispatcher {
-    resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void;
-    layoutChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void;
-    getInternalSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number];
-    getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number;
-    getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number;
+    resizeChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void;
+    layoutChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void;
+    getInternalSize(container: ILayoutContainer, elements: Array<ILayoutElement>): [number, number];
+    getInternalWidth(container: ILayoutContainer, elements: Array<ILayoutElement>): number;
+    getInternalHeight(container: ILayoutContainer, elements: Array<ILayoutElement>): number;
 }
