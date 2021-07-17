@@ -3,9 +3,8 @@ import EventDispatcher from '../event/EventDispatcher';
 import IHorizontalLayout from '../interfaces/layout/IHorizontalLayout';
 import { HorizontalAlign } from '../types/HorizontalAlign';
 import { VerticalAlign } from '../types/VerticalAlign';
-import ISvgElement from '../interfaces/svg/ISvgElement';
-import IDisplayContainer from '../interfaces/core/IDisplayContainer';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
+import ILayoutContainer from '../interfaces/core/ILayoutContainer';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
 
 export default class HorizontalLayout extends EventDispatcher implements IHorizontalLayout {
     public constructor(horizontalGap = 0, horizontalAlign: HorizontalAlign = Strings.LEFT, verticalAlign: VerticalAlign = Strings.TOP) {
@@ -16,6 +15,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         this.verticalAlign = verticalAlign;
     }
 
+    public resizeChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         const h = container.actualHeight - container.paddingTop - container.paddingBottom;
         if (!isNaN(container.width)) {
             const ratio = this.getPixelPercentWidthRatio(container, elements);
@@ -37,7 +37,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private getPixelPercentWidthRatio(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    private getPixelPercentWidthRatio(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         let widthSum = 0;
         let percentWidthSum = 0;
         for (const element of elements) {
@@ -59,7 +59,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    public layoutChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+    public layoutChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         if (this.verticalAlign === Strings.TOP) {
             this.layoutElementsTop(container, elements);
         } else if (this.verticalAlign === Strings.BOTTOM) {
@@ -69,7 +69,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private layoutElementsTop(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+    private layoutElementsTop(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         let x = this.getHorizontalXStartValue(container, elements);
         for (const element of elements) {
             element.position(x, container.paddingTop);
@@ -77,7 +77,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private layoutElementsBottom(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+    private layoutElementsBottom(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
@@ -87,7 +87,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private layoutElementsMiddle(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+    private layoutElementsMiddle(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
@@ -97,7 +97,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
     }
 
-    private getHorizontalXStartValue(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    private getHorizontalXStartValue(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         if (isNaN(container.width)) {
             return container.paddingLeft;
         }
@@ -118,7 +118,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return x;
     }
 
-    public getInternalSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
+    public getInternalSize(container: ILayoutContainer, elements: Array<ILayoutElement>): [number, number] {
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -132,7 +132,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return [width, height];
     }
 
-    public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    public getInternalWidth(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         let width = 0;
         for (const element of elements) {
             width += element.actualWidth + this.horizontalGap;
@@ -140,7 +140,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         return container.paddingLeft + width - this.horizontalGap + container.paddingRight;
     }
 
-    public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    public getInternalHeight(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         let height = 0;
         for (const element of elements) {
             if (height < element.actualHeight) {

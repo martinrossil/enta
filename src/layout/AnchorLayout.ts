@@ -1,15 +1,16 @@
 import EventDispatcher from '../event/EventDispatcher';
 import ILayout from '../interfaces/layout/ILayout';
-import ISvgElement from '../interfaces/svg/ISvgElement';
-import IDisplayContainer from '../interfaces/core/IDisplayContainer';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
+import IAnchorLayout from '../interfaces/layout/IAnchorLayout';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
+import ILayoutContainer from '../interfaces/core/ILayoutContainer';
 
-export default class AnchorLayout extends EventDispatcher implements ILayout {
+export default class AnchorLayout extends EventDispatcher implements IAnchorLayout, ILayout {
     public constructor() {
         super();
         this.name = 'AnchorLayout';
     }
 
+    public resizeChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         const w = container.actualWidth - container.paddingLeft - container.paddingRight;
         const h = container.actualHeight - container.paddingTop - container.paddingBottom;
         for (const element of elements) {
@@ -23,7 +24,7 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         }
     }
 
-    private resizeElement(element: IDisplayElement | ISvgElement, w: number, h: number): void {
+    private resizeElement(element: ILayoutElement, w: number, h: number): void {
         let width = NaN;
         let height = NaN;
         if (!isNaN(element.percentWidth)) {
@@ -51,7 +52,7 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         element.externalSize(width, height);
     }
 
-    private resizeElementWidth(element: IDisplayElement | ISvgElement, w: number): void {
+    private resizeElementWidth(element: ILayoutElement, w: number): void {
         if (!isNaN(element.percentWidth)) {
             if (!isNaN(element.left) && !isNaN(element.right)) {
                 element.externalWidth = (w - element.left - element.right) * element.percentWidth / 100;
@@ -65,7 +66,7 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         }
     }
 
-    private resizeElementHeight(element: IDisplayElement | ISvgElement, h: number): void {
+    private resizeElementHeight(element: ILayoutElement, h: number): void {
         if (!isNaN(element.percentHeight)) {
             if (!isNaN(element.top) && !isNaN(element.bottom)) {
                 element.externalHeight = (h - element.top - element.bottom) * element.percentHeight / 100;
@@ -79,13 +80,13 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         }
     }
 
-    public layoutChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+    public layoutChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         for (const element of elements) {
             this.layoutElement(container, element);
         }
     }
 
-    private layoutElement(container: IDisplayContainer, element: IDisplayElement | ISvgElement): void {
+    private layoutElement(container: ILayoutContainer, element: ILayoutElement): void {
         let x = container.paddingLeft;
         if (!isNaN(element.left) && isNaN(element.right)) {
             x = x + element.left;
@@ -119,7 +120,7 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         element.position(x, y);
     }
 
-    public getInternalSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
+    public getInternalSize(container: ILayoutContainer, elements: Array<ILayoutElement>): [number, number] {
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -147,7 +148,7 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         return [width, height];
     }
 
-    public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    public getInternalWidth(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         let width = 0;
         for (const element of elements) {
             if (!isNaN(element.left)) {
@@ -163,7 +164,7 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         return container.paddingLeft + width + container.paddingRight;
     }
 
-    public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    public getInternalHeight(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         let height = 0;
         for (const element of elements) {
             if (!isNaN(element.top)) {

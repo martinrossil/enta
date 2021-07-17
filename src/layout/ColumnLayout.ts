@@ -1,9 +1,8 @@
 import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IColomnLayout from '../interfaces/layout/IColumnLayout';
-import ISvgElement from '../interfaces/svg/ISvgElement';
-import IDisplayContainer from '../interfaces/core/IDisplayContainer';
-import IDisplayElement from '../interfaces/core/IDisplayElement';
+import ILayoutContainer from '../interfaces/core/ILayoutContainer';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
 
 export default class ColumnLayout extends EventDispatcher implements IColomnLayout {
     public constructor(minColumnWidth = 128, maxColumns = 4, gap = 16) {
@@ -14,6 +13,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         this.gap = gap;
     }
 
+    public resizeChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         const width = container.actualWidth - container.paddingLeft - container.paddingRight;
         const [columnWidth] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
         for (const element of elements) {
@@ -33,7 +33,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return this.getColumnWidthAndCount(width, minColumnWidth, maxColumns - 1, gap);
     }
 
-    public layoutChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
+    public layoutChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         if (elements.length === 0) {
             return;
         }
@@ -69,11 +69,11 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         }
     }
 
-    private noElementsSize(container: IDisplayContainer): [number, number] {
+    private noElementsSize(container: ILayoutContainer): [number, number] {
         return [container.paddingLeft + container.paddingRight, container.paddingTop + container.paddingBottom];
     }
 
-    private oneRowSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
+    private oneRowSize(container: ILayoutContainer, elements: Array<ILayoutElement>): [number, number] {
         const elementCount = elements.length;
         const totalElementsWidth = elementCount * this.minColumnWidth + (elementCount - 1) * this.horizontalGap;
         const calculatedWidth = container.paddingLeft + totalElementsWidth + container.paddingRight;
@@ -82,7 +82,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return [calculatedWidth, calculatedHeight];
     }
 
-    public getInternalSize(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): [number, number] {
+    public getInternalSize(container: ILayoutContainer, elements: Array<ILayoutElement>): [number, number] {
         if (elements.length === 0) {
             return this.noElementsSize(container);
         }
@@ -116,7 +116,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return [calculatedWidth, calculatedHeight];
     }
 
-    public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    public getInternalHeight(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         const lastElementIndex = elements.length - 1;
         let currentColumn = 1;
         let currentY = container.paddingTop;
@@ -141,7 +141,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return container.paddingTop + totalElementsHeight + container.paddingBottom;
     }
 
-    public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    public getInternalWidth(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         if (elements.length === 0) {
             return container.paddingLeft + container.paddingRight;
         }
@@ -152,13 +152,13 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         return container.paddingLeft + totalElementsWidth + container.paddingRight;
     }
 
-    private oneRowWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
+    private oneRowWidth(container: ILayoutContainer, elements: Array<ILayoutElement>): number {
         const elementCount = elements.length;
         const totalElementsWidth = elementCount * this.minColumnWidth + (elementCount - 1) * this.horizontalGap;
         return container.paddingLeft + totalElementsWidth + container.paddingRight;
     }
 
-    private getHighestElementHeightValue(elements: Array<IDisplayElement | ISvgElement>): number {
+    private getHighestElementHeightValue(elements: Array<ILayoutElement>): number {
         let height = 0;
         for (const element of elements) {
             if (height < element.actualHeight) {
