@@ -56,25 +56,25 @@ export default class PositionElement extends BaseElement implements IPositionEle
         return this._y;
     }
 
-    private _z = NaN;
+    private _zIndex = NaN;
 
-    public set z(value: number) {
-        if (isNaN(this._z) && isNaN(value)) {
+    public set zIndex(value: number) {
+        if (isNaN(this._zIndex) && isNaN(value)) {
             return;
         }
-        if (this._z === value) {
+        if (this._zIndex === value) {
             return;
         }
-        this._z = value;
-        if (isNaN(this._z)) {
+        this._zIndex = value;
+        if (isNaN(this._zIndex)) {
             this.style.zIndex = '';
         } else {
-            this.style.zIndex = this._z + '';
+            this.style.zIndex = this._zIndex + '';
         }
     }
 
-    public get z(): number {
-        return this._z;
+    public get zIndex(): number {
+        return this._zIndex;
     }
 
     private _top = NaN;
