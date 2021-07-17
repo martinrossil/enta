@@ -4,7 +4,7 @@ import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 import IRectangle from '../interfaces/vo/IRectangle';
 import SizeElement from '../core/SizeElement';
-import Cursor from '../consts/Cursor';
+import { CursorType } from '../types/CursorType';
 
 export default class SvgElement extends SizeElement implements ISvgElement {
     public constructor() {
@@ -117,9 +117,9 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         return this._enabled;
     }
 
-    private _cursor: string = Cursor.NONE;
+    private _cursor: CursorType = '';
 
-    public set cursor(value: string) {
+    public set cursor(value: CursorType) {
         if (this._cursor === value) {
             return;
         }
@@ -127,7 +127,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         this.style.cursor = value;
     }
 
-    public get cursor(): string {
+    public get cursor(): CursorType {
         return this._cursor;
     }
 }

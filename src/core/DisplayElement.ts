@@ -1,4 +1,5 @@
 import { ClipType } from '../types/ClipType';
+import { CursorType } from '../types/CursorType';
 import Strings from '../consts/Strings';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
@@ -8,7 +9,6 @@ import ILinearGradient from '../interfaces/vo/ILinearGradient';
 import Color from '../vo/Color';
 import LinearGradient from '../vo/LinearGradient';
 import SizeElement from './SizeElement';
-import Cursor from '../consts/Cursor';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {
@@ -296,9 +296,9 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._enabled;
     }
 
-    private _cursor: string = Cursor.NONE;
+    private _cursor: CursorType = '';
 
-    public set cursor(value: string) {
+    public set cursor(value: CursorType) {
         if (this._cursor === value) {
             return;
         }
@@ -306,8 +306,8 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.style.cursor = value;
     }
 
-    public get cursor(): string {
+    public get cursor(): CursorType {
         return this._cursor;
     }
 }
-customElements.define('enta-de', DisplayElement);
+customElements.define('display-element', DisplayElement);
