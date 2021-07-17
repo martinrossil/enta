@@ -3,7 +3,6 @@ export { default as ItemRenderer } from './components/ItemRenderer';
 export { default as List } from './components/List';
 export { default as ScreenNavigator } from './components/ScreenNavigator';
 
-export { default as Cursor } from './consts/Cursor';
 export { default as Strings } from './consts/Strings';
 
 export { default as ApplicationElement } from './core/ApplicationElement';
@@ -52,6 +51,7 @@ export { default as IInteractive } from './interfaces/fsm/IInteractive';
 export { default as IMachine } from './interfaces/fsm/IMachine';
 export { default as IState } from './interfaces/fsm/IState';
 
+export { default as IAnchorLayout } from './interfaces/layout/IAnchorLayout';
 export { default as IColumnLayout } from './interfaces/layout/IColumnLayout';
 export { default as IHorizontalLayout } from './interfaces/layout/IHorizontalLayout';
 export { default as ILayout } from './interfaces/layout/ILayout';
@@ -85,18 +85,19 @@ export { default as LabelElement } from './text/LabelElement';
 export { default as TextElement } from './text/TextElement';
 export { default as TextRenderer } from './text/TextRenderer';
 
+export { ChildType } from './types/ChildType';
 export { ClipType } from './types/ClipType';
 export { CornerType } from './types/CornerType';
+export { CursorType } from './types/CursorType';
 export { FontWeight } from './types/FontWeight';
 export { HorizontalAlign } from './types/HorizontalAlign';
 export { ItemRendererClass } from './types/ItemRendererClass';
+export { LayoutType } from './types/LayoutType';
 export { StrokeLineCap } from './types/StrokeLineCap';
 export { StrokeLineJoin } from './types/StrokeLineJoin';
 export { SvgNameSpace } from './types/SvgNameSpace';
 export { TextAlign } from './types/TextAlign';
 export { VerticalAlign } from './types/VerticalAlign';
-
-export { default as UID } from './utils/UID';
 
 export { default as Color } from './vo/Color';
 export { default as LinearGradient } from './vo/LinearGradient';
