@@ -1,6 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
 import Color from '../vo/Color';
-import Cursor from '../consts/Cursor';
 import IInteractive from '../interfaces/fsm/IInteractive';
 import InteractiveMachine from '../fsm/InteractiveMachine';
 
@@ -10,7 +9,7 @@ export default class PurpleBox extends DisplayElement implements IInteractive {
         super();
         this.name = PurpleBox.TAG;
         this.size(200, 200);
-        this.cursor = Cursor.POINTER;
+        this.cursor = 'pointer';
         this.backgroundColor = new Color(300, 100, 50);
         this.centerOffset = 0;
         this.middleOffset = 0;

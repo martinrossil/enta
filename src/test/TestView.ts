@@ -1,6 +1,4 @@
 import ItemRenderer from '../components/ItemRenderer'
-import ILabelElement from '../interfaces/text/ILabelElement';
-import LabelElement from '../text/LabelElement';
 import Color from '../vo/Color';
 import ITest from './ITest';
 
@@ -8,7 +6,6 @@ export default class TestView extends ItemRenderer<ITest> {
     public constructor() {
         super();
         // this.percentWidth = 100;
-        this.measureInternalSize = false;
         // this.height = Math.random() * 100 + 100;
         // this.padding = 16;
         this.height = 100; // Math.random() * 200 + 100;

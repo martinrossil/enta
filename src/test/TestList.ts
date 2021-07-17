@@ -13,7 +13,6 @@ export default class TestList extends List<ITest> {
         this.percentWidth = 100;
         this.percentHeight = 100;
         // this.width = 600;
-        this.measureInternalSize = false;
         this.backgroundColor = new Color(0, 100, 50, 0.2);
         this.ItemRendererClass = TestView;
         this.layout = new ColumnLayout(100, 4, 24);
