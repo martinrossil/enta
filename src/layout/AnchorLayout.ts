@@ -10,9 +10,8 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         this.name = 'AnchorLayout';
     }
 
-    public resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
-        const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
-        const h = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const w = container.actualWidth - container.paddingLeft - container.paddingRight;
+        const h = container.actualHeight - container.paddingTop - container.paddingBottom;
         for (const element of elements) {
             if (isNaN(element.width) && isNaN(element.height)) {
                 this.resizeElement(element, w, h);
@@ -91,30 +90,30 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         if (!isNaN(element.left) && isNaN(element.right)) {
             x = x + element.left;
         } else if (isNaN(element.left) && !isNaN(element.right)) {
-            x = container.measuredWidth - container.paddingRight - element.right - element.measuredWidth;
+            x = container.actualWidth - container.paddingRight - element.right - element.actualWidth;
         } else if (!isNaN(element.left) && !isNaN(element.right)) {
-            const insideWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+            const insideWidth = container.actualWidth - container.paddingLeft - container.paddingRight;
             const insideWidthCenter = (insideWidth - element.left - element.right) * 0.5;
-            const elementCenter = element.measuredWidth * 0.5;
+            const elementCenter = element.actualWidth * 0.5;
             x = insideWidthCenter - elementCenter + element.left + container.paddingLeft;
         } else if (!isNaN(element.centerOffset)) {
-            const insideWidthCenter = (container.measuredWidth - container.paddingLeft - container.paddingRight) * 0.5;
-            const elementCenter = element.measuredWidth * 0.5;
+            const insideWidthCenter = (container.actualWidth - container.paddingLeft - container.paddingRight) * 0.5;
+            const elementCenter = element.actualWidth * 0.5;
             x = insideWidthCenter - elementCenter + container.paddingLeft + element.centerOffset;
         }
         let y = container.paddingTop;
         if (!isNaN(element.top) && isNaN(element.bottom)) {
             y = y + element.top;
         } else if (isNaN(element.top) && !isNaN(element.bottom)) {
-            y = container.measuredHeight - container.paddingBottom - element.bottom - element.measuredHeight;
+            y = container.actualHeight - container.paddingBottom - element.bottom - element.actualHeight;
         } else if (!isNaN(element.top) && !isNaN(element.bottom)) {
-            const insideHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+            const insideHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
             const insideHeightMiddle = (insideHeight - element.top - element.bottom) * 0.5;
-            const elementMiddle = element.measuredHeight * 0.5;
+            const elementMiddle = element.actualHeight * 0.5;
             y = insideHeightMiddle - elementMiddle + element.top + container.paddingTop;
         } else if (!isNaN(element.middleOffset)) {
-            const insideHeightMiddle = (container.measuredHeight - container.paddingTop - container.paddingBottom) * 0.5;
-            const elementMiddle = element.measuredHeight * 0.5;
+            const insideHeightMiddle = (container.actualHeight - container.paddingTop - container.paddingBottom) * 0.5;
+            const elementMiddle = element.actualHeight * 0.5;
             y = insideHeightMiddle - elementMiddle + container.paddingTop + element.middleOffset;
         }
         element.position(x, y);
@@ -125,21 +124,21 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         let height = 0;
         for (const element of elements) {
             if (!isNaN(element.left)) {
-                if (width < (element.left + element.measuredWidth)) {
-                    width = element.left + element.measuredWidth;
+                if (width < (element.left + element.actualWidth)) {
+                    width = element.left + element.actualWidth;
                 }
             } else {
-                if (width < element.measuredWidth) {
-                    width = element.measuredWidth;
+                if (width < element.actualWidth) {
+                    width = element.actualWidth;
                 }
             }
             if (!isNaN(element.top)) {
-                if (height < (element.top + element.measuredHeight)) {
-                    height = (element.top + element.measuredHeight);
+                if (height < (element.top + element.actualHeight)) {
+                    height = (element.top + element.actualHeight);
                 }
             } else {
-                if (height < element.measuredHeight) {
-                    height = element.measuredHeight;
+                if (height < element.actualHeight) {
+                    height = element.actualHeight;
                 }
             }
         }
@@ -152,12 +151,12 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         let width = 0;
         for (const element of elements) {
             if (!isNaN(element.left)) {
-                if (width < (element.left + element.measuredWidth)) {
-                    width = element.left + element.measuredWidth;
+                if (width < (element.left + element.actualWidth)) {
+                    width = element.left + element.actualWidth;
                 }
             } else {
-                if (width < element.measuredWidth) {
-                    width = element.measuredWidth;
+                if (width < element.actualWidth) {
+                    width = element.actualWidth;
                 }
             }
         }
@@ -168,12 +167,12 @@ export default class AnchorLayout extends EventDispatcher implements ILayout {
         let height = 0;
         for (const element of elements) {
             if (!isNaN(element.top)) {
-                if (height < (element.top + element.measuredHeight)) {
-                    height = (element.top + element.measuredHeight);
+                if (height < (element.top + element.actualHeight)) {
+                    height = (element.top + element.actualHeight);
                 }
             } else {
-                if (height < element.measuredHeight) {
-                    height = element.measuredHeight;
+                if (height < element.actualHeight) {
+                    height = element.actualHeight;
                 }
             }
         }

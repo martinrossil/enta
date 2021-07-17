@@ -401,10 +401,10 @@ export default class SizeElement extends PositionElement implements ISizeElement
         }
         let updateWidth = false;
         let updateHeight = false;
-        if (isNaN(this.width) && this.measureInternalWidth) {
+        if (isNaN(this.width) && isNaN(this.externalWidth)) {
             updateWidth = true;
         }
-        if (isNaN(this.height) && this.measureInternalHeight) {
+        if (isNaN(this.height) && isNaN(this.externalHeight)) {
             updateHeight = true;
         }
         if (updateWidth && updateHeight) {

@@ -20,8 +20,8 @@ export default class SvgElement extends SizeElement implements ISvgElement {
     }
 
     private updateSvgAttributes(): void {
-        this.svg.setAttribute(Strings.WIDTH, this.measuredWidth.toString());
-        this.svg.setAttribute(Strings.HEIGHT, this.measuredHeight.toString());
+        this.svg.setAttribute(Strings.WIDTH, this.actualWidth.toString());
+        this.svg.setAttribute(Strings.HEIGHT, this.actualWidth.toString());
     }
 
     public addFilter(value: BlurFilter | ShadowFilter): void {

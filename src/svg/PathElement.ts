@@ -260,7 +260,7 @@ export default class PathElement extends SvgElement implements IPathElement {
         if (this.viewBox) {
             transform += this.viewBox.width * 0.5 + ' ' + this.viewBox.height * 0.5 + ')';
         } else {
-            transform += this.measuredWidth * 0.5 + ' ' + this.measuredHeight * 0.5 + ')';
+            transform += this.actualWidth * 0.5 + ' ' + this.actualHeight * 0.5 + ')';
         }
         linearGradientElement.setAttribute(Strings.GRADIENT_TRANSFORM, transform);
     }

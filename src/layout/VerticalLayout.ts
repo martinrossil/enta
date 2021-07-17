@@ -16,8 +16,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         this.verticalAlign = verticalAlign;
     }
 
-    public resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
-        const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const w = container.actualWidth - container.paddingLeft - container.paddingRight;
         if (!isNaN(container.height)) {
             const ratio = this.getPixelPercentHeightRatio(container, elements);
             for (const element of elements) {
@@ -47,10 +46,10 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
             } else if (!isNaN(element.percentHeight)) {
                 percentHeightSum += element.percentHeight;
             } else {
-                heightSum += element.measuredHeight;
+                heightSum += element.actualHeight;
             }
         }
-        const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const innerHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
         const verticalGapSumHeight = this.verticalGap * (elements.length - 1);
         const heightLeftForPercentHeight = innerHeight - heightSum - verticalGapSumHeight;
         if (percentHeightSum > 100) {
@@ -74,7 +73,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         let y = this.getVerticalYStartValue(container, elements);
         for (const element of elements) {
             element.position(container.paddingLeft, y);
-            y += element.measuredHeight + this.verticalGap;
+            y += element.actualHeight + this.verticalGap;
         }
     }
 
@@ -82,9 +81,9 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         let x = 0;
         let y = this.getVerticalYStartValue(container, elements);
         for (const element of elements) {
-            x = container.measuredWidth - container.paddingRight - element.measuredWidth;
+            x = container.actualWidth - container.paddingRight - element.actualWidth;
             element.position(x, y);
-            y += element.measuredHeight + this.verticalGap;
+            y += element.actualHeight + this.verticalGap;
         }
     }
 
@@ -92,9 +91,9 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         let x = 0;
         let y = this.getVerticalYStartValue(container, elements);
         for (const element of elements) {
-            x = container.measuredWidth * 0.5 - element.measuredWidth * 0.5;
+            x = container.actualWidth * 0.5 - element.actualWidth * 0.5;
             element.position(x, y);
-            y += element.measuredHeight + this.verticalGap;
+            y += element.actualHeight + this.verticalGap;
         }
     }
 
@@ -104,10 +103,10 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         }
         let y = container.paddingTop;
         if (this.verticalAlign === Strings.MIDDLE || this.verticalAlign === Strings.BOTTOM) {
-            const innerHeight = container.measuredHeight - container.paddingTop - container.paddingBottom;
+            const innerHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
             let elementsHeightSum = 0;
             for (const element of elements) {
-                elementsHeightSum += element.measuredHeight;
+                elementsHeightSum += element.actualHeight;
             }
             const verticalGapSumHeight = this.verticalGap * (elements.length - 1);
             if (this.verticalAlign === Strings.MIDDLE) {
@@ -123,10 +122,10 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         let width = 0;
         let height = 0;
         for (const element of elements) {
-            if (width < element.measuredWidth) {
-                width = element.measuredWidth;
+            if (width < element.actualWidth) {
+                width = element.actualWidth;
             }
-            height += element.measuredHeight + this.verticalGap;
+            height += element.actualHeight + this.verticalGap;
         }
         width = container.paddingLeft + width + container.paddingRight;
         height = container.paddingTop + height - this.verticalGap + container.paddingBottom;
@@ -136,8 +135,8 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let width = 0;
         for (const element of elements) {
-            if (width < element.measuredWidth) {
-                width = element.measuredWidth;
+            if (width < element.actualWidth) {
+                width = element.actualWidth;
             }
         }
         return container.paddingLeft + width + container.paddingRight;
@@ -146,7 +145,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let height = 0;
         for (const element of elements) {
-            height += element.measuredHeight + this.verticalGap;
+            height += element.actualHeight + this.verticalGap;
         }
         return container.paddingTop + height - this.verticalGap + container.paddingBottom;
     }

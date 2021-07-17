@@ -16,8 +16,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         this.verticalAlign = verticalAlign;
     }
 
-    public resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
-        const h = container.measuredHeight - container.paddingTop - container.paddingBottom;
+        const h = container.actualHeight - container.paddingTop - container.paddingBottom;
         if (!isNaN(container.width)) {
             const ratio = this.getPixelPercentWidthRatio(container, elements);
             for (const element of elements) {
@@ -47,10 +46,10 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
             } else if (!isNaN(element.percentWidth)) {
                 percentWidthSum += element.percentWidth;
             } else {
-                widthSum += element.measuredWidth;
+                widthSum += element.actualWidth;
             }
         }
-        const innerWidth = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const innerWidth = container.actualWidth - container.paddingLeft - container.paddingRight;
         const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
         const widthLeftForPercentWidth = innerWidth - widthSum - horizontalGapSumWidth;
         if (percentWidthSum > 100) {
@@ -74,7 +73,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         let x = this.getHorizontalXStartValue(container, elements);
         for (const element of elements) {
             element.position(x, container.paddingTop);
-            x += element.measuredWidth + this.horizontalGap;
+            x += element.actualWidth + this.horizontalGap;
         }
     }
 
@@ -82,9 +81,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
-            y = container.measuredHeight - container.paddingBottom - element.measuredHeight;
+            y = container.actualHeight - container.paddingBottom - element.actualHeight;
             element.position(x, y);
-            x += element.measuredWidth + this.horizontalGap;
+            x += element.actualWidth + this.horizontalGap;
         }
     }
 
@@ -92,9 +91,9 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         let x = this.getHorizontalXStartValue(container, elements);
         let y = 0;
         for (const element of elements) {
-            y = container.measuredHeight * 0.5 - element.measuredHeight * 0.5;
+            y = container.actualHeight * 0.5 - element.actualHeight * 0.5;
             element.position(x, y);
-            x += element.measuredWidth + this.horizontalGap;
+            x += element.actualWidth + this.horizontalGap;
         }
     }
 
@@ -104,10 +103,10 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         }
         let x = container.paddingLeft
         if (this.horizontalAlign === Strings.CENTER || this.horizontalAlign === Strings.RIGHT) {
-            const w = container.measuredWidth - container.paddingLeft - container.paddingRight;
+            const w = container.actualWidth - container.paddingLeft - container.paddingRight;
             let elementsWidthSum = 0;
             for (const element of elements) {
-                elementsWidthSum += element.measuredWidth;
+                elementsWidthSum += element.actualWidth;
             }
             const horizontalGapSumWidth = this.horizontalGap * (elements.length - 1);
             if (this.horizontalAlign === Strings.CENTER) {
@@ -123,10 +122,10 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
         let width = 0;
         let height = 0;
         for (const element of elements) {
-            if (height < element.measuredHeight) {
-                height = element.measuredHeight;
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
             }
-            width += element.measuredWidth + this.horizontalGap;
+            width += element.actualWidth + this.horizontalGap;
         }
         width = container.paddingLeft + width - this.horizontalGap + container.paddingRight;
         height = container.paddingTop + height + container.paddingBottom;
@@ -136,7 +135,7 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     public getInternalWidth(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let width = 0;
         for (const element of elements) {
-            width += element.measuredWidth + this.horizontalGap;
+            width += element.actualWidth + this.horizontalGap;
         }
         return container.paddingLeft + width - this.horizontalGap + container.paddingRight;
     }
@@ -144,8 +143,8 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
     public getInternalHeight(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): number {
         let height = 0;
         for (const element of elements) {
-            if (height < element.measuredHeight) {
-                height = element.measuredHeight;
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
             }
         }
         return container.paddingTop + height + container.paddingBottom;

@@ -14,8 +14,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         this.gap = gap;
     }
 
-    public resizeChildren(container: IDisplayContainer, elements: Array<IDisplayElement | ISvgElement>): void {
-        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const width = container.actualWidth - container.paddingLeft - container.paddingRight;
         const [columnWidth] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
         for (const element of elements) {
             element.externalWidth = columnWidth;
@@ -38,7 +37,7 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         if (elements.length === 0) {
             return;
         }
-        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const width = container.actualWidth - container.paddingLeft - container.paddingRight;
         const [columnWidth, columnCount] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
         if (elements.length <= columnCount) {
             let currentX = container.paddingLeft;
@@ -54,8 +53,8 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         let currentY = container.paddingTop;
         let elementHeight = 0;
         for (const element of elements) {
-            if (elementHeight < element.measuredHeight) {
-                elementHeight = element.measuredHeight;
+            if (elementHeight < element.actualHeight) {
+                elementHeight = element.actualHeight;
             }
             element.position(currentX, currentY);
             if (currentColumn < columnCount) {
@@ -90,15 +89,15 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         if (elements.length <= this.maxColumns) {
             return this.oneRowSize(container, elements);
         }
-        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const width = container.actualWidth - container.paddingLeft - container.paddingRight;
         const [columnWidth, columnCount] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
         const lastElementIndex = elements.length - 1;
         let currentColumn = 1;
         let currentY = container.paddingTop;
         let elementHeight = 0;
         for (const element of elements) {
-            if (elementHeight < element.measuredHeight) {
-                elementHeight = element.measuredHeight;
+            if (elementHeight < element.actualHeight) {
+                elementHeight = element.actualHeight;
             }
             if (currentColumn < columnCount) {
                 currentColumn++;
@@ -122,11 +121,11 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
         let currentColumn = 1;
         let currentY = container.paddingTop;
         let elementHeight = 0;
-        const width = container.measuredWidth - container.paddingLeft - container.paddingRight;
+        const width = container.actualWidth - container.paddingLeft - container.paddingRight;
         const [columnWidth, columnCount] = this.getColumnWidthAndCount(width, this.minColumnWidth, this.maxColumns, this.horizontalGap);
         for (const element of elements) {
-            if (elementHeight < element.measuredHeight) {
-                elementHeight = element.measuredHeight;
+            if (elementHeight < element.actualHeight) {
+                elementHeight = element.actualHeight;
             }
             if (currentColumn < columnCount) {
                 currentColumn++;
@@ -162,8 +161,8 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
     private getHighestElementHeightValue(elements: Array<IDisplayElement | ISvgElement>): number {
         let height = 0;
         for (const element of elements) {
-            if (height < element.measuredHeight) {
-                height = element.measuredHeight;
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
             }
         }
         return height;

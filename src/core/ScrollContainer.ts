@@ -32,17 +32,17 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     private updateChildrenSizes(): void {
-        this.outerElement.externalSize(this.measuredWidth + this.scrollBarWidth, this.measuredHeight + this.scrollBarHeight);
+        this.outerElement.externalSize(this.actualWidth + this.scrollBarWidth, this.actualHeight + this.scrollBarHeight);
         if (!this.horizontalScrollEnabled && !this.verticalScrollEnabled) {
-            this.elementsContainer.externalSize(this.measuredWidth, this.measuredHeight);
+            this.outerElement.elementsContainer.externalSize(this.actualWidth, this.actualHeight);
             return;
         }
         if (!this.horizontalScrollEnabled && this.verticalScrollEnabled) {
-            this.elementsContainer.externalWidth = this.measuredWidth;
+            this.outerElement.elementsContainer.externalWidth = this.actualWidth;
             return;
         }
         if (this.horizontalScrollEnabled && !this.verticalScrollEnabled) {
-            this.elementsContainer.externalHeight = this.measuredHeight;
+            this.outerElement.elementsContainer.externalHeight = this.actualHeight;
         }
     }
 
@@ -65,15 +65,15 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     protected updateInternalSize(): void {
-        this.internalSize(this.elementsContainer.measuredWidth, this.elementsContainer.measuredHeight);
+        this.internalSize(this.outerElement.elementsContainer.actualWidth, this.outerElement.elementsContainer.actualHeight);
     }
 
     protected updateInternalWidth(): void {
-        this.internalWidth = this.elementsContainer.measuredWidth;
+        this.internalWidth = this.outerElement.elementsContainer.actualWidth;
     }
 
     protected updateInternalHeight(): void {
-        this.internalHeight = this.elementsContainer.measuredHeight;
+        this.internalHeight = this.outerElement.elementsContainer.actualHeight;
     }
 
     private _outerElement!: DisplayElement;

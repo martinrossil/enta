@@ -11,8 +11,8 @@ export default class ImageElement extends DisplayElement implements IImageElemen
 
     protected validate(): void {
         super.validate();
-        this.img.width = this.measuredWidth;
-        this.img.height = this.measuredHeight;
+        this.img.width = this.actualWidth;
+        this.img.height = this.actualHeight;
     }
 
     private _img!: HTMLImageElement;
