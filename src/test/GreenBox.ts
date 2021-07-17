@@ -9,7 +9,7 @@ export default class GreenBox extends DisplayElement {
         this.left = 200;
         this.top = 200;
         this.backgroundColor = new Color(120, 100, 50);
-        this.z = 0;
+        this.zIndex = 0;
     }
 }
 customElements.define('green-box', GreenBox);

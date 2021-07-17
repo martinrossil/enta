@@ -21,7 +21,7 @@ export default class LeftNavigation extends List<IProvider> {
         this.layout = new VerticalLayout(8);
         this.dataProvider = this.providers;
         this.selectedIndex = 6;
-        this.z = 1;
+        this.zIndex = 1;
     }
 
     private _providers!: IArrayCollection<IProvider>;
