@@ -1,5 +1,3 @@
-import { ClipType } from '../../types/ClipType';
-
 export default interface ILayoutElement {
     position(x: number, y: number): void;
     x: number;

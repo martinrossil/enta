@@ -2,8 +2,7 @@ import DisplayElement from '../core/DisplayElement';
 import IBaseText from '../interfaces/text/IBaseText';
 import IColor from '../interfaces/vo/IColor';
 import ITypeFace from '../interfaces/vo/ITypeFace';
-import { FontWeight } from '../types/FontWeight';
-import { TextAlign } from '../types/TextAlign';
+import { FontWeight, TextAlign } from '../shared/Types';
 import TypeFace from '../vo/TypeFace';
 import TextRenderer from './TextRenderer';
 

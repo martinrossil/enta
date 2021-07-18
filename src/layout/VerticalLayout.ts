@@ -1,5 +1,4 @@
-import { HorizontalAlign } from '../types/HorizontalAlign';
-import { VerticalAlign } from '../types/VerticalAlign';
+import { HorizontalAlign, VerticalAlign } from '../shared/Types';
 import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IVerticalLayout from '../interfaces/layout/IVerticalLayout';

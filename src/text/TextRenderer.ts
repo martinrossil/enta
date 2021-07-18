@@ -2,8 +2,7 @@ import DisplayElement from '../core/DisplayElement';
 import Strings from '../consts/Strings';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import IColor from '../interfaces/vo/IColor';
-import { FontWeight } from '../types/FontWeight';
-import { TextAlign } from '../types/TextAlign';
+import { FontWeight, TextAlign } from '../shared/Types';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
     public constructor() {

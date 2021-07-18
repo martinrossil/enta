@@ -4,9 +4,10 @@ import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 import IRectangle from '../interfaces/vo/IRectangle';
 import SizeElement from '../core/SizeElement';
-import { CursorType } from '../types/CursorType';
+import { Cursor, SvgNameSpace } from '../shared/Types';
 
 export default class SvgElement extends SizeElement implements ISvgElement {
+    protected SVG_NS: SvgNameSpace = 'http://www.w3.org/2000/svg';
     public constructor() {
         super();
         this.name = 'SvgElement';
@@ -32,7 +33,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
 
     private get svg(): SVGSVGElement {
         if (!this._svg) {
-            this._svg = document.createElementNS(Strings.SVG_NS, 'svg');
+            this._svg = document.createElementNS(this.SVG_NS, 'svg');
             this._svg.style.position = Strings.ABSOLUTE;
             this._svg.style.overflow = Strings.VISIBLE;
             this._svg.appendChild(this.defs);
@@ -46,7 +47,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
 
     protected get defs(): SVGDefsElement {
         if (!this._defs) {
-            this._defs = document.createElementNS(Strings.SVG_NS, 'defs');
+            this._defs = document.createElementNS(this.SVG_NS, 'defs');
         }
         return this._defs;
     }
@@ -55,7 +56,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
 
     protected get group(): SVGElement {
         if (!this._group) {
-            this._group = document.createElementNS(Strings.SVG_NS, 'g');
+            this._group = document.createElementNS(this.SVG_NS, 'g');
         }
         return this._group;
     }
@@ -117,9 +118,9 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         return this._enabled;
     }
 
-    private _cursor: CursorType = '';
+    private _cursor: Cursor = '';
 
-    public set cursor(value: CursorType) {
+    public set cursor(value: Cursor) {
         if (this._cursor === value) {
             return;
         }
@@ -127,7 +128,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         this.style.cursor = value;
     }
 
-    public get cursor(): CursorType {
+    public get cursor(): Cursor {
         return this._cursor;
     }
 }

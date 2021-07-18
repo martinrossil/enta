@@ -1,4 +1,4 @@
-import { ItemRendererClass } from '../../types/ItemRendererClass';
+import { ItemRendererClass } from '../../shared/Types';
 import IScrollContainer from '../core/IScrollContainer';
 import IArrayCollection from '../data/IArrayCollection';
 

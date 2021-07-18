@@ -1,5 +1,4 @@
-import { StrokeLineCap } from '../../types/StrokeLineCap';
-import { StrokeLineJoin } from '../../types/StrokeLineJoin';
+import { StrokeLineCap, StrokeLineJoin } from '../../shared/Types';
 import IColor from '../vo/IColor';
 import ILinearGradient from '../vo/ILinearGradient';
 import ISvgElement from './ISvgElement';

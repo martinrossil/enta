@@ -1,8 +1,7 @@
 import Strings from '../consts/Strings';
 import IScrollContainer from '../interfaces/core/IScrollContainer';
 import IScrollOuterElement from '../interfaces/core/IScrollOuterElement';
-import { ChildType } from '../types/ChildType';
-import { LayoutType } from '../types/LayoutType';
+import { ChildElement, Layout } from '../shared/Types';
 import DisplayElement from './DisplayElement';
 import ScrollOuterElement from './ScrollOuterElement';
 
@@ -84,19 +83,19 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this._outerElement;
     }
 
-    public addElement(element: ChildType): void {
+    public addElement(element: ChildElement): void {
         this.outerElement.elementsContainer.addElement(element);
     }
 
-    public addElementAt(element: ChildType, index: number): void {
+    public addElementAt(element: ChildElement, index: number): void {
         this.outerElement.elementsContainer.addElementAt(element, index);
     }
 
-    public addElements(elements: Array<ChildType>): void {
+    public addElements(elements: Array<ChildElement>): void {
         this.outerElement.elementsContainer.addElements(elements);
     }
 
-    public removeElement(element: ChildType): void {
+    public removeElement(element: ChildElement): void {
         this.outerElement.elementsContainer.removeElement(element);
     }
 
@@ -104,7 +103,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this.outerElement.elementsContainer.removeElements();
     }
 
-    public containsElement(element: ChildType): boolean {
+    public containsElement(element: ChildElement): boolean {
         return this.outerElement.elementsContainer.contains(element as unknown as Node);
     }
 
@@ -157,11 +156,11 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this._verticalScrollEnabled;
     }
 
-    public set layout(value: LayoutType) {
+    public set layout(value: Layout) {
         this.outerElement.elementsContainer.layout = value;
     }
 
-    public get layout(): LayoutType {
+    public get layout(): Layout {
         return this.outerElement.elementsContainer.layout;
     }
 

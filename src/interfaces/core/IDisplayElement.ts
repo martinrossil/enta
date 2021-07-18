@@ -1,4 +1,4 @@
-import { ClipType } from '../../types/ClipType';
+import { Clip, Cursor } from '../../shared/Types';
 import IFilter from '../filters/IFilter';
 import IColor from '../vo/IColor';
 import ILinearGradient from '../vo/ILinearGradient';
@@ -11,11 +11,11 @@ export default interface IDisplayElement extends ISizeElement {
     cornerSizeTopRight: number;
     cornerSizeBottomLeft: number;
     cornerSizeBottomRight: number;
-    clip: ClipType;
-    clipX: ClipType;
-    clipY: ClipType;
+    clip: Clip;
+    clipX: Clip;
+    clipY: Clip;
     visible: boolean;
     enabled: boolean;
-    cursor: string;
+    cursor: Cursor;
     addFilter(filter: IFilter): void;
 }

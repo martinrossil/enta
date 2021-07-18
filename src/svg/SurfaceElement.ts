@@ -1,4 +1,4 @@
-import { CornerType } from '../types/CornerType';
+import { CornerShape } from '../shared/Types';
 import Strings from '../consts/Strings';
 import ISurfaceElement from '../interfaces/svg/ISurfaceElement';
 import PathElement from './PathElement';
@@ -42,9 +42,9 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
         return this._cornerSize;
     }
 
-    private _cornerType: CornerType = Strings.ROUND;
+    private _cornerType: CornerShape = Strings.ROUND;
 
-    public set cornerType(value: CornerType) {
+    public set cornerType(value: CornerShape) {
         if (this._cornerType === value) {
             return;
         }
@@ -52,7 +52,7 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
         this.invalidate();
     }
 
-    public get cornerType(): CornerType {
+    public get cornerType(): CornerShape {
         return this._cornerType;
     }
 

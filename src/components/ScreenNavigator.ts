@@ -1,6 +1,6 @@
 import DisplayContainer from '../core/DisplayContainer';
 import IScreenNavigator from '../interfaces/components/IScreenNavigator';
-import { ChildType } from '../types/ChildType';
+import { ChildElement } from '../shared/Types';
 
 export default class ScreenNavigator extends DisplayContainer implements IScreenNavigator {
     public constructor() {
@@ -10,13 +10,13 @@ export default class ScreenNavigator extends DisplayContainer implements IScreen
 
     private updateScreens(): void {
         for (let i = 0; i < this.elements.length; i++) {
-            const screen: ChildType = this.getScreenAt(i);
+            const screen: ChildElement = this.getScreenAt(i);
             screen.visible = this.screenIndex === i;
         }
     }
 
-    private getScreenAt(index: number): ChildType {
-        return this.elements[index] as unknown as ChildType;
+    private getScreenAt(index: number): ChildElement {
+        return this.elements[index] as unknown as ChildElement;
     }
 
     private _screenIndex = NaN;

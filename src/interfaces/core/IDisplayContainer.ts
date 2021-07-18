@@ -1,13 +1,12 @@
-import { ChildType } from '../../types/ChildType';
-import { LayoutType } from '../../types/LayoutType';
+import { ChildElement, Layout } from '../../shared/Types';
 import IDisplayElement from './IDisplayElement';
 
 export default interface IDisplayContainer extends IDisplayElement {
-    addElement(element: ChildType): void;
-    addElementAt(element: ChildType, index: number): void;
-    addElements(elements: Array<ChildType>): void;
-    removeElement(element: ChildType): void;
-    containsElement(element: ChildType): boolean;
+    addElement(element: ChildElement): void;
+    addElementAt(element: ChildElement, index: number): void;
+    addElements(elements: Array<ChildElement>): void;
+    removeElement(element: ChildElement): void;
+    containsElement(element: ChildElement): boolean;
     removeElements(): void;
     padding: number;
     paddingLeft: number;
@@ -16,5 +15,5 @@ export default interface IDisplayContainer extends IDisplayElement {
     paddingBottom: number;
     paddingX: number;
     paddingY: number;
-    layout: LayoutType;
+    layout: Layout;
 }

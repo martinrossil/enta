@@ -1,5 +1,4 @@
-import { ClipType } from '../types/ClipType';
-import { CursorType } from '../types/CursorType';
+import { Clip, Cursor } from '../shared/Types';
 import Strings from '../consts/Strings';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
@@ -216,9 +215,9 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._cornerSizeBottomRight;
     }
 
-    private _clip: ClipType = Strings.VISIBLE;
+    private _clip: Clip = Strings.VISIBLE;
 
-    public set clip(value: ClipType) {
+    public set clip(value: Clip) {
         if (this._clip === value) {
             return;
         }
@@ -226,13 +225,13 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.style.overflow = this._clip;
     }
 
-    public get clip(): ClipType {
+    public get clip(): Clip {
         return this._clip;
     }
 
-    private _clipX: ClipType = Strings.VISIBLE;
+    private _clipX: Clip = Strings.VISIBLE;
 
-    public set clipX(value: ClipType) {
+    public set clipX(value: Clip) {
         if (this._clipX === value) {
             return;
         }
@@ -240,13 +239,13 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.style.overflowX = this._clipX;
     }
 
-    public get clipX(): ClipType {
+    public get clipX(): Clip {
         return this._clipX;
     }
 
-    private _clipY: ClipType = Strings.VISIBLE;
+    private _clipY: Clip = Strings.VISIBLE;
 
-    public set clipY(value: ClipType) {
+    public set clipY(value: Clip) {
         if (this._clipY === value) {
             return;
         }
@@ -254,7 +253,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.style.overflowY = this._clipY;
     }
 
-    public get clipY(): ClipType {
+    public get clipY(): Clip {
         return this._clipY;
     }
 
@@ -296,9 +295,9 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._enabled;
     }
 
-    private _cursor: CursorType = '';
+    private _cursor: Cursor = '';
 
-    public set cursor(value: CursorType) {
+    public set cursor(value: Cursor) {
         if (this._cursor === value) {
             return;
         }
@@ -306,7 +305,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.style.cursor = value;
     }
 
-    public get cursor(): CursorType {
+    public get cursor(): Cursor {
         return this._cursor;
     }
 }

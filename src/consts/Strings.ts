@@ -1,8 +1,4 @@
-import { ClipType } from '../types/ClipType';
-import { CornerType } from '../types/CornerType';
-import { HorizontalAlign } from '../types/HorizontalAlign';
-import { SvgNameSpace } from '../types/SvgNameSpace';
-import { VerticalAlign } from '../types/VerticalAlign';
+import { Clip, CornerShape, HorizontalAlign, VerticalAlign } from '../shared/Types';
 
 export default class Strings {
     public static get ABSOLUTE(): string { return 'absolute'; }
@@ -23,7 +19,7 @@ export default class Strings {
     public static get GRADIENT_UNITS(): string { return 'gradientUnits'; }
     public static get GRAYSCALE(): string { return 'grayscale'; }
     public static get HEIGHT(): string { return 'height'; }
-    public static get HIDDEN(): ClipType { return 'hidden'; }
+    public static get HIDDEN(): Clip { return 'hidden'; }
     public static get HUNDRED_VH(): string { return '100vh'; }
     public static get ID(): string { return 'id'; }
     public static get INVALIDATE(): string { return 'invalidate'; }
@@ -46,8 +42,8 @@ export default class Strings {
     public static get RESIZE(): string { return 'resize'; }
     public static get RIGHT(): HorizontalAlign { return 'right'; }
     public static get ROTATE(): string { return 'rotate'; }
-    public static get ROUND(): CornerType { return 'round'; }
-    public static get SCROLL(): ClipType { return 'scroll'; }
+    public static get ROUND(): CornerShape { return 'round'; }
+    public static get SCROLL(): Clip { return 'scroll'; }
     public static get SELECTED_ITEM_CHANGED(): string { return 'selectedItemChanged'; }
     public static get SELECTED_INDEX_CHANGED(): string { return 'selectedIndexChanged'; }
     public static get STOP_COLOR(): string { return 'stop-color'; }
@@ -56,7 +52,6 @@ export default class Strings {
     public static get STROKE_LINECAP(): string { return 'stroke-linecap'; }
     public static get STROKE_LINEJOIN(): string { return 'stroke-linejoin'; }
     public static get STROKE_WIDTH(): string { return 'stroke-width'; }
-    public static get SVG_NS(): SvgNameSpace { return 'http://www.w3.org/2000/svg'; }
     public static get TOP(): VerticalAlign { return 'top'; }
     public static get TOUCH(): string { return 'touch'; }
     public static get TRANSFORM(): string { return 'transform'; }
@@ -64,7 +59,7 @@ export default class Strings {
     public static get URL(): string { return 'url'; }
     public static get USER_SPACE_ON_USE(): string { return 'userSpaceOnUse'; }
     public static get VIEW_BOX(): string { return 'viewBox'; }
-    public static get VISIBLE(): ClipType { return 'visible'; }
+    public static get VISIBLE(): Clip { return 'visible'; }
     public static get WIDTH(): string { return 'width'; }
     public static get ZERO(): string { return '0'; }
 }

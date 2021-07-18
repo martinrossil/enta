@@ -4,7 +4,7 @@ import IItemRenderer from '../interfaces/components/IItemRenderer';
 import IList from '../interfaces/components/IList';
 import IArrayCollection from '../interfaces/data/IArrayCollection';
 import IEventListener from '../interfaces/event/IEventListener';
-import { ItemRendererClass } from '../types/ItemRendererClass';
+import { ItemRendererClass } from '../shared/Types';
 import ItemRenderer from './ItemRenderer';
 
 export default class List<Item> extends ScrollContainer implements IList<Item> {

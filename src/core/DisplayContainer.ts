@@ -5,8 +5,7 @@ import AnchorLayout from '../layout/AnchorLayout';
 import DisplayElement from '../core/DisplayElement';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
 import ILayoutContainer from '../interfaces/core/ILayoutContainer';
-import { LayoutType } from '../types/LayoutType';
-import { ChildType } from '../types/ChildType';
+import { ChildElement, Layout } from '../shared/Types';
 
 export default class DisplayContainer extends DisplayElement implements IDisplayContainer, ILayoutContainer {
     public constructor() {
@@ -53,13 +52,13 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     protected elements: Array<ILayoutElement> = [];
 
-    public addElement(element: ChildType): void {
+    public addElement(element: ChildElement): void {
         this.elements.push(element as unknown as ILayoutElement);
         this.appendChild(element as unknown as Node);
         this.invalidate();
     }
 
-    public addElementAt(element: ChildType, index: number): void {
+    public addElementAt(element: ChildElement, index: number): void {
         if (this.elements[index]) {
             const beforeElement: Node = this.elements[index] as unknown as Node;
             this.elements.splice(index, 0, element as unknown as ILayoutElement);
@@ -72,7 +71,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidate();
     }
 
-    public addElements(elements: Array<ChildType>): void {
+    public addElements(elements: Array<ChildElement>): void {
         const frag: DocumentFragment = document.createDocumentFragment();
         for (const element of elements) {
             this.elements.push(element as unknown as ILayoutElement);
@@ -82,7 +81,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidate();
     }
 
-    public removeElement(element: ChildType): void {
+    public removeElement(element: ChildElement): void {
         const start: number = this.elements.indexOf(element as unknown as ILayoutElement);
         if (start !== -1) {
             this.elements.splice(start, 1);
@@ -101,7 +100,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         }
     }
 
-    public containsElement(element: ChildType): boolean {
+    public containsElement(element: ChildElement): boolean {
         return this.contains(element as unknown as Node);
     }
 
@@ -111,7 +110,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     private _layout!: ILayout;
 
-    public set layout(value: LayoutType) {
+    public set layout(value: Layout) {
         if (this._layout === value) {
             return;
         }
@@ -123,12 +122,12 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidate();
     }
 
-    public get layout(): LayoutType {
+    public get layout(): Layout {
         if (!this._layout) {
             this._layout = new AnchorLayout() as unknown as ILayout;
             this._layout.addEventListener(Strings.INVALIDATE, this.invalidate);
         }
-        return this._layout as LayoutType;
+        return this._layout as Layout;
     }
 
     private _padding = 0;

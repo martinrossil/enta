@@ -1,8 +1,7 @@
 import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IHorizontalLayout from '../interfaces/layout/IHorizontalLayout';
-import { HorizontalAlign } from '../types/HorizontalAlign';
-import { VerticalAlign } from '../types/VerticalAlign';
+import { HorizontalAlign, VerticalAlign } from '../shared/Types';
 import ILayoutContainer from '../interfaces/core/ILayoutContainer';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
 
