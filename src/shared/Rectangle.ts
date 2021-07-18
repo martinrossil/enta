@@ -1,4 +1,4 @@
-import IRectangle from '../interfaces/vo/IRectangle';
+import { IRectangle } from './Interfaces';
 
 export default class Rectangle implements IRectangle {
     public constructor(x = 0, y = 0, width = 0, height = 0) {

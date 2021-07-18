@@ -1,5 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 
 export default class RedBox extends DisplayElement {
     public constructor() {

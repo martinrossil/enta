@@ -1,6 +1,6 @@
 import ITest from './ITest';
 import List from '../components/List';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 import TestView from './TestView';
 import Test from './Test';
 import ArrayCollection from '../data/ArrayCollection';

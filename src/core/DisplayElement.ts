@@ -2,11 +2,10 @@ import { Clip, Cursor } from '../shared/Types';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
 import IFilter from '../interfaces/filters/IFilter';
-import IColor from '../interfaces/vo/IColor';
-import ILinearGradient from '../interfaces/vo/ILinearGradient';
-import Color from '../vo/Color';
-import LinearGradient from '../vo/LinearGradient';
+import Color from '../shared/Color';
+import LinearGradient from '../shared/LinearGradient';
 import SizeElement from './SizeElement';
+import { IColor, ILinearGradient } from '../shared/Interfaces';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {

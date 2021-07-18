@@ -1,6 +1,6 @@
 import ItemRenderer from '../components/ItemRenderer';
 import IProvider from './IProvider';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 
 export default class LeftNavigationItemRenderer extends ItemRenderer<IProvider> {
     public constructor() {

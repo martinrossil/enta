@@ -1,5 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 import IInteractive from '../interfaces/fsm/IInteractive';
 import InteractiveMachine from '../fsm/InteractiveMachine';
 

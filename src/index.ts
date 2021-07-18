@@ -64,11 +64,6 @@ export { default as ILabelElement } from './interfaces/text/ILabelElement';
 export { default as ITextElement } from './interfaces/text/ITextElement';
 export { default as ITextRenderer } from './interfaces/text/ITextRenderer';
 
-export { default as IColor } from './interfaces/vo/IColor';
-export { default as ILinearGradient } from './interfaces/vo/ILinearGradient';
-export { default as IRectangle } from './interfaces/vo/IRectangle';
-export { default as ITypeFace } from './interfaces/vo/ITypeFace';
-
 export { default as AnchorLayout } from './layout/AnchorLayout';
 export { default as ColumnLayout } from './layout/ColumnLayout';
 export { default as HorizontalLayout } from './layout/HorizontalLayout';
@@ -78,10 +73,20 @@ export { default as PathElement } from './svg/PathElement';
 export { default as SurfaceElement } from './svg/SurfaceElement';
 export { default as SvgElement } from './svg/SvgElement';
 
+export { IColor } from './shared/Interfaces';
+export { ILinearGradient } from './shared/Interfaces';
+export { IRectangle } from './shared/Interfaces';
+export { ITypeFace } from './shared/Interfaces';
+
 export { default as BaseText } from './text/BaseText';
 export { default as LabelElement } from './text/LabelElement';
 export { default as TextElement } from './text/TextElement';
 export { default as TextRenderer } from './text/TextRenderer';
+export { default as TypeFace } from './text/TypeFace';
+
+export { default as Color } from './shared/Color';
+export { default as LinearGradient } from './shared/LinearGradient';
+export { default as Rectangle } from './shared/Rectangle';
 
 export { ChildElement } from './shared/Types';
 export { Clip } from './shared/Types';
@@ -96,8 +101,3 @@ export { StrokeLineJoin } from './shared/Types';
 export { SvgNameSpace } from './shared/Types';
 export { TextAlign } from './shared/Types';
 export { VerticalAlign } from './shared/Types';
-
-export { default as Color } from './vo/Color';
-export { default as LinearGradient } from './vo/LinearGradient';
-export { default as Rectangle } from './vo/Rectangle';
-export { default as TypeFace } from './vo/TypeFace';

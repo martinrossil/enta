@@ -1,6 +1,6 @@
 import DisplayContainer from '../core/DisplayContainer';
 import ColumnLayout from '../layout/ColumnLayout';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 import RedBox from './RedBox';
 
 export default class BlueContainer extends DisplayContainer {

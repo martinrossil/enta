@@ -2,7 +2,7 @@ import List from '../components/List';
 import ArrayCollection from '../data/ArrayCollection';
 import IArrayCollection from '../interfaces/data/IArrayCollection';
 import VerticalLayout from '../layout/VerticalLayout';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 import IProvider from './IProvider';
 import LeftNavigationItemRenderer from './LeftNavigationItemRenderer';
 import Provider from './Provider';

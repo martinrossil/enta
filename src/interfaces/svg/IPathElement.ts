@@ -1,6 +1,5 @@
+import { IColor, ILinearGradient } from '../../shared/Interfaces';
 import { StrokeLineCap, StrokeLineJoin } from '../../shared/Types';
-import IColor from '../vo/IColor';
-import ILinearGradient from '../vo/ILinearGradient';
 import ISvgElement from './ISvgElement';
 
 export default interface IPathElement extends ISvgElement {

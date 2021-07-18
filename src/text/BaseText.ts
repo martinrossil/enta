@@ -1,10 +1,9 @@
 import DisplayElement from '../core/DisplayElement';
 import IBaseText from '../interfaces/text/IBaseText';
-import IColor from '../interfaces/vo/IColor';
-import ITypeFace from '../interfaces/vo/ITypeFace';
 import { FontWeight, TextAlign } from '../shared/Types';
-import TypeFace from '../vo/TypeFace';
+import TypeFace from './TypeFace';
 import TextRenderer from './TextRenderer';
+import { IColor, ITypeFace } from '../shared/Interfaces';
 
 export default class BaseText extends DisplayElement implements IBaseText {
     public constructor() {

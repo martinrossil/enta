@@ -1,9 +1,9 @@
 import BlurFilter from '../filters/BlurFilter';
 import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
-import IRectangle from '../interfaces/vo/IRectangle';
 import SizeElement from '../core/SizeElement';
 import { Cursor, SvgNameSpace } from '../shared/Types';
+import { IRectangle } from '../shared/Interfaces';
 
 export default class SvgElement extends SizeElement implements ISvgElement {
     protected SVG_NS: SvgNameSpace = 'http://www.w3.org/2000/svg';

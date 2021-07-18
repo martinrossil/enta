@@ -1,5 +1,5 @@
 import DisplayContainer from '../core/DisplayContainer';
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 import PurpleBox from './PurpleBox';
 
 export default class YellowBox extends DisplayContainer {

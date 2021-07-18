@@ -1,5 +1,5 @@
 import ItemRenderer from '../components/ItemRenderer'
-import Color from '../vo/Color';
+import Color from '../shared/Color';
 import ITest from './ITest';
 
 export default class TestView extends ItemRenderer<ITest> {

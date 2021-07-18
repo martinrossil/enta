@@ -1,11 +1,10 @@
 import { StrokeLineCap, StrokeLineJoin } from '../shared/Types';
 import IEventListener from '../interfaces/event/IEventListener';
 import IPathElement from '../interfaces/svg/IPathElement';
-import IColor from '../interfaces/vo/IColor';
-import ILinearGradient from '../interfaces/vo/ILinearGradient';
-import Color from '../vo/Color';
-import LinearGradient from '../vo/LinearGradient';
+import Color from '../shared/Color';
+import LinearGradient from '../shared/LinearGradient';
 import SvgElement from './SvgElement';
+import { IColor, ILinearGradient } from '../shared/Interfaces';
 
 export default class PathElement extends SvgElement implements IPathElement {
     public constructor() {
