@@ -1,6 +1,6 @@
 import DisplayElement from '../core/DisplayElement';
-import Strings from '../consts/Strings';
 import IImageElement from '../interfaces/components/IImageElement';
+import { ObjectFit } from '../shared/Types';
 
 export default class ImageElement extends DisplayElement implements IImageElement {
     public constructor() {
@@ -20,9 +20,23 @@ export default class ImageElement extends DisplayElement implements IImageElemen
     private get img(): HTMLImageElement {
         if (!this._img) {
             this._img = document.createElement('img');
-            this._img.style.objectFit = Strings.COVER;
+            this._img.style.objectFit = this.objectFit;
         }
         return this._img;
+    }
+
+    private _objectFit: ObjectFit = 'none';
+
+    public set objectFit(value: ObjectFit) {
+        if (this._objectFit === value) {
+            return;
+        }
+        this._objectFit = value;
+        this._img.style.objectFit = value;
+    }
+
+    public get objectFit(): ObjectFit {
+        return this._objectFit;
     }
 
     private _source = '';
