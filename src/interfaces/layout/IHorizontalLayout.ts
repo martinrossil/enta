@@ -1,5 +1,4 @@
-import { HorizontalAlign } from '../../types/HorizontalAlign';
-import { VerticalAlign } from '../../types/VerticalAlign';
+import { HorizontalAlign, VerticalAlign } from '../../shared/Types';
 
 export default interface IHorizontalLayout {
     horizontalGap: number;

@@ -1,4 +1,4 @@
-import { TextAlign } from '../../types/TextAlign';
+import { TextAlign } from '../../shared/Types';
 import IDisplayElement from '../core/IDisplayElement';
 import IColor from '../vo/IColor';
 

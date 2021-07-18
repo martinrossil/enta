@@ -1,5 +1,4 @@
-import { FontWeight } from '../../types/FontWeight';
-import { TextAlign } from '../../types/TextAlign';
+import { FontWeight, TextAlign } from '../../shared/Types';
 import IDisplayElement from '../core/IDisplayElement';
 import IColor from '../vo/IColor';
 import ITypeFace from '../vo/ITypeFace';

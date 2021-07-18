@@ -1,11 +1,11 @@
 import DisplayContainer from '../../core/DisplayContainer';
-import { ClipType } from '../../types/ClipType';
+import { Clip } from '../../shared/Types';
 import ILayoutElement from './ILayoutElement';
 
 export default interface IScrollOuterElement extends ILayoutElement {
-    clip: ClipType;
-    clipX: ClipType;
-    clipY: ClipType;
+    clip: Clip;
+    clipX: Clip;
+    clipY: Clip;
     readonly offsetWidth: number;
     readonly offsetHeight: number;
     readonly clientWidth: number;
