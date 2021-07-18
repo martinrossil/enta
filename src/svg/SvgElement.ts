@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import BlurFilter from '../filters/BlurFilter';
 import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
@@ -21,8 +20,8 @@ export default class SvgElement extends SizeElement implements ISvgElement {
     }
 
     private updateSvgAttributes(): void {
-        this.svg.setAttribute(Strings.WIDTH, this.actualWidth.toString());
-        this.svg.setAttribute(Strings.HEIGHT, this.actualWidth.toString());
+        this.svg.setAttribute('width', this.actualWidth.toString());
+        this.svg.setAttribute('height', this.actualWidth.toString());
     }
 
     public addFilter(value: BlurFilter | ShadowFilter): void {
@@ -34,11 +33,11 @@ export default class SvgElement extends SizeElement implements ISvgElement {
     private get svg(): SVGSVGElement {
         if (!this._svg) {
             this._svg = document.createElementNS(this.SVG_NS, 'svg');
-            this._svg.style.position = Strings.ABSOLUTE;
-            this._svg.style.overflow = Strings.VISIBLE;
+            this._svg.style.position = 'absolute';
+            this._svg.style.overflow = 'visible';
             this._svg.appendChild(this.defs);
             this._svg.appendChild(this.group);
-            this._svg.setAttribute(Strings.PRESERVE_ASPECT_RATIO, Strings.NONE);
+            this._svg.setAttribute('preserveAspectRatio', 'none');
         }
         return this._svg;
     }
@@ -70,10 +69,10 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         this._viewBox = value;
         if (this._viewBox) {
             const box = this._viewBox;
-            this.svg.setAttribute(Strings.VIEW_BOX, box.x + ' ' + box.y + ' ' + box.width + ' ' + box.height);
+            this.svg.setAttribute('viewBox', box.x + ' ' + box.y + ' ' + box.width + ' ' + box.height);
             return;
         }
-        this.svg.removeAttribute(Strings.VIEW_BOX);
+        this.svg.removeAttribute('viewBox');
     }
 
     public get viewBox(): IRectangle | null {
@@ -91,7 +90,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
             this.style.visibility = '';
             return;
         }
-        this.style.visibility = Strings.HIDDEN;
+        this.style.visibility = 'hidden';
     }
 
     public get visible(): boolean {
@@ -107,10 +106,10 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         this._enabled = value;
         if (value) {
             this.style.pointerEvents = '';
-            this.style.userSelect = Strings.AUTO;
+            this.style.userSelect = 'auto';
         } else {
-            this.style.pointerEvents = Strings.NONE;
-            this.style.userSelect = Strings.NONE;
+            this.style.pointerEvents = 'none';
+            this.style.userSelect = 'none';
         }
     }
 

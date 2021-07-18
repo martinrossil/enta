@@ -3,8 +3,6 @@ export { default as ItemRenderer } from './components/ItemRenderer';
 export { default as List } from './components/List';
 export { default as ScreenNavigator } from './components/ScreenNavigator';
 
-export { default as Strings } from './consts/Strings';
-
 export { default as ApplicationElement } from './core/ApplicationElement';
 export { default as BaseElement } from './core/BaseElement';
 export { default as DisplayContainer } from './core/DisplayContainer';

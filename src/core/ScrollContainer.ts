@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import IScrollContainer from '../interfaces/core/IScrollContainer';
 import IScrollOuterElement from '../interfaces/core/IScrollOuterElement';
 import { ChildElement, Layout } from '../shared/Types';
@@ -10,8 +9,8 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         super();
         this.name = 'ScrollContainer';
         this.verticalScrollEnabled = true;
-        this.clip = Strings.HIDDEN;
-        this.addEventListener(Strings.INVALIDATE, this.childInvalid);
+        this.clip = 'hidden';
+        this.addEventListener('invalidate', this.childInvalid);
         this.appendChild(this.outerElement as unknown as Node);
     }
 
@@ -116,7 +115,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         this._scrollEnabled = value;
         this._horizontalScrollEnabled = value;
         this._verticalScrollEnabled = value;
-        this.outerElement.clip = this.scrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
+        this.outerElement.clip = this.scrollEnabled ? 'scroll' : 'hidden';
         this.invalidate();
     }
 
@@ -132,7 +131,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._horizontalScrollEnabled = value;
         this._scrollEnabled = value && this.verticalScrollEnabled;
-        this.outerElement.clipX = this.horizontalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
+        this.outerElement.clipX = this.horizontalScrollEnabled ? 'scroll' : 'hidden';
         this.invalidate();
     }
 
@@ -148,7 +147,7 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
         this._verticalScrollEnabled = value;
         this._scrollEnabled = value && this.horizontalScrollEnabled;
-        this.outerElement.clipY = this.verticalScrollEnabled ? Strings.SCROLL : Strings.HIDDEN;
+        this.outerElement.clipY = this.verticalScrollEnabled ? 'scroll' : 'hidden';
         this.invalidate();
     }
 

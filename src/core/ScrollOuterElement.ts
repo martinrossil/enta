@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import IScrollOuterElement from '../interfaces/core/IScrollOuterElement';
 import { Clip } from '../shared/Types';
 import DisplayContainer from './DisplayContainer';
@@ -8,7 +7,7 @@ export default class ScrollOuterElement extends SizeElement implements IScrollOu
     public constructor() {
         super();
         this.name = 'ScrollOuterElement';
-        this.clip = Strings.SCROLL;
+        this.clip = 'scroll';
         this.appendChild(this.elementsContainer)
     }
 
@@ -18,12 +17,12 @@ export default class ScrollOuterElement extends SizeElement implements IScrollOu
         if (!this._elementsContainer) {
             this._elementsContainer = new DisplayContainer();
             // this will boost scroll performance, no repaints
-            this._elementsContainer.style.willChange = Strings.TRANSFORM;
+            this._elementsContainer.style.willChange = 'transform';
         }
         return this._elementsContainer;
     }
 
-    private _clip: Clip = Strings.VISIBLE;
+    private _clip: Clip = 'visible';
 
     public set clip(value: Clip) {
         if (this._clip === value) {
@@ -37,7 +36,7 @@ export default class ScrollOuterElement extends SizeElement implements IScrollOu
         return this._clip;
     }
 
-    private _clipX: Clip = Strings.VISIBLE;
+    private _clipX: Clip = 'visible';
 
     public set clipX(value: Clip) {
         if (this._clipX === value) {
@@ -51,7 +50,7 @@ export default class ScrollOuterElement extends SizeElement implements IScrollOu
         return this._clipX;
     }
 
-    private _clipY: Clip = Strings.VISIBLE;
+    private _clipY: Clip = 'visible';
 
     public set clipY(value: Clip) {
         if (this._clipY === value) {

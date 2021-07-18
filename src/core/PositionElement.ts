@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import IPositionElement from '../interfaces/core/IPositionElement';
 import BaseElement from './BaseElement';
 
@@ -6,7 +5,7 @@ export default class PositionElement extends BaseElement implements IPositionEle
     public constructor() {
         super();
         this.name = 'PositionElement';
-        this.style.position = Strings.ABSOLUTE;
+        this.style.position = 'absolute';
     }
 
     public position(x: number, y: number): void {

@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IEventListener from '../interfaces/event/IEventListener';
 import IColor from '../interfaces/vo/IColor';
@@ -20,29 +19,29 @@ export default class LinearGradient extends EventDispatcher implements ILinearGr
         }
         for (const color of colors) {
             this.colors.push(color);
-            color.addEventListener(Strings.INVALIDATE, this.colorChanged as IEventListener);
+            color.addEventListener('invalidate', this.colorChanged as IEventListener);
         }
     }
 
     private colorChanged(e: CustomEvent<IColor>): void {
-        this.dispatch(Strings.COLOR_CHANGED, e.detail)
+        this.dispatch('colorChanged', e.detail)
     }
 
     readonly colors: Array<IColor> = [];
 
     public addColor(value: IColor): void {
         this.colors.push(value);
-        value.addEventListener(Strings.INVALIDATE, this.colorChanged as IEventListener);
-        this.dispatch(Strings.COLOR_ADDED, value);
+        value.addEventListener('invalidate', this.colorChanged as IEventListener);
+        this.dispatch('colorAdded', value);
     }
 
     public addColors(value: Array<IColor>): void {
         for (const color of value) {
             this.colors.push(color);
-            color.addEventListener(Strings.INVALIDATE, this.colorChanged as IEventListener);
+            color.addEventListener('invalidate', this.colorChanged as IEventListener);
         }
         if (value.length > 0) {
-            this.dispatch(Strings.COLORS_ADDED, value);
+            this.dispatch('colorsAdded', value);
         }
     }
 
@@ -55,12 +54,12 @@ export default class LinearGradient extends EventDispatcher implements ILinearGr
         if (isNaN(value) || value < 0 || value >= 360) {
             if (this._degrees !== 0) {
                 this._degrees = 0;
-                this.dispatch(Strings.DEGREES_CHANGED, 0);
+                this.dispatch('degreesChanged', 0);
                 return;
             }
         }
         this._degrees = value;
-        this.dispatch(Strings.DEGREES_CHANGED, this._degrees);
+        this.dispatch('degreesChanged', this._degrees);
     }
 
     public get degrees(): number {

@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import DisplayContainer from '../core/DisplayContainer';
 import InteractiveMachine from '../fsm/InteractiveMachine';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
@@ -24,7 +23,7 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
     }
 
     public clicked(): void {
-        this.dispatch(Strings.ITEM_RENDERER_TRIGGERED, this.data, true);
+        this.dispatch('itemRendererTriggered', this.data, true);
     }
 
     protected dataChanged(): void {

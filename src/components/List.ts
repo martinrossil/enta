@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import ScrollContainer from '../core/ScrollContainer';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
 import IList from '../interfaces/components/IList';
@@ -17,15 +16,15 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
         this.itemsAdded = this.itemsAdded.bind(this);
         this.itemRemoved = this.itemRemoved.bind(this);
         this.reset = this.reset.bind(this);
-        this.addEventListener(Strings.ITEM_RENDERER_TRIGGERED, this.itemRenderTriggered as IEventListener);
+        this.addEventListener('itemRendererTriggered', this.itemRenderTriggered as IEventListener);
     }
 
     private itemRenderTriggered(e: CustomEvent<Item>): void {
         e.stopImmediatePropagation();
         if (this.dataProvider) {
             this.selectedIndex = this.dataProvider.getItemIndex(e.detail);
-            this.dispatch(Strings.SELECTED_ITEM_CHANGED, e.detail);
-            this.dispatch(Strings.SELECTED_INDEX_CHANGED, this.selectedIndex);
+            this.dispatch('selectedItemChanged', e.detail);
+            this.dispatch('selectedIndexChanged', this.selectedIndex);
         }
     }
 
@@ -127,17 +126,17 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
             return;
         }
         if (this._dataProvider) {
-            this._dataProvider.removeEventListener(Strings.ITEM_ADDED, this.itemAdded as IEventListener);
-            this._dataProvider.removeEventListener(Strings.ITEMS_ADDED, this.itemsAdded as IEventListener);
-            this._dataProvider.removeEventListener(Strings.ITEM_REMOVED, this.itemRemoved as IEventListener);
-            this._dataProvider.removeEventListener(Strings.RESET, this.reset as IEventListener);
+            this._dataProvider.removeEventListener('itemAdded', this.itemAdded as IEventListener);
+            this._dataProvider.removeEventListener('itemsAdded', this.itemsAdded as IEventListener);
+            this._dataProvider.removeEventListener('itemRemoved', this.itemRemoved as IEventListener);
+            this._dataProvider.removeEventListener('reset', this.reset as IEventListener);
         }
         this._dataProvider = value;
         if (this._dataProvider) {
-            this._dataProvider.addEventListener(Strings.ITEM_ADDED, this.itemAdded as IEventListener);
-            this._dataProvider.addEventListener(Strings.ITEMS_ADDED, this.itemsAdded as IEventListener);
-            this._dataProvider.addEventListener(Strings.ITEM_REMOVED, this.itemRemoved as IEventListener);
-            this._dataProvider.addEventListener(Strings.RESET, this.reset as IEventListener);
+            this._dataProvider.addEventListener('itemAdded', this.itemAdded as IEventListener);
+            this._dataProvider.addEventListener('itemsAdded', this.itemsAdded as IEventListener);
+            this._dataProvider.addEventListener('itemRemoved', this.itemRemoved as IEventListener);
+            this._dataProvider.addEventListener('reset', this.reset as IEventListener);
         }
         this.reset();
     }

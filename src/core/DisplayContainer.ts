@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import IDisplayContainer from '../interfaces/core/IDisplayContainer';
 import ILayout from '../interfaces/layout/ILayout';
 import AnchorLayout from '../layout/AnchorLayout';
@@ -11,7 +10,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     public constructor() {
         super();
         this.name = 'DisplayContainer';
-        this.addEventListener(Strings.INVALIDATE, this.childInvalid);
+        this.addEventListener('invalidate', this.childInvalid);
     }
 
     protected validate(): void {
@@ -115,17 +114,17 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             return;
         }
         if (this._layout) {
-            this._layout.removeEventListener(Strings.INVALIDATE, this.invalidate);
+            this._layout.removeEventListener('invalidate', this.invalidate);
         }
         this._layout = value as ILayout;
-        this._layout.addEventListener(Strings.INVALIDATE, this.invalidate);
+        this._layout.addEventListener('invalidate', this.invalidate);
         this.invalidate();
     }
 
     public get layout(): Layout {
         if (!this._layout) {
             this._layout = new AnchorLayout() as unknown as ILayout;
-            this._layout.addEventListener(Strings.INVALIDATE, this.invalidate);
+            this._layout.addEventListener('invalidate', this.invalidate);
         }
         return this._layout as Layout;
     }

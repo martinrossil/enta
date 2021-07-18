@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IColomnLayout from '../interfaces/layout/IColumnLayout';
 import ILayoutContainer from '../interfaces/core/ILayoutContainer';
@@ -278,6 +277,6 @@ export default class ColumnLayout extends EventDispatcher implements IColomnLayo
     }
 
     private notifyInvalid(): void {
-        this.dispatch(Strings.INVALIDATE);
+        this.dispatch('invalidate');
     }
 }

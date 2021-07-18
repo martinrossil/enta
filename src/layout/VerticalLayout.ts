@@ -1,12 +1,11 @@
 import { HorizontalAlign, VerticalAlign } from '../shared/Types';
-import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IVerticalLayout from '../interfaces/layout/IVerticalLayout';
 import ILayoutContainer from '../interfaces/core/ILayoutContainer';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
 
 export default class VerticalLayout extends EventDispatcher implements IVerticalLayout {
-    public constructor(verticalGap = 0, horizontalAlign: HorizontalAlign = Strings.LEFT, verticalAlign: VerticalAlign = Strings.TOP) {
+    public constructor(verticalGap = 0, horizontalAlign: HorizontalAlign = 'left', verticalAlign: VerticalAlign = 'top') {
         super();
         this.name = 'VerticalLayout';
         this.verticalGap = verticalGap;
@@ -59,9 +58,9 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     public layoutChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
-        if (this.horizontalAlign === Strings.LEFT) {
+        if (this.horizontalAlign === 'left') {
             this.layoutElementsLeft(container, elements);
-        } else if (this.horizontalAlign === Strings.RIGHT) {
+        } else if (this.horizontalAlign === 'right') {
             this.layoutElementsRight(container, elements);
         } else {
             this.layoutElementsCenter(container, elements);
@@ -101,14 +100,14 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
             return container.paddingTop;
         }
         let y = container.paddingTop;
-        if (this.verticalAlign === Strings.MIDDLE || this.verticalAlign === Strings.BOTTOM) {
+        if (this.verticalAlign === 'middle' || this.verticalAlign === 'bottom') {
             const innerHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
             let elementsHeightSum = 0;
             for (const element of elements) {
                 elementsHeightSum += element.actualHeight;
             }
             const verticalGapSumHeight = this.verticalGap * (elements.length - 1);
-            if (this.verticalAlign === Strings.MIDDLE) {
+            if (this.verticalAlign === 'middle') {
                 y += (innerHeight - elementsHeightSum - verticalGapSumHeight) * 0.5;
             } else {
                 y += (innerHeight - elementsHeightSum - verticalGapSumHeight);
@@ -170,7 +169,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         return this._verticalGap;
     }
 
-    private _horizontalAlign: HorizontalAlign = Strings.LEFT;
+    private _horizontalAlign: HorizontalAlign = 'left';
 
     public set horizontalAlign(value: HorizontalAlign) {
         if (this._horizontalAlign === value) {
@@ -184,7 +183,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
         return this._horizontalAlign;
     }
 
-    private _verticalAlign: VerticalAlign = Strings.TOP;
+    private _verticalAlign: VerticalAlign = 'top';
 
     public set verticalAlign(value: VerticalAlign) {
         if (this._verticalAlign === value) {
@@ -199,6 +198,6 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
     }
 
     private notifyInvalid(): void {
-        this.dispatch(Strings.INVALIDATE);
+        this.dispatch('invalidate');
     }
 }

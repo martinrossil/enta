@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import ISizeElement from '../interfaces/core/ISizeElement';
 import PositionElement from './PositionElement';
 
@@ -180,7 +179,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._actualWidth = value;
-        this.style.width = this._actualWidth + Strings.PX;
+        this.style.width = this._actualWidth + 'px';
     }
 
     public get actualWidth(): number {
@@ -260,7 +259,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._actualHeight = value;
-        this.style.height = this._actualHeight + Strings.PX;
+        this.style.height = this._actualHeight + 'px';
     }
 
     public get actualHeight(): number {

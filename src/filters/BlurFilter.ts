@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IBlurFilter from '../interfaces/filters/IBlurFilter';
 
@@ -37,6 +36,6 @@ export default class BlurFilter extends EventDispatcher implements IBlurFilter {
     }
 
     private notify(): void {
-        this.dispatch(Strings.INVALIDATE);
+        this.dispatch('invalidate');
     }
 }

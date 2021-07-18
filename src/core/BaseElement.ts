@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import IBaseElement from '../interfaces/core/IBaseElement';
 
 export default class BaseElement extends HTMLElement implements IBaseElement {
@@ -38,6 +37,6 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         if (!this.connected) {
             return;
         }
-        this.dispatchEvent(new CustomEvent(Strings.INVALIDATE, { bubbles: true }));
+        this.dispatchEvent(new CustomEvent('invalidate', { bubbles: true }));
     }
 }

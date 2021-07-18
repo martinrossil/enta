@@ -1,4 +1,3 @@
-import Strings from '../consts/Strings';
 import EventDispatcher from '../event/EventDispatcher';
 import IArrayCollection from '../interfaces/data/IArrayCollection';
 
@@ -15,12 +14,12 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
 
     public addItem(item: Item): void {
         this.source.push(item);
-        this.dispatch(Strings.ITEM_ADDED, item);
+        this.dispatch('itemAdded', item);
     }
 
     public addItems(items: Item[]): void {
         this._source = this.source.concat(items);
-        this.dispatch(Strings.ITEMS_ADDED, items);
+        this.dispatch('itemsAdded', items);
     }
 
     public getItemIndex(item: Item): number {
@@ -45,7 +44,7 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
         const index = this.source.indexOf(item);
         if (index > -1) {
             this.source.splice(index, 1);
-            this.dispatch(Strings.ITEM_REMOVED, item);
+            this.dispatch('itemRemoved', item);
         }
     }
 
@@ -53,14 +52,14 @@ export default class ArrayCollection<Item> extends EventDispatcher implements IA
         const item = this.getItemAt(index);
         if (item) {
             this.source.splice(index, 1);
-            this.dispatch(Strings.ITEM_REMOVED, item);
+            this.dispatch('itemRemoved', item);
         }
     }
 
     public removeAll(): void {
         if (this.length > 0) {
             this.source.length = 0;
-            this.dispatch(Strings.RESET);
+            this.dispatch('reset');
         }
     }
 

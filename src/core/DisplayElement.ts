@@ -1,5 +1,4 @@
 import { Clip, Cursor } from '../shared/Types';
-import Strings from '../consts/Strings';
 import BoxShadowFilter from '../filters/BoxShadowFilter';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
 import IFilter from '../interfaces/filters/IFilter';
@@ -15,16 +14,16 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.name = 'DisplayElement';
         this.backgroundColorChanged = this.backgroundColorChanged.bind(this);
         this.filtersChanged = this.filtersChanged.bind(this);
-        this.style.border = Strings.NONE;
-        this.style.outline = Strings.NONE;
-        this.style.boxSizing = Strings.BORDER_BOX;
+        this.style.border = 'none';
+        this.style.outline = 'none';
+        this.style.boxSizing = 'border-box';
     }
 
     private filters: Array<IFilter> = [];
 
     public addFilter(value: IFilter): void {
         this.filters.push(value);
-        value.addEventListener(Strings.INVALIDATE, this.filtersChanged);
+        value.addEventListener('invalidate', this.filtersChanged);
         this.filtersChanged();
     }
 
@@ -71,25 +70,25 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             return;
         }
         if (this._backgroundColor instanceof Color) {
-            this._backgroundColor.removeEventListener(Strings.INVALIDATE, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener('invalidate', this.backgroundColorChanged);
         } else if (this._backgroundColor instanceof LinearGradient) {
-            this._backgroundColor.removeEventListener(Strings.COLOR_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.removeEventListener(Strings.COLORS_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.removeEventListener(Strings.COLOR_CHANGED, this.backgroundColorChanged);
-            this._backgroundColor.removeEventListener(Strings.DEGREES_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener('colorAdded', this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener('colorsAdded', this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener('colorChanged', this.backgroundColorChanged);
+            this._backgroundColor.removeEventListener('degreesChanged', this.backgroundColorChanged);
         }
         this._backgroundColor = value;
         if (this._backgroundColor instanceof Color) {
-            this._backgroundColor.addEventListener(Strings.INVALIDATE, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener('invalidate', this.backgroundColorChanged);
             this.style.background = '';
             this.style.backgroundColor = this._backgroundColor.toString();
             return;
         }
         if (this._backgroundColor instanceof LinearGradient) {
-            this._backgroundColor.addEventListener(Strings.COLOR_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.addEventListener(Strings.COLORS_ADDED, this.backgroundColorChanged);
-            this._backgroundColor.addEventListener(Strings.COLOR_CHANGED, this.backgroundColorChanged);
-            this._backgroundColor.addEventListener(Strings.DEGREES_CHANGED, this.backgroundColorChanged);
+            this._backgroundColor.addEventListener('colorAdded', this.backgroundColorChanged);
+            this._backgroundColor.addEventListener('colorsAdded', this.backgroundColorChanged);
+            this._backgroundColor.addEventListener('colorChanged', this.backgroundColorChanged);
+            this._backgroundColor.addEventListener('degreesChanged', this.backgroundColorChanged);
             this.style.backgroundColor = '';
             this.style.background = this._backgroundColor.toString();
             return;
@@ -115,7 +114,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
                 this._cornerSizeTopRight = 0;
                 this._cornerSizeBottomLeft = 0;
                 this._cornerSizeBottomRight = 0;
-                this.style.borderRadius = Strings.ZERO;
+                this.style.borderRadius = '0';
             }
             return;
         }
@@ -124,7 +123,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this._cornerSizeTopRight = value;
         this._cornerSizeBottomLeft = value;
         this._cornerSizeBottomRight = value;
-        this.style.borderRadius = this._cornerSize + Strings.PX;
+        this.style.borderRadius = this._cornerSize + 'px';
     }
 
     public get cornerSize(): number {
@@ -140,12 +139,12 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeTopLeft !== 0) {
                 this._cornerSizeTopLeft = 0;
-                this.style.borderTopLeftRadius = Strings.ZERO;
+                this.style.borderTopLeftRadius = '0';
             }
             return;
         }
         this._cornerSizeTopLeft = value;
-        this.style.borderTopLeftRadius = this._cornerSizeTopLeft + Strings.PX;
+        this.style.borderTopLeftRadius = this._cornerSizeTopLeft + 'px';
     }
 
     public get cornerSizeTopLeft(): number {
@@ -161,12 +160,12 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeTopRight !== 0) {
                 this._cornerSizeTopRight = 0;
-                this.style.borderTopRightRadius = Strings.ZERO;
+                this.style.borderTopRightRadius = '0';
             }
             return;
         }
         this._cornerSizeTopRight = value;
-        this.style.borderTopRightRadius = this._cornerSizeTopRight + Strings.PX;
+        this.style.borderTopRightRadius = this._cornerSizeTopRight + 'px';
     }
 
     public get cornerSizeTopRight(): number {
@@ -182,12 +181,12 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeBottomLeft !== 0) {
                 this._cornerSizeBottomLeft = 0;
-                this.style.borderBottomLeftRadius = Strings.ZERO;
+                this.style.borderBottomLeftRadius = '0';
             }
             return;
         }
         this._cornerSizeBottomLeft = value;
-        this.style.borderBottomLeftRadius = this._cornerSizeBottomLeft + Strings.PX;
+        this.style.borderBottomLeftRadius = this._cornerSizeBottomLeft + 'px';
     }
 
     public get cornerSizeBottomLeft(): number {
@@ -203,19 +202,19 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         if (isNaN(value) || value < 0) {
             if (this._cornerSizeBottomRight !== 0) {
                 this._cornerSizeBottomRight = 0;
-                this.style.borderBottomRightRadius = Strings.ZERO;
+                this.style.borderBottomRightRadius = '0';
             }
             return;
         }
         this._cornerSizeBottomRight = value;
-        this.style.borderBottomRightRadius = this._cornerSizeBottomRight + Strings.PX;
+        this.style.borderBottomRightRadius = this._cornerSizeBottomRight + 'px';
     }
 
     public get cornerSizeBottomRight(): number {
         return this._cornerSizeBottomRight;
     }
 
-    private _clip: Clip = Strings.VISIBLE;
+    private _clip: Clip = 'visible';
 
     public set clip(value: Clip) {
         if (this._clip === value) {
@@ -229,7 +228,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._clip;
     }
 
-    private _clipX: Clip = Strings.VISIBLE;
+    private _clipX: Clip = 'visible';
 
     public set clipX(value: Clip) {
         if (this._clipX === value) {
@@ -243,7 +242,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         return this._clipX;
     }
 
-    private _clipY: Clip = Strings.VISIBLE;
+    private _clipY: Clip = 'visible';
 
     public set clipY(value: Clip) {
         if (this._clipY === value) {
@@ -268,7 +267,7 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             this.style.visibility = '';
             return;
         }
-        this.style.visibility = Strings.HIDDEN;
+        this.style.visibility = 'hidden';
     }
 
     public get visible(): boolean {
@@ -284,10 +283,10 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this._enabled = value;
         if (value) {
             this.style.pointerEvents = '';
-            this.style.userSelect = Strings.AUTO;
+            this.style.userSelect = 'auto';
         } else {
-            this.style.pointerEvents = Strings.NONE;
-            this.style.userSelect = Strings.NONE;
+            this.style.pointerEvents = 'none';
+            this.style.userSelect = 'none';
         }
     }
 

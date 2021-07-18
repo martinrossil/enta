@@ -1,5 +1,4 @@
 import DisplayElement from '../core/DisplayElement';
-import Strings from '../consts/Strings';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import IColor from '../interfaces/vo/IColor';
 import { FontWeight, TextAlign } from '../shared/Types';
@@ -68,12 +67,12 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         if (isNaN(value) || value < 0) {
             if (this._fontSize !== 16) {
                 this._fontSize = 16;
-                this.style.fontSize = this._fontSize + Strings.PX;
+                this.style.fontSize = this._fontSize + 'px';
             }
             return;
         }
         this._fontSize = value;
-        this.style.fontSize = this._fontSize + Strings.PX;
+        this.style.fontSize = this._fontSize + 'px';
     }
 
     public get fontSize(): number {
@@ -103,12 +102,12 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         if (isNaN(value)) {
             if (this._letterSpacing !== 0) {
                 this._letterSpacing = 0;
-                this.style.letterSpacing = this._letterSpacing + Strings.PX;
+                this.style.letterSpacing = this._letterSpacing + 'px';
             }
             return;
         }
         this._letterSpacing = value;
-        this.style.letterSpacing = this._letterSpacing + Strings.PX;
+        this.style.letterSpacing = this._letterSpacing + 'px';
     }
 
     public get letterSpacing(): number {
@@ -134,7 +133,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._lineHeight;
     }
 
-    private _textAlign: TextAlign = Strings.LEFT;
+    private _textAlign: TextAlign = 'left';
 
     public set textAlign(value: TextAlign) {
         if (this._textAlign === value) {
