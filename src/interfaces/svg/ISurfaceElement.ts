@@ -3,5 +3,5 @@ import IPathElement from './IPathElement';
 
 export default interface ISurfaceElement extends IPathElement {
     cornerSize: number;
-    cornerType: CornerShape;
+    cornerShape: CornerShape;
 }

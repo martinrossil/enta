@@ -14,6 +14,7 @@ export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 9
 export type HorizontalAlign = 'left' | 'center' | 'right';
 export type ItemRendererClass<Item> = new () => IItemRenderer<Item>;
 export type Layout = IAnchorLayout | IHorizontalLayout | IVerticalLayout | IColomnLayout;
+export type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 export type StrokeLineCap = '' | 'butt' | 'round' | 'square';
 export type StrokeLineJoin = '' | 'miter' | 'round' | 'bevel' | 'miter-clip' | 'arcs';
 export type SvgNameSpace = 'http://www.w3.org/2000/svg';
