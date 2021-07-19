@@ -1,4 +1,4 @@
-import { IRectangle } from './Interfaces';
+import IRectangle from '../interfaces/shared/IRectangle';
 
 export default class Rectangle implements IRectangle {
     public constructor(x = 0, y = 0, width = 0, height = 0) {

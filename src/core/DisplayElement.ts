@@ -5,7 +5,8 @@ import IFilter from '../interfaces/filters/IFilter';
 import Color from '../shared/Color';
 import LinearGradient from '../shared/LinearGradient';
 import SizeElement from './SizeElement';
-import { IColor, ILinearGradient } from '../shared/Interfaces';
+import IColor from '../interfaces/shared/IColor';
+import ILinearGradient from '../interfaces/shared/ILinearGradient';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {

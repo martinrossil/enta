@@ -55,6 +55,10 @@ export { default as IHorizontalLayout } from './interfaces/layout/IHorizontalLay
 export { default as ILayout } from './interfaces/layout/ILayout';
 export { default as IVerticalLayout } from './interfaces/layout/IVerticalLayout';
 
+export { default as IColor } from './interfaces/shared/IColor';
+export { default as ILinearGradient } from './interfaces/shared/ILinearGradient';
+export { default as IRectangle } from './interfaces/shared/IRectangle';
+
 export { default as IPathElement } from './interfaces/svg/IPathElement';
 export { default as ISurfaceElement } from './interfaces/svg/ISurfaceElement';
 export { default as ISvgElement } from './interfaces/svg/ISvgElement';
@@ -63,6 +67,7 @@ export { default as IBaseText } from './interfaces/text/IBaseText';
 export { default as ILabelElement } from './interfaces/text/ILabelElement';
 export { default as ITextElement } from './interfaces/text/ITextElement';
 export { default as ITextRenderer } from './interfaces/text/ITextRenderer';
+export { default as ITypeFace } from './interfaces/text/ITypeFace';
 
 export { default as AnchorLayout } from './layout/AnchorLayout';
 export { default as ColumnLayout } from './layout/ColumnLayout';
@@ -72,11 +77,6 @@ export { default as VerticalLayout } from './layout/VerticalLayout';
 export { default as PathElement } from './svg/PathElement';
 export { default as SurfaceElement } from './svg/SurfaceElement';
 export { default as SvgElement } from './svg/SvgElement';
-
-export { IColor } from './shared/Interfaces';
-export { ILinearGradient } from './shared/Interfaces';
-export { IRectangle } from './shared/Interfaces';
-export { ITypeFace } from './shared/Interfaces';
 
 export { default as BaseText } from './text/BaseText';
 export { default as LabelElement } from './text/LabelElement';

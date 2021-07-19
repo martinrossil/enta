@@ -1,5 +1,5 @@
 import EventDispatcher from '../event/EventDispatcher';
-import { ITypeFace } from '../shared/Interfaces';
+import ITypeFace from '../interfaces/text/ITypeFace';
 
 /**
  * Verdana 400 capHeight = 0.73, verticalOffset = 0.044, horizontalOffset = 0.13;

@@ -3,7 +3,7 @@ import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 import SizeElement from '../core/SizeElement';
 import { Cursor, SvgNameSpace } from '../shared/Types';
-import { IRectangle } from '../shared/Interfaces';
+import IRectangle from '../interfaces/shared/IRectangle';
 
 export default class SvgElement extends SizeElement implements ISvgElement {
     protected SVG_NS: SvgNameSpace = 'http://www.w3.org/2000/svg';

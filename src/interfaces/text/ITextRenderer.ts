@@ -1,6 +1,6 @@
-import { IColor } from '../../shared/Interfaces';
 import { TextAlign } from '../../shared/Types';
 import IDisplayElement from '../core/IDisplayElement';
+import IColor from '../shared/IColor';
 
 export default interface ITextRenderer extends IDisplayElement {
     text: string;

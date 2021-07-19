@@ -1,7 +1,7 @@
 import EventDispatcher from '../event/EventDispatcher';
 import IBoxShadowFilter from '../interfaces/filters/IBoxShadowFilter';
+import IColor from '../interfaces/shared/IColor';
 import Color from '../shared/Color';
-import { IColor } from '../shared/Interfaces';
 
 export default class BoxShadowFilter extends EventDispatcher implements IBoxShadowFilter {
     public constructor(x = 0, y = 4, blur = 8, spread = 0, color: IColor = new Color(0, 0, 0, 0.3), inset = false) {

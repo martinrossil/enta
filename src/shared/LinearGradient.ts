@@ -1,6 +1,7 @@
 import EventDispatcher from '../event/EventDispatcher';
 import IEventListener from '../interfaces/event/IEventListener';
-import { IColor, ILinearGradient } from './Interfaces';
+import IColor from '../interfaces/shared/IColor';
+import ILinearGradient from '../interfaces/shared/ILinearGradient';
 
 export default class LinearGradient extends EventDispatcher implements ILinearGradient {
     public constructor(degrees = 0, colors: Array<IColor> = []) {

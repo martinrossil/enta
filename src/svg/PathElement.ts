@@ -4,7 +4,8 @@ import IPathElement from '../interfaces/svg/IPathElement';
 import Color from '../shared/Color';
 import LinearGradient from '../shared/LinearGradient';
 import SvgElement from './SvgElement';
-import { IColor, ILinearGradient } from '../shared/Interfaces';
+import IColor from '../interfaces/shared/IColor';
+import ILinearGradient from '../interfaces/shared/ILinearGradient';
 
 export default class PathElement extends SvgElement implements IPathElement {
     public constructor() {

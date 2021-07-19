@@ -1,6 +1,7 @@
-import { IColor, ILinearGradient } from '../../shared/Interfaces';
 import { Clip, Cursor } from '../../shared/Types';
 import IFilter from '../filters/IFilter';
+import IColor from '../shared/IColor';
+import ILinearGradient from '../shared/ILinearGradient';
 import ISizeElement from './ISizeElement';
 
 export default interface IDisplayElement extends ISizeElement {

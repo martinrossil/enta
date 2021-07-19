@@ -1,5 +1,5 @@
 import EventDispatcher from '../event/EventDispatcher';
-import { IColor } from './Interfaces';
+import IColor from '../interfaces/shared/IColor';
 
 export default class Color extends EventDispatcher implements IColor {
     public constructor(hue = 0, saturation = 0, lightness = 0, opacity = 1.0) {

@@ -3,7 +3,8 @@ import IBaseText from '../interfaces/text/IBaseText';
 import { FontWeight, TextAlign } from '../shared/Types';
 import TypeFace from './TypeFace';
 import TextRenderer from './TextRenderer';
-import { IColor, ITypeFace } from '../shared/Interfaces';
+import ITypeFace from '../interfaces/text/ITypeFace';
+import IColor from '../interfaces/shared/IColor';
 
 export default class BaseText extends DisplayElement implements IBaseText {
     public constructor() {

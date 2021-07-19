@@ -1,7 +1,7 @@
 import EventDispatcher from '../event/EventDispatcher';
 import IShadowFilter from '../interfaces/filters/IShadowFilter';
+import IColor from '../interfaces/shared/IColor';
 import Color from '../shared/Color';
-import { IColor } from '../shared/Interfaces';
 
 export default class ShadowFilter extends EventDispatcher implements IShadowFilter {
     public constructor(x = 0, y = 4, blur = 8, color: IColor = new Color(0, 0, 0, 0.6)) {

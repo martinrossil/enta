@@ -1,4 +1,4 @@
-import { IColor } from '../../shared/Interfaces';
+import IColor from '../shared/IColor';
 import IFilter from './IFilter';
 
 export default interface IBoxShadowFilter extends IFilter {

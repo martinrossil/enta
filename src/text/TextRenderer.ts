@@ -1,6 +1,6 @@
 import DisplayElement from '../core/DisplayElement';
+import IColor from '../interfaces/shared/IColor';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
-import { IColor } from '../shared/Interfaces';
 import { FontWeight, TextAlign } from '../shared/Types';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
