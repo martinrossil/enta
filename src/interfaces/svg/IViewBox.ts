@@ -1,4 +1,4 @@
-export default interface IRectangle {
+export default interface IViewBox {
     name: string;
     x: number;
     y: number;

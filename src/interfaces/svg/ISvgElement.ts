@@ -2,10 +2,10 @@ import BlurFilter from '../../filters/BlurFilter';
 import ShadowFilter from '../../filters/ShadowFilter';
 import { Cursor } from '../../shared/Types';
 import ISizeElement from '../core/ISizeElement';
-import IRectangle from '../shared/IRectangle';
+import IViewBox from './IViewBox';
 
 export default interface ISvgElement extends ISizeElement {
-    viewBox: IRectangle | null;
+    viewBox: IViewBox | null;
     visible: boolean;
     enabled: boolean;
     cursor: Cursor;

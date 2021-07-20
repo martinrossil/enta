@@ -3,7 +3,7 @@ import ShadowFilter from '../filters/ShadowFilter';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 import SizeElement from '../core/SizeElement';
 import { Cursor, SvgNameSpace } from '../shared/Types';
-import IRectangle from '../interfaces/shared/IRectangle';
+import IViewBox from '../interfaces/svg/IViewBox';
 
 export default class SvgElement extends SizeElement implements ISvgElement {
     protected SVG_NS: SvgNameSpace = 'http://www.w3.org/2000/svg';
@@ -60,9 +60,9 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         return this._group;
     }
 
-    private _viewBox: IRectangle | null = null;
+    private _viewBox: IViewBox | null = null;
 
-    public set viewBox(value: IRectangle | null) {
+    public set viewBox(value: IViewBox | null) {
         if (this._viewBox === value) {
             return;
         }
@@ -75,7 +75,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         this.svg.removeAttribute('viewBox');
     }
 
-    public get viewBox(): IRectangle | null {
+    public get viewBox(): IViewBox | null {
         return this._viewBox;
     }
 

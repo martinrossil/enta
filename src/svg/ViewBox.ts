@@ -1,8 +1,8 @@
-import IRectangle from '../interfaces/shared/IRectangle';
+import IViewBox from '../interfaces/svg/IViewBox';
 
-export default class Rectangle implements IRectangle {
+export default class ViewBox implements IViewBox {
     public constructor(x = 0, y = 0, width = 0, height = 0) {
-        this.name = 'Rectangle';
+        this.name = 'ViewBox';
         this.x = x;
         this.y = y;
         this.width = width;
