@@ -43,3 +43,4 @@ export default class ScreenNavigator extends DisplayContainer implements IScreen
         return this._screenIndex;
     }
 }
+customElements.define('screen-navigator', ScreenNavigator);

@@ -40,3 +40,4 @@ export default class BaseElement extends HTMLElement implements IBaseElement {
         this.dispatchEvent(new CustomEvent('invalidate', { bubbles: true }));
     }
 }
+customElements.define('base-element', BaseElement);

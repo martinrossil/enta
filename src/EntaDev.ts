@@ -9,10 +9,9 @@ import IPathElement from './interfaces/svg/IPathElement';
 import PathElement from './svg/PathElement';
 
 export default class EntaDev extends ApplicationElement {
-    public static TAG = 'enta-dev';
     public constructor() {
         super();
-        this.name = EntaDev.TAG;
+        this.name = 'EntaDev';
         this.addElement(new LeftNavigation());
         const labelElement: ILabelElement = new LabelElement();
         const textElement: ITextElement = new TextElement();
@@ -24,4 +23,4 @@ export default class EntaDev extends ApplicationElement {
         return this;
     }
 }
-customElements.define(EntaDev.TAG, EntaDev);
+customElements.define('enta-dev', EntaDev);

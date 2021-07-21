@@ -127,3 +127,4 @@ export default class BaseText extends DisplayElement implements IBaseText {
         this.textRenderer.y = -this.topPadding + this.typeFace.offsetY * this.fontSize;
     }
 }
+customElements.define('base-text', BaseText);

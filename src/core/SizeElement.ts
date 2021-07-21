@@ -375,3 +375,4 @@ export default class SizeElement extends PositionElement implements ISizeElement
         // override
     }
 }
+customElements.define('size-element', SizeElement);

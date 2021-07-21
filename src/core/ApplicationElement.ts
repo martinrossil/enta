@@ -24,3 +24,4 @@ export default class ApplicationElement extends DisplayContainer {
         this.size(w, h);
     }
 }
+customElements.define('application-element', ApplicationElement);

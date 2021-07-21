@@ -105,3 +105,4 @@ export default class SurfaceElement extends PathElement implements ISurfaceEleme
         return d;
     }
 }
+customElements.define('surface-element', SurfaceElement);

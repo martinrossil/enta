@@ -131,3 +131,4 @@ export default class SvgElement extends SizeElement implements ISvgElement {
         return this._cursor;
     }
 }
+customElements.define('svg-element', SvgElement);
