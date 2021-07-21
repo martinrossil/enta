@@ -13,10 +13,6 @@ export default class EntaDev extends ApplicationElement {
         super();
         this.name = 'EntaDev';
         this.addElement(new LeftNavigation());
-        const labelElement: ILabelElement = new LabelElement();
-        const textElement: ITextElement = new TextElement();
-        const pathElement: IPathElement = new PathElement();
-        console.log(labelElement.name, textElement.name, pathElement.name);
     }
 
     private get self(): IDisplayContainer {

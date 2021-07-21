@@ -182,4 +182,3 @@ export default class PositionElement extends BaseElement implements IPositionEle
         this.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
     }
 }
-customElements.define('position-element', PositionElement);

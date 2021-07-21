@@ -30,4 +30,3 @@ export default class TextElement extends BaseText implements ITextElement {
         this.internalHeight = this.actualRendererHeight;
     }
 }
-customElements.define('text-element', TextElement);

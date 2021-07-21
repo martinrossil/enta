@@ -67,4 +67,3 @@ export default class ImageElement extends DisplayElement implements IImageElemen
         return this._alt;
     }
 }
-customElements.define('image-element', ImageElement);
