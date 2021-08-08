@@ -22,9 +22,11 @@ export default class List<Item> extends ScrollContainer implements IList<Item> {
     private itemRenderTriggered(e: CustomEvent<Item>): void {
         e.stopImmediatePropagation();
         if (this.dataProvider) {
-            this.selectedIndex = this.dataProvider.getItemIndex(e.detail);
-            this.dispatch('selectedItemChanged', e.detail);
-            this.dispatch('selectedIndexChanged', this.selectedIndex);
+            if (e.detail !== this.selectedItem) {
+                this.selectedIndex = this.dataProvider.getItemIndex(e.detail);
+                this.dispatch('selectedItemChanged', e.detail);
+                this.dispatch('selectedIndexChanged', this.selectedIndex);
+            }
         }
     }
 
