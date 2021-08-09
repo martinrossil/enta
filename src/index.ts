@@ -88,6 +88,7 @@ export { default as TypeFace } from './text/TypeFace';
 export { default as Color } from './shared/Color';
 export { default as LinearGradient } from './shared/LinearGradient';
 
+export { AnchorTarget } from './shared/Types';
 export { ChildElement } from './shared/Types';
 export { Clip } from './shared/Types';
 export { CornerShape } from './shared/Types';
