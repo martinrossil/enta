@@ -7,6 +7,7 @@ export { default as ApplicationElement } from './core/ApplicationElement';
 export { default as BaseElement } from './core/BaseElement';
 export { default as DisplayContainer } from './core/DisplayContainer';
 export { default as DisplayElement } from './core/DisplayElement';
+export { default as LinkContainer } from './core/LinkContainer';
 export { default as PositionElement } from './core/PositionElement';
 export { default as ScrollContainer } from './core/ScrollContainer';
 export { default as SizeElement } from './core/SizeElement';
@@ -31,6 +32,7 @@ export { default as IScreenNavigator } from './interfaces/components/IScreenNavi
 export { default as IBaseElement } from './interfaces/core/IBaseElement';
 export { default as IDisplayContainer } from './interfaces/core/IDisplayContainer';
 export { default as IDisplayElement } from './interfaces/core/IDisplayElement';
+export { default as ILinkContainer } from './interfaces/core/ILinkContainer';
 export { default as IPositionElement } from './interfaces/core/IPositionElement';
 export { default as IScrollContainer } from './interfaces/core/IScrollContainer';
 export { default as ISizeElement } from './interfaces/core/ISizeElement';
