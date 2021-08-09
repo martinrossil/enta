@@ -29,3 +29,4 @@ export type SvgNameSpace = 'http://www.w3.org/2000/svg';
  */
  export type TextAlign = 'left' | 'center' | 'right'| 'justify';
  export type VerticalAlign = 'top' | 'middle' | 'bottom';
+ export type AnchorTarget = '_self' | '_blank' | '_parent' | '_top';
