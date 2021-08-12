@@ -15,7 +15,7 @@ export default class VerticalLayout extends EventDispatcher implements IVertical
 
     public resizeChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         const w = container.actualWidth - container.paddingLeft - container.paddingRight;
-        if (!isNaN(container.height)) {
+        if (!isNaN(container.height) || !isNaN(container.externalHeight)) {
             const ratio = this.getPixelPercentHeightRatio(container, elements);
             for (const element of elements) {
                 if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
