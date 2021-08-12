@@ -15,7 +15,6 @@ export default class HorizontalLayout extends EventDispatcher implements IHorizo
 
     public resizeChildren(container: ILayoutContainer, elements: Array<ILayoutElement>): void {
         const h = container.actualHeight - container.paddingTop - container.paddingBottom;
-        console.log(this.name, 'resizeChildren()', container.width, container.externalWidth);
         if (!isNaN(container.width) || !isNaN(container.externalWidth)) {
             const ratio = this.getPixelPercentWidthRatio(container, elements);
             for (const element of elements) {
