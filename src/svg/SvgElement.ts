@@ -21,7 +21,7 @@ export default class SvgElement extends SizeElement implements ISvgElement {
 
     private updateSvgAttributes(): void {
         this.svg.setAttribute('width', this.actualWidth.toString());
-        this.svg.setAttribute('height', this.actualWidth.toString());
+        this.svg.setAttribute('height', this.actualHeight.toString());
     }
 
     public addFilter(value: BlurFilter | ShadowFilter): void {
