@@ -1,4 +1,5 @@
 import IPositionElement from '../interfaces/core/IPositionElement';
+import { Align, HorizontalAlign, VerticalAlign } from '../shared/Types';
 import BaseElement from './BaseElement';
 
 export default class PositionElement extends BaseElement implements IPositionElement {
@@ -144,38 +145,46 @@ export default class PositionElement extends BaseElement implements IPositionEle
         return this._left;
     }
 
-    private _centerOffset = NaN;
+    private _align: Align = 'none';
 
-    public set centerOffset(value: number) {
-        if (isNaN(this._centerOffset) && isNaN(value)) {
+    public set align(value: Align) {
+        if (this._align === value) {
             return;
         }
-        if (this._centerOffset === value) {
-            return;
-        }
-        this._centerOffset = value;
+        this._align = value;
         this.notifyInvalid();
     }
 
-    public get centerOffset(): number {
-        return this._centerOffset;
+    public get align(): Align {
+        return this._align;
     }
 
-    private _middleOffset = NaN;
+    private _alignHorizontal: HorizontalAlign = 'none';
 
-    public set middleOffset(value: number) {
-        if (isNaN(this._middleOffset) && isNaN(value)) {
+    public set alignHorizontal(value: HorizontalAlign) {
+        if (this._alignHorizontal === value) {
             return;
         }
-        if (this._middleOffset === value) {
-            return;
-        }
-        this._middleOffset = value;
+        this._alignHorizontal = value;
         this.notifyInvalid();
     }
 
-    public get middleOffset(): number {
-        return this._middleOffset;
+    public get alignHorizontal(): HorizontalAlign {
+        return this._alignHorizontal;
+    }
+
+    private _alignVertical: VerticalAlign = 'none';
+
+    public set alignVertical(value: VerticalAlign) {
+        if (this._alignVertical === value) {
+            return;
+        }
+        this._alignVertical = value;
+        this.notifyInvalid();
+    }
+
+    public get alignVertical(): VerticalAlign {
+        return this._alignVertical;
     }
 
     private updateTransform(): void {

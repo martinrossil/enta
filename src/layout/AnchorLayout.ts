@@ -97,10 +97,15 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
             const insideWidthCenter = (insideWidth - element.left - element.right) * 0.5;
             const elementCenter = element.actualWidth * 0.5;
             x = insideWidthCenter - elementCenter + element.left + container.paddingLeft;
-        } else if (!isNaN(element.centerOffset)) {
-            const insideWidthCenter = (container.actualWidth - container.paddingLeft - container.paddingRight) * 0.5;
-            const elementCenter = element.actualWidth * 0.5;
-            x = insideWidthCenter - elementCenter + container.paddingLeft + element.centerOffset;
+        } else {
+            if (element.alignHorizontal === 'center' || element.align === 'centerTop' || element.align === 'centerMiddle' || element.align === 'centerBottom') {
+                const insideWidthCenter = (container.actualWidth - container.paddingLeft - container.paddingRight) * 0.5;
+                const elementCenter = element.actualWidth * 0.5;
+                x = insideWidthCenter - elementCenter + container.paddingLeft;
+            } else if (element.alignHorizontal === 'right' || element.align === 'rightTop' || element.align === 'rightMiddle' || element.align === 'rightBottom') {
+                const insideWidth = container.actualWidth - container.paddingLeft - container.paddingRight;
+                x = insideWidth - element.actualWidth + container.paddingLeft;
+            }
         }
         let y = container.paddingTop;
         if (!isNaN(element.top) && isNaN(element.bottom)) {
@@ -112,10 +117,15 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
             const insideHeightMiddle = (insideHeight - element.top - element.bottom) * 0.5;
             const elementMiddle = element.actualHeight * 0.5;
             y = insideHeightMiddle - elementMiddle + element.top + container.paddingTop;
-        } else if (!isNaN(element.middleOffset)) {
-            const insideHeightMiddle = (container.actualHeight - container.paddingTop - container.paddingBottom) * 0.5;
-            const elementMiddle = element.actualHeight * 0.5;
-            y = insideHeightMiddle - elementMiddle + container.paddingTop + element.middleOffset;
+        } else {
+            if (element.alignVertical === 'middle' || element.align === 'leftMiddle' || element.align === 'centerMiddle' || element.align === 'rightMiddle') {
+                const insideHeightMiddle = (container.actualHeight - container.paddingTop - container.paddingBottom) * 0.5;
+                const elementMiddle = element.actualHeight * 0.5;
+                y = insideHeightMiddle - elementMiddle + container.paddingTop;
+            } else if (element.alignVertical === 'bottom' || element.align === 'leftBottom' || element.align === 'centerBottom' || element.align === 'rightBottom') {
+                const insideHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
+                y = insideHeight - element.actualHeight + container.paddingTop;
+            }
         }
         element.position(x, y);
     }

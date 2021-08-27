@@ -1,3 +1,5 @@
+import { Align, HorizontalAlign, VerticalAlign } from '../../shared/Types';
+
 export default interface ILayoutElement {
     position(x: number, y: number): void;
     x: number;
@@ -6,8 +8,9 @@ export default interface ILayoutElement {
     right: number;
     bottom: number;
     left: number;
-    centerOffset: number;
-    middleOffset: number;
+    align: Align;
+    alignHorizontal: HorizontalAlign;
+    alignVertical: VerticalAlign;
     externalSize(width: number, height: number): void;
     externalWidth: number;
     externalHeight: number;

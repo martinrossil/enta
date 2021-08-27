@@ -6,12 +6,14 @@ import IHorizontalLayout from '../interfaces/layout/IHorizontalLayout';
 import IVerticalLayout from '../interfaces/layout/IVerticalLayout';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 
+export type Align = 'leftTop' | 'centerTop' | 'rightTop' | 'leftMiddle' | 'centerMiddle' | 'rightMiddle' | 'leftBottom' | 'centerBottom' | 'rightBottom' | 'none';
+export type AnchorTarget = '_self' | '_blank' | '_parent' | '_top';
 export type ChildElement = IDisplayElement | ISvgElement;
 export type Clip = 'visible' | 'hidden' | 'scroll';
 export type Cursor = '' | 'pointer';
 export type CornerShape = 'round' | 'cut';
 export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
-export type HorizontalAlign = 'left' | 'center' | 'right';
+export type HorizontalAlign = 'left' | 'center' | 'right' | 'none';
 export type ItemRendererClass<Item> = new () => IItemRenderer<Item>;
 export type Layout = IAnchorLayout | IHorizontalLayout | IVerticalLayout | IColomnLayout;
 export type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
@@ -28,5 +30,4 @@ export type SvgNameSpace = 'http://www.w3.org/2000/svg';
  * 'justify': The inline contents are justified. Text should be spaced to line up its left and right edges to the left and right edges of the line box, except for the last line.
  */
  export type TextAlign = 'left' | 'center' | 'right'| 'justify';
- export type VerticalAlign = 'top' | 'middle' | 'bottom';
- export type AnchorTarget = '_self' | '_blank' | '_parent' | '_top';
+ export type VerticalAlign = 'top' | 'middle' | 'bottom' | 'none';

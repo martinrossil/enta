@@ -90,6 +90,7 @@ export { default as TypeFace } from './text/TypeFace';
 export { default as Color } from './shared/Color';
 export { default as LinearGradient } from './shared/LinearGradient';
 
+export { Align } from './shared/Types';
 export { AnchorTarget } from './shared/Types';
 export { ChildElement } from './shared/Types';
 export { Clip } from './shared/Types';
