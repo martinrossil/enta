@@ -7,9 +7,6 @@ export default class BlueContainer extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'BlueContainer';
-        // this.percentWidth = 100;
-        // this.measureInternalWidth = false;
-        this.centerOffset = this.middleOffset = 0;
         this.layout = new ColumnLayout(128, 5, 20);
         this.backgroundColor = new Color(240, 100, 50, 0.5);
         this.padding = 20;

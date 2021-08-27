@@ -11,8 +11,6 @@ export default class PurpleBox extends DisplayElement implements IInteractive {
         this.size(200, 200);
         this.cursor = 'pointer';
         this.backgroundColor = new Color(300, 100, 50);
-        this.centerOffset = 0;
-        this.middleOffset = 0;
     }
 
     private machine: InteractiveMachine = new InteractiveMachine(this);
