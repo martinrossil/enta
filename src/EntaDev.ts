@@ -1,6 +1,7 @@
 import ApplicationElement from './core/ApplicationElement';
 import Colors from './test/design/Colors';
 import GreenBox from './test/GreenBox';
+import registerElement from './core/RegisterElement';
 
 export default class EntaDev extends ApplicationElement {
     public constructor() {
@@ -11,4 +12,4 @@ export default class EntaDev extends ApplicationElement {
         this.addElement(new GreenBox());
     }
 }
-customElements.define('enta-dev', EntaDev);
+registerElement('enta-dev', EntaDev);

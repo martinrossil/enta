@@ -1,4 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
+import registerElement from '../core/RegisterElement';
 import Color from '../shared/Color';
 
 export default class GreenBox extends DisplayElement {
@@ -12,4 +13,4 @@ export default class GreenBox extends DisplayElement {
         this.align = 'rightBottom';
     }
 }
-customElements.define('green-box', GreenBox);
+registerElement('green-box', GreenBox);

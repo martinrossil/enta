@@ -9,6 +9,7 @@ export { default as DisplayContainer } from './core/DisplayContainer';
 export { default as DisplayElement } from './core/DisplayElement';
 export { default as LinkContainer } from './core/LinkContainer';
 export { default as PositionElement } from './core/PositionElement';
+export { default as registerElement } from './core/RegisterElement';
 export { default as ScrollContainer } from './core/ScrollContainer';
 export { default as SizeElement } from './core/SizeElement';
 
@@ -80,6 +81,8 @@ export { default as PathElement } from './svg/PathElement';
 export { default as SurfaceElement } from './svg/SurfaceElement';
 export { default as SvgElement } from './svg/SvgElement';
 export { default as ViewBox } from './svg/ViewBox';
+
+export { default as GreenBox } from './test/GreenBox';
 
 export { default as BaseText } from './text/BaseText';
 export { default as LabelElement } from './text/LabelElement';
