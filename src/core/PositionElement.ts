@@ -6,7 +6,6 @@ export default class PositionElement extends BaseElement implements IPositionEle
     public constructor() {
         super();
         this.name = 'PositionElement';
-        this.style.position = 'absolute';
     }
 
     public position(x: number, y: number): void {

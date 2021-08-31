@@ -4,18 +4,27 @@ export default class ApplicationElement extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'ApplicationElement';
-        this.clip = 'hidden'
+        this.clip = 'hidden';
+        window.addEventListener('resize', this.resize.bind(this));
+        this.injectGlobalStyles();
+        this.resize();
+    }
+
+    private injectGlobalStyles(): void {
         document.body.style.setProperty('overflow', 'hidden');
         document.body.style.setProperty('height', '100vh');
-        document.body.style.setProperty('position', 'absolute');
-        document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
-        document.body.style.setProperty('-webkit-tap-highlight-color', 'transparent');
-        document.body.style.setProperty('-moz-tap-highlight-color', 'transparent');
-        document.body.style.setProperty('-webkit-font-smoothing', 'antialiased');
-        document.body.style.setProperty('-moz-osx-font-smoothing', 'grayscale');
-        document.body.style.setProperty('margin', '0');
-        window.addEventListener('resize', this.resize.bind(this));
-        this.resize();
+        let innerHTMLString = '*{';
+        innerHTMLString += '-webkit-overflow-scrolling: touch;';
+        innerHTMLString += '-webkit-tap-highlight-color: transparent;';
+        innerHTMLString += '-webkit-font-smoothing: antialiased;';
+        innerHTMLString += '-moz-osx-font-smoothing: grayscale;';
+        innerHTMLString += 'margin: 0;';
+        innerHTMLString += 'position: absolute; box-sizing:border-box;';
+        innerHTMLString += 'border:none; outline:none;';
+        innerHTMLString += '}';
+        const style: HTMLStyleElement = document.createElement('style');
+        style.innerHTML = innerHTMLString;
+        document.head.appendChild(style);
     }
 
     private resize(): void {

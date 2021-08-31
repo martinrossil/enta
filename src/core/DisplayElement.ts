@@ -14,9 +14,6 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         this.name = 'DisplayElement';
         this.backgroundColorChanged = this.backgroundColorChanged.bind(this);
         this.filtersChanged = this.filtersChanged.bind(this);
-        this.style.border = 'none';
-        this.style.outline = 'none';
-        this.style.boxSizing = 'border-box';
     }
 
     private filters: Array<IFilter> = [];
