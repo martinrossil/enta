@@ -9,7 +9,7 @@ export default class GreenBox extends DisplayElement {
         this.backgroundColor = new Color(120, 100, 50);
         this.zIndex = 0;
         this.cursor = 'pointer';
-        this.align = 'rightBottom';
+        this.align = 'bottomRight';
     }
 }
 customElements.define('green-box', GreenBox);
