@@ -1,10 +1,10 @@
-import IInteractive from '../interfaces/fsm/IInteractive';
+import IMouseTouch from '../interfaces/fsm/IMouseTouch';
 import IState from '../interfaces/fsm/IState';
 import Machine from './Machine';
 import State from './State';
 
-export default class InteractiveMachine extends Machine<IInteractive> {
-    public constructor(host: IInteractive) {
+export default class MouseTouchMachine extends Machine<IMouseTouch> {
+    public constructor(host: IMouseTouch) {
         super(host);
         this.initial.on = host.initial.bind(host);
         this.initial.addTransition('mouseover', this.hoverState);
@@ -88,7 +88,7 @@ export default class InteractiveMachine extends Machine<IInteractive> {
         if (e instanceof MouseEvent) {
             return [e.offsetX, e.offsetY];
         }
-        if (!window.TouchEvent) {
+        if (!TouchEvent) {
             return [0, 0];
         }
         if (e instanceof TouchEvent) {

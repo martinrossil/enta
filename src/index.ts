@@ -20,7 +20,7 @@ export { default as BlurFilter } from './filters/BlurFilter';
 export { default as BoxShadowFilter } from './filters/BoxShadowFilter';
 export { default as ShadowFilter } from './filters/ShadowFilter';
 
-export { default as InteractiveMachine } from './fsm/InteractiveMachine';
+export { default as MouseTouchMachine } from './fsm/MouseTouchMachine';
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
 
@@ -47,7 +47,7 @@ export { default as IBoxShadowFilter } from './interfaces/filters/IBoxShadowFilt
 export { default as IFilter } from './interfaces/filters/IFilter';
 export { default as IShadowFilter } from './interfaces/filters/IShadowFilter';
 
-export { default as IInteractive } from './interfaces/fsm/IInteractive';
+export { default as IMouseTouch } from './interfaces/fsm/IMouseTouch';
 export { default as IMachine } from './interfaces/fsm/IMachine';
 export { default as IState } from './interfaces/fsm/IState';
 

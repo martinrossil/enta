@@ -1,9 +1,9 @@
 import DisplayElement from '../core/DisplayElement';
 import Color from '../shared/Color';
-import IInteractive from '../interfaces/fsm/IInteractive';
-import InteractiveMachine from '../fsm/InteractiveMachine';
+import IMouseTouch from '../interfaces/fsm/IMouseTouch';
+import InteractiveMachine from '../fsm/MouseTouchMachine';
 
-export default class PurpleBox extends DisplayElement implements IInteractive {
+export default class PurpleBox extends DisplayElement implements IMouseTouch {
     public static TAG = 'purple-box';
     public constructor() {
         super();

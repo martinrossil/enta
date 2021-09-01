@@ -1,5 +1,5 @@
 import DisplayContainer from '../core/DisplayContainer';
-import InteractiveMachine from '../fsm/InteractiveMachine';
+import MouseTouchMachine from '../fsm/MouseTouchMachine';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
 
 export default class ItemRenderer<Item> extends DisplayContainer implements IItemRenderer<Item> {
@@ -8,7 +8,7 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
         this.name = 'ListItemRenderer';
     }
 
-    private machine: InteractiveMachine = new InteractiveMachine(this);
+    private machine: MouseTouchMachine = new MouseTouchMachine(this);
 
     public initial(): void {
         // override
