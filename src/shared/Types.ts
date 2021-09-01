@@ -6,7 +6,7 @@ import IHorizontalLayout from '../interfaces/layout/IHorizontalLayout';
 import IVerticalLayout from '../interfaces/layout/IVerticalLayout';
 import ISvgElement from '../interfaces/svg/ISvgElement';
 
-export type Align = 'leftTop' | 'centerTop' | 'rightTop' | 'leftMiddle' | 'centerMiddle' | 'rightMiddle' | 'leftBottom' | 'centerBottom' | 'rightBottom' | 'none';
+export type Align = 'topLeft' | 'topCenter' | 'topRight' | 'leftMiddle' | 'centerMiddle' | 'rightMiddle' | 'bottomLeft' | 'bottomCenter' | 'bottomRight' | 'none';
 export type AnchorTarget = '_self' | '_blank' | '_parent' | '_top';
 export type ChildElement = IDisplayElement | ISvgElement;
 export type Clip = 'visible' | 'hidden' | 'scroll';

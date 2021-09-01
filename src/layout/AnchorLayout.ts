@@ -98,11 +98,11 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
             const elementCenter = element.actualWidth * 0.5;
             x = insideWidthCenter - elementCenter + element.left + container.paddingLeft;
         } else {
-            if (element.alignHorizontal === 'center' || element.align === 'centerTop' || element.align === 'centerMiddle' || element.align === 'centerBottom') {
+            if (element.alignHorizontal === 'center' || element.align === 'topCenter' || element.align === 'centerMiddle' || element.align === 'bottomCenter') {
                 const insideWidthCenter = (container.actualWidth - container.paddingLeft - container.paddingRight) * 0.5;
                 const elementCenter = element.actualWidth * 0.5;
                 x = insideWidthCenter - elementCenter + container.paddingLeft;
-            } else if (element.alignHorizontal === 'right' || element.align === 'rightTop' || element.align === 'rightMiddle' || element.align === 'rightBottom') {
+            } else if (element.alignHorizontal === 'right' || element.align === 'topRight' || element.align === 'rightMiddle' || element.align === 'bottomRight') {
                 const insideWidth = container.actualWidth - container.paddingLeft - container.paddingRight;
                 x = insideWidth - element.actualWidth + container.paddingLeft;
             }
@@ -122,7 +122,7 @@ export default class AnchorLayout extends EventDispatcher implements IAnchorLayo
                 const insideHeightMiddle = (container.actualHeight - container.paddingTop - container.paddingBottom) * 0.5;
                 const elementMiddle = element.actualHeight * 0.5;
                 y = insideHeightMiddle - elementMiddle + container.paddingTop;
-            } else if (element.alignVertical === 'bottom' || element.align === 'leftBottom' || element.align === 'centerBottom' || element.align === 'rightBottom') {
+            } else if (element.alignVertical === 'bottom' || element.align === 'bottomLeft' || element.align === 'bottomCenter' || element.align === 'bottomRight') {
                 const insideHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
                 y = insideHeight - element.actualHeight + container.paddingTop;
             }
