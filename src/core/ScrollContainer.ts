@@ -1,8 +1,7 @@
 import IScrollContainer from '../interfaces/core/IScrollContainer';
-import IScrollOuterElement from '../interfaces/core/IScrollOuterElement';
 import { ChildElement, Layout } from '../shared/Types';
+import DisplayContainer from './DisplayContainer';
 import DisplayElement from './DisplayElement';
-import ScrollOuterElement from './ScrollOuterElement';
 
 export default class ScrollContainer extends DisplayElement implements IScrollContainer {
     public constructor() {
@@ -31,15 +30,15 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     private updateChildrenSizes(): void {
         this.outerElement.externalSize(this.actualWidth + this.scrollBarWidth, this.actualHeight + this.scrollBarHeight);
         if (!this.horizontalScrollEnabled && !this.verticalScrollEnabled) {
-            this.outerElement.elementsContainer.externalSize(this.actualWidth, this.actualHeight);
+            this.elementsContainer.externalSize(this.actualWidth, this.actualHeight);
             return;
         }
         if (!this.horizontalScrollEnabled && this.verticalScrollEnabled) {
-            this.outerElement.elementsContainer.externalWidth = this.actualWidth;
+            this.elementsContainer.externalWidth = this.actualWidth;
             return;
         }
         if (this.horizontalScrollEnabled && !this.verticalScrollEnabled) {
-            this.outerElement.elementsContainer.externalHeight = this.actualHeight;
+            this.elementsContainer.externalHeight = this.actualHeight;
         }
     }
 
@@ -62,48 +61,62 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     protected updateInternalSize(): void {
-        this.internalSize(this.outerElement.elementsContainer.actualWidth, this.outerElement.elementsContainer.actualHeight);
+        this.internalSize(this.elementsContainer.actualWidth, this.elementsContainer.actualHeight);
     }
 
     protected updateInternalWidth(): void {
-        this.internalWidth = this.outerElement.elementsContainer.actualWidth;
+        this.internalWidth = this.elementsContainer.actualWidth;
     }
 
     protected updateInternalHeight(): void {
-        this.internalHeight = this.outerElement.elementsContainer.actualHeight;
+        this.internalHeight = this.elementsContainer.actualHeight;
     }
 
-    private _outerElement!: IScrollOuterElement;
+    private _outerElement!: DisplayElement;
 
-    private get outerElement(): IScrollOuterElement {
+    private get outerElement(): DisplayElement {
         if (!this._outerElement) {
-            this._outerElement = new ScrollOuterElement();
+            this._outerElement = new DisplayElement();
+            this._outerElement.name = 'ScrollOuterElement';
+            this._outerElement.clip = 'scroll';
+            this._outerElement.appendChild(this.elementsContainer)
         }
         return this._outerElement;
     }
 
+    private _elementsContainer!: DisplayContainer;
+
+    public get elementsContainer(): DisplayContainer {
+        if (!this._elementsContainer) {
+            this._elementsContainer = new DisplayContainer();
+            // this will boost scroll performance, no repaints
+            this._elementsContainer.style.willChange = 'transform';
+        }
+        return this._elementsContainer;
+    }
+
     public addElement(element: ChildElement): void {
-        this.outerElement.elementsContainer.addElement(element);
+        this.elementsContainer.addElement(element);
     }
 
     public addElementAt(element: ChildElement, index: number): void {
-        this.outerElement.elementsContainer.addElementAt(element, index);
+        this.elementsContainer.addElementAt(element, index);
     }
 
     public addElements(elements: Array<ChildElement>): void {
-        this.outerElement.elementsContainer.addElements(elements);
+        this.elementsContainer.addElements(elements);
     }
 
     public removeElement(element: ChildElement): void {
-        this.outerElement.elementsContainer.removeElement(element);
+        this.elementsContainer.removeElement(element);
     }
 
     public removeElements(): void {
-        this.outerElement.elementsContainer.removeElements();
+        this.elementsContainer.removeElements();
     }
 
     public containsElement(element: ChildElement): boolean {
-        return this.outerElement.elementsContainer.contains(element as unknown as Node);
+        return this.elementsContainer.containsElement(element);
     }
 
     private _scrollEnabled = false;
@@ -156,66 +169,66 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
     }
 
     public set layout(value: Layout) {
-        this.outerElement.elementsContainer.layout = value;
+        this.elementsContainer.layout = value;
     }
 
     public get layout(): Layout {
-        return this.outerElement.elementsContainer.layout;
+        return this.elementsContainer.layout;
     }
 
     public set padding(value: number) {
-        this.outerElement.elementsContainer.padding = value;
+        this.elementsContainer.padding = value;
     }
 
     public get padding(): number {
-        return this.outerElement.elementsContainer.padding;
+        return this.elementsContainer.padding;
     }
 
     public set paddingLeft(value: number) {
-        this.outerElement.elementsContainer.paddingLeft = value;
+        this.elementsContainer.paddingLeft = value;
     }
 
     public get paddingLeft(): number {
-        return this.outerElement.elementsContainer.paddingLeft;
+        return this.elementsContainer.paddingLeft;
     }
 
     public set paddingTop(value: number) {
-        this.outerElement.elementsContainer.paddingTop = value;
+        this.elementsContainer.paddingTop = value;
     }
 
     public get paddingTop(): number {
-        return this.outerElement.elementsContainer.paddingTop;
+        return this.elementsContainer.paddingTop;
     }
 
     public set paddingRight(value: number) {
-        this.outerElement.elementsContainer.paddingRight = value;
+        this.elementsContainer.paddingRight = value;
     }
 
     public get paddingRight(): number {
-        return this.outerElement.elementsContainer.paddingRight;
+        return this.elementsContainer.paddingRight;
     }
 
     public set paddingBottom(value: number) {
-        this.outerElement.elementsContainer.paddingBottom = value;
+        this.elementsContainer.paddingBottom = value;
     }
 
     public get paddingBottom(): number {
-        return this.outerElement.elementsContainer.paddingBottom;
+        return this.elementsContainer.paddingBottom;
     }
 
     public set paddingX(value: number) {
-        this.outerElement.elementsContainer.paddingX = value;
+        this.elementsContainer.paddingX = value;
     }
 
     public get paddingX(): number {
-        return this.outerElement.elementsContainer.paddingX;
+        return this.elementsContainer.paddingX;
     }
 
     public set paddingY(value: number) {
-        this.outerElement.elementsContainer.paddingY = value;
+        this.elementsContainer.paddingY = value;
     }
 
     public get paddingY(): number {
-        return this.outerElement.elementsContainer.paddingY;
+        return this.elementsContainer.paddingY;
     }
 }
