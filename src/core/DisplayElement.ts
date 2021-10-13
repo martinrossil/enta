@@ -9,6 +9,10 @@ import IColor from '../interfaces/shared/IColor';
 import ILinearGradient from '../interfaces/shared/ILinearGradient';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
+    public static get observedAttributes(): Array<string> {
+        return ['b'];
+    }
+
     public constructor() {
         super();
         this.name = 'DisplayElement';
@@ -303,6 +307,10 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
 
     public get cursor(): Cursor {
         return this._cursor;
+    }
+
+    public attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+        console.log(name, oldValue, newValue);
     }
 }
 customElements.define('display-element', DisplayElement);

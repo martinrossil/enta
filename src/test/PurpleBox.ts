@@ -4,10 +4,13 @@ import IMouseTouch from '../interfaces/fsm/IMouseTouch';
 import InteractiveMachine from '../fsm/MouseTouchMachine';
 
 export default class PurpleBox extends DisplayElement implements IMouseTouch {
-    public static TAG = 'purple-box';
+    public static get observedAttributes(): Array<string> {
+        return [...DisplayElement.observedAttributes, 'a'];
+    }
+
     public constructor() {
         super();
-        this.name = PurpleBox.TAG;
+        this.name = 'PurpleBox';
         this.size(200, 200);
         this.cursor = 'pointer';
         this.backgroundColor = new Color(300, 100, 50);
@@ -33,5 +36,9 @@ export default class PurpleBox extends DisplayElement implements IMouseTouch {
     public clicked(): void {
         console.log('clicked()');
     }
+
+    public attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+        console.log(name, oldValue, newValue);
+    }
 }
-customElements.define(PurpleBox.TAG, PurpleBox);
+customElements.define('purple-box', PurpleBox);
