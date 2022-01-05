@@ -1,3 +1,5 @@
+export { default as DataContainer } from './components/DataContainer';
+export { default as DataRenderer } from './components/DataRenderer';
 export { default as ImageElement } from './components/ImageElement';
 export { default as ItemRenderer } from './components/ItemRenderer';
 export { default as List } from './components/List';
@@ -24,6 +26,8 @@ export { default as MouseTouchMachine } from './fsm/MouseTouchMachine';
 export { default as Machine } from './fsm/Machine';
 export { default as State } from './fsm/State';
 
+export { default as IDataContainer } from './interfaces/components/IDataContainer';
+export { default as IDataRenderer } from './interfaces/components/IDataRenderer';
 export { default as IImageElement } from './interfaces/components/IImageElement';
 export { default as IItemRenderer } from './interfaces/components/IItemRenderer';
 export { default as IList } from './interfaces/components/IList';
