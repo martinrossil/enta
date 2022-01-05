@@ -62,3 +62,4 @@ export default class ItemRenderer<Item> extends DisplayContainer implements IIte
         return this._selected;
     }
 }
+customElements.define('item-renderer', ItemRenderer);
