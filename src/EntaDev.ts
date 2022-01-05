@@ -1,7 +1,6 @@
 import ApplicationElement from './core/ApplicationElement';
-import Color from './shared/Color';
 import Colors from './test/design/Colors';
-import PurpleBox from './test/PurpleBox';
+import TestDataContainer from './test/TestDataContainer';
 
 export default class EntaDev extends ApplicationElement {
     public constructor() {
@@ -9,7 +8,7 @@ export default class EntaDev extends ApplicationElement {
         this.name = 'EntaDev';
         this.backgroundColor = Colors.BACKGROUND;
         this.padding = 32;
-        this.addElement(new PurpleBox());
+        this.addElement(new TestDataContainer());
     }
 }
 customElements.define('enta-dev', EntaDev);
