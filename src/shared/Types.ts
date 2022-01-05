@@ -1,3 +1,4 @@
+import IDataRenderer from '../interfaces/components/IDataRenderer';
 import IItemRenderer from '../interfaces/components/IItemRenderer';
 import IDisplayElement from '../interfaces/core/IDisplayElement';
 import IAnchorLayout from '../interfaces/layout/IAnchorLayout';
@@ -15,6 +16,7 @@ export type CornerShape = 'round' | 'cut';
 export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
 export type HorizontalAlign = 'left' | 'center' | 'right' | 'none';
 export type ItemRendererClass<Item> = new () => IItemRenderer<Item>;
+export type DataRendererClass<Data> = new () => IDataRenderer<Data>;
 export type Layout = IAnchorLayout | IHorizontalLayout | IVerticalLayout | IColomnLayout;
 export type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 export type StrokeLineCap = '' | 'butt' | 'round' | 'square';
