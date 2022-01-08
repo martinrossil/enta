@@ -5,14 +5,15 @@ import { ObjectFit } from '../shared/Types';
 export default class ImageElement extends DisplayElement implements IImageElement {
     public constructor() {
         super();
+        this.clip = 'hidden';
         this.name = 'Image';
         this.appendChild(this.img);
     }
 
     protected validate(): void {
         super.validate();
-        this.img.width = this.actualWidth;
-        this.img.height = this.actualHeight;
+        this.img.width = Math.ceil(this.actualWidth);
+        this.img.height = Math.ceil(this.actualHeight);
     }
 
     private _img!: HTMLImageElement;
