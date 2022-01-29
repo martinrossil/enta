@@ -1,6 +1,6 @@
 import ApplicationElement from './core/ApplicationElement';
 import Colors from './test/design/Colors';
-import TestDataContainer from './test/TestDataContainer';
+import TestMachine from './test/TestMachine';
 
 export default class EntaDev extends ApplicationElement {
     public constructor() {
@@ -8,7 +8,8 @@ export default class EntaDev extends ApplicationElement {
         this.name = 'EntaDev';
         this.backgroundColor = Colors.BACKGROUND;
         this.padding = 32;
-        this.addElement(new TestDataContainer());
     }
+
+    private testMachine: TestMachine = new TestMachine(this);
 }
 customElements.define('enta-dev', EntaDev);
