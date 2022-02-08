@@ -1,7 +1,7 @@
 import DisplayElement from '../core/DisplayElement';
 import Color from '../shared/Color';
 import IMouseTouch from '../interfaces/fsm/IMouseTouch';
-import InteractiveMachine from '../fsm/MouseTouchMachine';
+import MouseTouchMachine from '../fsm/MouseTouchMachine';
 
 export default class PurpleBox extends DisplayElement implements IMouseTouch {
     public static get observedAttributes(): Array<string> {
@@ -16,7 +16,7 @@ export default class PurpleBox extends DisplayElement implements IMouseTouch {
         this.backgroundColor = new Color(300, 100, 50);
     }
 
-    private machine: InteractiveMachine = new InteractiveMachine(this);
+    private machine: MouseTouchMachine = new MouseTouchMachine(this);
 
     public initial(): void {
         console.log('initial()');
