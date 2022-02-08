@@ -20,7 +20,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     }
 
     private _hoverState!: IState;
-    private get hoverState(): IState {
+    protected get hoverState(): IState {
         if (!this._hoverState) {
             this._hoverState = new State('Hover');
             this._hoverState.on = this.hover;
@@ -33,7 +33,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     }
 
     private _pressedState!: IState;
-    private get pressedState(): IState {
+    protected get pressedState(): IState {
         if (!this._pressedState) {
             this._pressedState = new State('Pressed');
             this._pressedState.on = this.pressed;
@@ -45,7 +45,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     }
 
     private _clickedState!: IState;
-    private get clickedState(): IState {
+    protected get clickedState(): IState {
         if (!this._clickedState) {
             this._clickedState = new State('Clicked');
             this._clickedState.on = this.clicked;
@@ -55,7 +55,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     }
 
     private _delayState!: IState;
-    private get delayState(): IState {
+    protected get delayState(): IState {
         if (!this._delayState) {
             this._delayState = new State('Delay');
             this._delayState.on = this.delay;
