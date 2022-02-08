@@ -23,7 +23,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     private get hoverState(): IState {
         if (!this._hoverState) {
             this._hoverState = new State('Hover');
-            this._hoverState.on = this.hover.bind(this);
+            this._hoverState.on = this.hover;
             this._hoverState.addTransition('mouseleave', this.initial);
             this._hoverState.addTransition('mousedown', this.pressedState);
             this._hoverState.addTransition('click', this.clickedState);
@@ -36,7 +36,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     private get pressedState(): IState {
         if (!this._pressedState) {
             this._pressedState = new State('Pressed');
-            this._pressedState.on = this.pressed.bind(this);
+            this._pressedState.on = this.pressed;
             this._pressedState.addTransition('mouseup', this.hoverState);
             this._pressedState.addTransition('mouseleave', this.initial);
             this._pressedState.addTransition('touchend', this.delayState);
@@ -48,7 +48,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     private get clickedState(): IState {
         if (!this._clickedState) {
             this._clickedState = new State('Clicked');
-            this._clickedState.on = this.clicked.bind(this);
+            this._clickedState.on = this.clicked;
             this._clickedState.next = this.hoverState;
         }
         return this._clickedState;
@@ -58,7 +58,7 @@ export default class MouseTouchMachine extends Machine<IMouseTouch> {
     private get delayState(): IState {
         if (!this._delayState) {
             this._delayState = new State('Delay');
-            this._delayState.on = this.delay.bind(this);
+            this._delayState.on = this.delay;
             this._delayState.addTransition('DELAY_COMPLETE', this.initial);
             this._delayState.addTransition('click', this.clickedState);
         }
